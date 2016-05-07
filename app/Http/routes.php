@@ -37,3 +37,9 @@ Route::get('contactos', function(){
 	return view('informativa.contactos', ['contactosActive' => true]);
 })->name('contactos');
 //////////////////////////
+
+// Auth
+Route::get('/login', function(){
+	return view('auth.login');
+})->name('login');
+

@@ -13,7 +13,6 @@ function setBackground( optionSelected ) {
 function cleanBackground ( optionSelected ){
 	for (var i = 1; i <= 8; i++) {
 		var newOption = $('#pager-option-'+i);
-		console.log(optionSelected.attr('id') + " / " + newOption.attr('id'));
 		if( optionSelected.attr('id') != newOption.attr('id')){
 			newOption.css('background-color', '#FFFFFF');
 		}

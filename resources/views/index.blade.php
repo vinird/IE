@@ -6,13 +6,15 @@
 	@include('informativa.layouts.headContent')
 	<script src="{{ asset('js/js_resources/jssor.slider.mini.js') }}"></script>
 	<script src="{{ asset('js/js_resources/slider_script.js') }}"></script>
+	<script src="{{ asset('js/cicles_angular.js') }}"></script>
+
 
 
 </head>
 <body class="">
 <!--/////////// navbar ////////////////-->
 
-@include('informativa.layouts.navBar')
+@include('informativa.layouts.navBar')     
 
 <div class="container">
 	<div class="row text-center nav-modify">
@@ -89,7 +91,13 @@
 	<br>
 	<div class="row section-0">
 		<div class="col-xs-12 text-center ">
-			<h3>INFORMÁTICA EMPRESARIAL</h3>
+			<h3>INFORMÁTICA EMPRESARIAL
+				@if(Auth::check())
+					Esta logeado
+				@else
+					No esta logeado
+				@endif
+			</h3>
 		</div>
 	</div>
 </div>
