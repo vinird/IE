@@ -91,13 +91,7 @@
 	<br>
 	<div class="row section-0">
 		<div class="col-xs-12 text-center ">
-			<h3>INFORMÁTICA EMPRESARIAL
-				@if(Auth::check())
-					Esta logeado
-				@else
-					No esta logeado
-				@endif
-			</h3>
+			<h3>INFORMÁTICA EMPRESARIAL</h3>
 		</div>
 	</div>
 </div>
