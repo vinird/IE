@@ -39,7 +39,9 @@ Route::get('contactos', function(){
 //////////////////////////
 
 // Auth
-Route::get('/login', function(){
-	return view('auth.login');
-})->name('login');
+Route::resource('/acuerdos', 'Acuerdos');
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
