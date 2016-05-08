@@ -2,8 +2,6 @@
 	<script src="js/js_resources/jquery-1.12.3.min.js"></script>
 	<s<link rel="stylesheet" type="text/css" href="css/css_resource/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/css_resource/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/css_resource/animate.css">
-	<link rel="stylesheet" type="text/css" href="css/css_resource/slider_style.css">
 	<link rel="stylesheet" type="text/css" href="css/css_resource/fullcalendar.min.css">
 	<link rel="stylesheet" type="text/css" href="css/css_resource/animate_icon/component.css">
 

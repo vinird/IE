@@ -36,10 +36,15 @@ Route::get('ubicacion', function(){
 Route::get('contactos', function(){
 	return view('informativa.contactos', ['contactosActive' => true]);
 })->name('contactos');
+
 //////////////////////////
 
 // Auth
-Route::resource('/acuerdos', 'Acuerdos');
+Route::group(['middleware' => ['auth']], function () {
+    
+	Route::resource('/acuerdos', 'Acuerdos');
+
+});
 
 
 Route::auth();
