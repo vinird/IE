@@ -73,7 +73,7 @@
 
 **``git branch -d nombreDeLaRama``**	// elimina la rama
 
-## Administrar un repositorio remoto
+### Administrar un repositorio remoto
 **``git clone url``**			// copia los archivos del repositorio a un directorio local
 
 **``git remote add origin url``**	// sincroniza el repositorio remoto
@@ -87,11 +87,29 @@
 **``git push origin master``**		// subir el contenido al repositorio remoto
 
 
+## Levantar el proyecto con Homestead y Vagrant
+1. Descargar e instalar ya sea [VirtualBox](https://www.virtualbox.org/wiki/Downloads) o VMware para la virtualización.
+2. Descargar e instalar [Vagrant](http://www.vagrantup.com/downloads.html).
+3. Añadir el plug-in Vagrant Box mediante el comando **``vagrant box add laravel/homestead``**.
+4. Durante la instalación seleccionar el software de virtualización escogido en el paso 1.
+5. Crear una carpeta llamada "Homestead" en /home/Usuario..
+6. Ejecutar los comandos **``cd ~``** (Para situarse en la carpeta home del usuario) y **``git clone https://github.com/laravel/homestead.git Homestead``** (Clonar el proyecto de Lavarel Homestead).
+7. Situarse en la carpeta Homestead.
+8. Ingresar el siguiente comando **``bash init.sh``** para iniciarlizar Homestead.
+9. Crear una clave ssh con los siguientes comandos **``mkdir ~/.ssh``** (crear la carpeta donde se almacenará la clave), 
+**``chmod 700 ~/.ssh``** (limita el acceso a la carpeta) y **``ssh-keygen -t rsa`** (generador de la clave).
+10. Crear una carpeta en el home del usuario con el nombre "Sites" ya que en esta se guardará el sitio web.
+11. Ahora para configurar el sitio hay que abrir el archivo Homestead.yaml, ubicado en .homestead como una carpeta oculta dentro del home del usuario.
+12. Modificar la dirección ip de la maquina virtual en el apartado ip por una más coveniente, por ejemplo "192.168.2.2".
+13. Modificar en el apartado sites el map por la ruta web que se desea para ingresar al sitio, por ejemplo "infoempresarial.com".
+14. Añadir al archivo hosts, ubicado en /etc la dirección modificado en el paso 12 y el nombre de dominio modificado en el paso 13 (puede requerir acceso como superusuario), por ejemplo "192.168.2.2 infoempresarial.com".
+15. Para finalizar, levante la máquina virtual con el comado **``vagrant up``**.
+
 
 Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
-## License
+### License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
