@@ -47,8 +47,9 @@
 <!-- slider -->
 	<div class="uk-slidenav-position" data-uk-slideshow>
     <ul class="uk-slideshow">
-        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/noticias/informatica.jpg') }}"></li>
-        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/noticias/noticia_1457.jpg') }}"></li>
+        <li><img width="1900" height="530" alt="img" src="{{ asset('img/img_include/Amakhala_Game_Reserve_Bukela_Game_Lodge_lion1_Banner.jpeg') }}"></li>
+        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/IMAG4011.jpg') }}"></li>
+        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/langlaufen.jpg') }}"></li>
     </ul>
     <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
     <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
@@ -119,7 +120,7 @@
 				</table>
 				<nav>
 				  	<ul class="pager">
-				    	<li><a id="pager-option-1" class="pager-option-" ng-click="loadCicle(1)">l Ciclo</a></li>
+				    	<li><a id="pager-option-1" class="pager-option-" ng-click="loadCicle(1)" style="background-color: rgb(186, 229, 164);">l Ciclo</a></li>
 				    	<li><a id="pager-option-2" class="pager-option-" ng-click="loadCicle(2)">ll Ciclo</a></li>
 				    	<li><a id="pager-option-3" class="pager-option-" ng-click="loadCicle(3)">lll Ciclo</a></li>
 				    	<li><a id="pager-option-4" class="pager-option-" ng-click="loadCicle(4)">lV Ciclo</a></li>

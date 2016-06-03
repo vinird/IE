@@ -50,3 +50,26 @@ Route::group(['middleware' => ['auth']], function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+// admin
+Route::get('/admin/acuerdos' , function(){
+	return view('admin.acuerdos');
+});
+Route::get('/admin/main' , function(){
+	return view('admin.adminMain');
+});
+Route::get('/admin/eventos' , function(){
+	return view('admin.eventos');
+});
+Route::get('/admin/noticias' , function(){
+	return view('admin.noticias');
+});
+Route::get('/admin/repositorio' , function(){
+	return view('admin.repositorio');
+});
+Route::get('/admin/sede' , function(){
+	return view('admin.sede');
+});
+Route::get('/admin/users' , function(){
+	return view('admin.users');
+});

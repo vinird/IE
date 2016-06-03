@@ -49,7 +49,7 @@ a,
 a:hover,
 .uk-link:hover {
   color: #005599;
-  text-decoration: underline;
+  text-decoration: none;
 }
 /* Text-level semantics
  ========================================================================== */
@@ -1284,7 +1284,7 @@ iframe {
  * Sub-modifier: `uk-panel-box-primary`
  */
 .uk-panel-box-primary {
-  background-color: #ebf7fd;
+  background-color: inherit;
   color: #2d7091;
 }
 .uk-panel-box-primary-hover:hover {
@@ -1923,17 +1923,17 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li.uk-open > a {
-  background-color: #f5f5f5;
+  background-color: inherit;
   /* 3 */
   outline: none;
 }
 /* OnClick */
 .uk-navbar-nav > li > a:active {
-  background-color: #dddddd;
+  background-color: inherit;
 }
 /* Active */
 .uk-navbar-nav > li.uk-active > a {
-  background-color: #f5f5f5;
+  background-color: inherit;
 }
 /* Sub-objects: `uk-navbar-nav-subtitle`
  ========================================================================== */
@@ -2280,13 +2280,13 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-pagination > li > a:hover,
 .uk-pagination > li > a:focus {
-  background-color: #f5f5f5;
+  background-color: inherit;
   /* 2 */
   outline: none;
 }
 /* OnClick */
 .uk-pagination > li > a:active {
-  background-color: #dddddd;
+  background-color: inherit;
 }
 /*
  * Active
@@ -2299,7 +2299,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * Disabled
  */
 .uk-pagination > .uk-disabled > span {
-  background-color: #f5f5f5;
+  background-color: inherit;
   color: #999999;
 }
 /* Previous and next navigation
@@ -3046,7 +3046,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-form input[type="tel"]:disabled,
 .uk-form input[type="color"]:disabled {
   border-color: #dddddd;
-  background-color: #f5f5f5;
+  background-color: inherit;
   color: #999999;
 }
 /*
@@ -3371,7 +3371,7 @@ select.uk-form-width-mini {
  */
 .uk-button:hover,
 .uk-button:focus {
-  background-color: #f5f5f5;
+  background-color: inherit;
   /* 2 */
   outline: none;
   /* 3 */
@@ -3380,7 +3380,7 @@ select.uk-form-width-mini {
 /* Active */
 .uk-button:active,
 .uk-button.uk-active {
-  background-color: #dddddd;
+  background-color: inherit;
 }
 /* Color modifiers
  ========================================================================== */
@@ -3388,57 +3388,57 @@ select.uk-form-width-mini {
  * Modifier: `uk-button-primary`
  */
 .uk-button-primary {
-  background-color: #00a8e6;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Hover */
 .uk-button-primary:hover,
 .uk-button-primary:focus {
-  background-color: #35b3ee;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Active */
 .uk-button-primary:active,
 .uk-button-primary.uk-active {
-  background-color: #0091ca;
+  background-color: inherit;
   color: #ffffff;
 }
 /*
  * Modifier: `uk-button-success`
  */
 .uk-button-success {
-  background-color: #8cc14c;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Hover */
 .uk-button-success:hover,
 .uk-button-success:focus {
-  background-color: #8ec73b;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Active */
 .uk-button-success:active,
 .uk-button-success.uk-active {
-  background-color: #72ae41;
+  background-color: inherit;
   color: #ffffff;
 }
 /*
  * Modifier: `uk-button-danger`
  */
 .uk-button-danger {
-  background-color: #da314b;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Hover */
 .uk-button-danger:hover,
 .uk-button-danger:focus {
-  background-color: #e4354f;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Active */
 .uk-button-danger:active,
 .uk-button-danger.uk-active {
-  background-color: #c91032;
+  background-color: inherit;
   color: #ffffff;
 }
 /* Disabled state
@@ -3446,7 +3446,7 @@ select.uk-form-width-mini {
  ========================================================================== */
 /* Equal for all button types */
 .uk-button:disabled {
-  background-color: #f5f5f5;
+  background-color: inherit;
   color: #999999;
 }
 /* Modifier: `uk-button-link`
@@ -3470,7 +3470,7 @@ select.uk-form-width-mini {
 .uk-button-link:active,
 .uk-button-link.uk-active {
   color: #005599;
-  text-decoration: underline;
+  text-decoration: none;
 }
 .uk-button-link:disabled {
   color: #999999;
@@ -3631,13 +3631,13 @@ select.uk-form-width-mini {
  */
 .uk-icon-button:hover,
 .uk-icon-button:focus {
-  background-color: #f5f5f5;
+  background-color: inherit;
   /* 2 */
   outline: none;
 }
 /* Active */
 .uk-icon-button:active {
-  background-color: #dddddd;
+  background-color: inherit;
 }
 /* Icon mapping
  ========================================================================== */
@@ -5668,19 +5668,19 @@ a.uk-badge:hover {
  * Modifier: `uk-badge-success`
  */
 .uk-badge-success {
-  background-color: #8cc14c;
+  background-color: inherit;
 }
 /*
  * Modifier: `uk-badge-warning`
  */
 .uk-badge-warning {
-  background-color: #faa732;
+  background-color: inherit;
 }
 /*
  * Modifier: `uk-badge-danger`
  */
 .uk-badge-danger {
-  background-color: #da314b;
+  background-color: inherit;
 }
 /* ========================================================================
    Component: Alert
@@ -5777,7 +5777,7 @@ a.uk-badge:hover {
 a.uk-thumbnail:hover,
 a.uk-thumbnail:focus {
   border-color: #aaaaaa;
-  background-color: #ffffff;
+  background-color: inherit;
   /* 2 */
   text-decoration: none;
   /* 3 */
@@ -8250,7 +8250,7 @@ a.uk-thumbnail:focus {
 .uk-contrast a:not([class]):hover,
 .uk-contrast .uk-link:hover {
   color: #ffffff;
-  text-decoration: underline;
+  text-decoration: none;
 }
 .uk-contrast :not(pre) > code,
 .uk-contrast :not(pre) > kbd,
@@ -8397,24 +8397,24 @@ a.uk-thumbnail:focus {
 }
 .uk-contrast .uk-button:hover,
 .uk-contrast .uk-button:focus {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-inherit rgba(255, 255, 255, 0.8);
 }
 .uk-contrast .uk-button:active,
 .uk-contrast .uk-button.uk-active {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-inherit rgba(255, 255, 255, 0.7);
 }
 .uk-contrast .uk-button-primary {
-  background-color: #00a8e6;
+  background-color: inherit;
   color: #ffffff;
 }
 .uk-contrast .uk-button-primary:hover,
 .uk-contrast .uk-button-primary:focus {
-  background-color: #35b3ee;
+  background-color: inherit;
   color: #ffffff;
 }
 .uk-contrast .uk-button-primary:active,
 .uk-contrast .uk-button-primary.uk-active {
-  background-color: #0091ca;
+  background-color: inherit;
   color: #ffffff;
 }
 .uk-contrast .uk-icon-hover {
@@ -8428,10 +8428,10 @@ a.uk-thumbnail:focus {
 }
 .uk-contrast .uk-icon-button:hover,
 .uk-contrast .uk-icon-button:focus {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-inherit rgba(255, 255, 255, 0.8);
 }
 .uk-contrast .uk-icon-button:active {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-inherit rgba(255, 255, 255, 0.7);
 }
 .uk-contrast .uk-text-muted {
   color: rgba(255, 255, 255, 0.6) !important;
@@ -8453,7 +8453,7 @@ a.uk-thumbnail:focus {
   }
   a,
   a:visited {
-    text-decoration: underline;
+    text-decoration: none;
   }
   pre,
   blockquote {
