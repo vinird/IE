@@ -4,18 +4,23 @@
 
 	<title>Home</title>
 	@include('informativa.layouts.headContent')
-	<script src="{{ asset('js/js_resources/jssor.slider.mini.js') }}"></script>
-	<script src="{{ asset('js/js_resources/slider_script.js') }}"></script>
-	<script src="{{ asset('js/cicles_angular.js') }}"></script>
 
+	<!-- slider -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/uikit.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/components/slideshow.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/components/slidenav.min.css') }}">
+	<script src="{{ asset('js/js_resources/uikit/uikit.min.js') }}"></script>
+	<script src="{{ asset('js/js_resources/uikit/components/slideshow.min.js') }}"></script>
+	<script src="{{ asset('js/js_resources/uikit/components/slideshow-fx.min.js') }}"></script>
+	<!-- end slider -->
+	<script src="{{ asset('js/cicles_angular.js') }}"></script>
 
 
 </head>
 <body class="">
 <!--/////////// navbar ////////////////-->
 
-@include('informativa.layouts.navBar')     
-
+@include('informativa.layouts.navBar')
 <div class="container">
 	<div class="row text-center nav-modify">
 		<div class="col-xs-12 col-sm-2 col-nav-modify">
@@ -39,54 +44,18 @@
 	</div>
 </div>
 <!--//////// Body ///////////-->
-
-<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1300px; height: 250px; overflow: hidden; visibility: hidden;">
-        <!-- Loading Screen -->
-        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-        </div>
-        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
-            <div data-p="225.00" style="display: none;">
-                <img data-u="image" src="img/red.jpg" />
-                <div style="position: absolute; top: 30px; left: 30px; width: 480px; height: 120px; font-size: 50px; color: #ffffff; line-height: 60px;">TOUCH SWIPE SLIDER</div>
-                <div style="position: absolute; top: 300px; left: 30px; width: 480px; height: 120px; font-size: 30px; color: #ffffff; line-height: 38px;">Build your slider with anything, includes image, content, text, html, photo, picture</div>
-                <div data-u="caption" data-t="0" style="position: absolute; top: 100px; left: 600px; width: 445px; height: 300px;">
-                    <img src="img/c-phone.png" style="position: absolute; top: 0px; left: 0px; width: 445px; height: 300px;" />
-                    <img src="img/c-jssor-slider.png" data-u="caption" data-t="1" style="position: absolute; top: 70px; left: 130px; width: 102px; height: 78px;" />
-                    <img src="img/c-text.png" data-u="caption" data-t="2" style="position: absolute; top: 153px; left: 163px; width: 80px; height: 53px;" />
-                    <img src="img/c-fruit.png" data-u="caption" data-t="3" style="position: absolute; top: 60px; left: 220px; width: 140px; height: 90px;" />
-                    <img src="img/c-navigator.png" data-u="caption" data-t="4" style="position: absolute; top: -123px; left: 121px; width: 200px; height: 155px;" />
-                </div>
-                <div data-u="caption" data-t="5" style="position: absolute; top: 120px; left: 650px; width: 470px; height: 220px;">
-                    <img src="img/c-phone-horizontal.png" style="position: absolute; top: 0px; left: 0px; width: 470px; height: 220px;" />
-                    <div style="position: absolute; top: 4px; left: 45px; width: 379px; height: 213px; overflow: hidden;">
-                        <img src="img/c-slide-1.jpg" data-u="caption" data-t="6" style="position: absolute; top: 0px; left: 0px; width: 379px; height: 213px;" />
-                        <img src="img/c-slide-3.jpg" data-u="caption" data-t="7" style="position: absolute; top: 0px; left: 379px; width: 379px; height: 213px;" />
-                    </div>
-                    <img src="img/c-navigator-horizontal.png" style="position: absolute; top: 4px; left: 45px; width: 379px; height: 213px;" />
-                    <img src="img/c-finger-pointing.png" data-u="caption" data-t="8" style="position: absolute; top: 740px; left: 1600px; width: 257px; height: 300px;" />
-                </div>
-            </div>
-            <div data-p="225.00" style="display: none;">
-                <img data-u="image" src="img/purple.jpg" />
-            </div>
-            <div data-p="225.00" style="display: none;">
-                <img data-u="image" src="img/blue.jpg" />
-            </div>
-        
-        </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
-            <!-- bullet navigator item prototype -->
-            <div data-u="prototype" style="width:16px;height:16px;"></div>
-        </div>
-        <!-- Arrow Navigator -->
-        <span data-u="arrowleft" class="jssora22l" style="top:0px;left:12px;width:40px;height:58px;" data-autocenter="2"></span>
-        <span data-u="arrowright" class="jssora22r" style="top:0px;right:12px;width:40px;height:58px;" data-autocenter="2"></span>
+<!-- slider -->
+	<div class="uk-slidenav-position" data-uk-slideshow>
+    <ul class="uk-slideshow">
+        <li><img width="1900" height="530" alt="img" src="{{ asset('img/img_include/Amakhala_Game_Reserve_Bukela_Game_Lodge_lion1_Banner.jpeg') }}"></li>
+        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/IMAG4011.jpg') }}"></li>
+        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/langlaufen.jpg') }}"></li>
+    </ul>
+    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
 </div>
+<!-- end slider -->
 
-<!-- #endregion Jssor Slider End -->
 <div class="container ie-title">
 	<br>
 	<div class="row section-0">
@@ -151,7 +120,7 @@
 				</table>
 				<nav>
 				  	<ul class="pager">
-				    	<li><a id="pager-option-1" class="pager-option-" ng-click="loadCicle(1)">l Ciclo</a></li>
+				    	<li><a id="pager-option-1" class="pager-option-" ng-click="loadCicle(1)" style="background-color: rgb(186, 229, 164);">l Ciclo</a></li>
 				    	<li><a id="pager-option-2" class="pager-option-" ng-click="loadCicle(2)">ll Ciclo</a></li>
 				    	<li><a id="pager-option-3" class="pager-option-" ng-click="loadCicle(3)">lll Ciclo</a></li>
 				    	<li><a id="pager-option-4" class="pager-option-" ng-click="loadCicle(4)">lV Ciclo</a></li>
@@ -296,4 +265,15 @@
 
 </body>
 <script src="js/js_resources/animate_icon/main_animate_icon.js"></script>
+<script type="text/javascript">
+	var slideshow = UIkit.slideshow($('.uk-slidenav-position'), { 
+		animation: 'scale',
+		autoplay: true,
+		autoplayInterval: 5000,
+		pauseOnHover: false,
+		height: 'auto',
+		kenburns: true,
+
+	});
+</script>
 </html>
