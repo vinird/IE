@@ -3,8 +3,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/animate.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/slider_style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/animate_icon/component.css') }}">
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">

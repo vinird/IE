@@ -36,10 +36,40 @@ Route::get('ubicacion', function(){
 Route::get('contactos', function(){
 	return view('informativa.contactos', ['contactosActive' => true]);
 })->name('contactos');
+
 //////////////////////////
 
 // Auth
-Route::get('/login', function(){
-	return view('auth.login');
-})->name('login');
+Route::group(['middleware' => ['auth']], function () {
+    
+	Route::resource('/acuerdos', 'Acuerdos');
 
+});
+
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+// admin
+Route::get('/admin/acuerdos' , function(){
+	return view('admin.acuerdos');
+});
+Route::get('/admin/main' , function(){
+	return view('admin.adminMain');
+});
+Route::get('/admin/eventos' , function(){
+	return view('admin.eventos');
+});
+Route::get('/admin/noticias' , function(){
+	return view('admin.noticias');
+});
+Route::get('/admin/repositorio' , function(){
+	return view('admin.repositorio');
+});
+Route::get('/admin/sede' , function(){
+	return view('admin.sede');
+});
+Route::get('/admin/users' , function(){
+	return view('admin.users');
+});

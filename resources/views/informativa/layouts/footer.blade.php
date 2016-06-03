@@ -4,7 +4,9 @@
 			<br>
 			<div class="col-xs-12">
 				<div class="pull-right">
-					<h5><a href="{{ route('login') }}">Perfil Administrativo</a></h5>
+					<h5><a href="{{ url('login') }}">Perfil Administrativo</a></h5>
+					<h5><a href="{{ url('/admin/main') }}">Ir a home administrativo (temporal)</a></h5>
+
 				</div>
 			</div>
 			<div class="col-xs-12">
