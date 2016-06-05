@@ -39,7 +39,7 @@
 				<!-- panel agregar ususario -->
 				<div class="col-xs-12 col-md-4 col-xl-3">
 					<div class="panel panel-default">
-						<div class="panel-heading p4"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp; Agregar Sede  </h4></div>
+						<div class="panel-heading p4"> <h4>&nbsp;&nbsp;&nbsp;&nbsp; Agregar Sede  </h4></div>
 					  	<div class="panel-body">
 					  		<!-- inicia el formulario -->
 					    	<form class="">
@@ -66,7 +66,7 @@
 										</select>
 							  	</div>
 							  	<br>
-				        		<button type="submit" class="btn btn-primary btn-sm pull-right">Agregar</button>
+				        		<button type="submit" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar</button>
 						</form>
 						<!-- termina formulario -->
 					 	</div>

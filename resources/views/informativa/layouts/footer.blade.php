@@ -4,9 +4,11 @@
 			<br>
 			<div class="col-xs-12">
 				<div class="pull-right">
-					<h5><a href="{{ url('login') }}">Perfil Administrativo</a></h5>
-					<h5><a href="{{ url('/admin/main') }}">Ir a home administrativo (temporal)</a></h5>
-
+					@if(Auth::check())
+						<h5><a href="{{ url('/admin/main') }}">Entrar al perfil administrativo</a></h5>
+					@else
+						<h5><a href="{{ url('/admin/main') }}">Perfil Administrativo</a></h5>
+					@endif
 				</div>
 			</div>
 			<div class="col-xs-12">

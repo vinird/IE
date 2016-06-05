@@ -8,7 +8,7 @@
 		        	<span class="icon-bar"></span>
 		      	</button>
 		      	<a class="navbar-brand" href="{{ url('/admin/main') }}">
-		      		<i class="fa fa-home fa-lg" aria-hidden="true"></i>
+		      		<i class="fa fa-home fa-lg" aria-hidden="true"></i> Principal
 		      	</a>
 		    </div>
 
@@ -57,11 +57,11 @@
 
 
 		        	<li class="dropdown">
-			          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp; User name<span class="caret"></span></a>
+			          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp; {{ Auth::user()->name }}<span class="caret"></span></a>
 			          	<ul class="dropdown-menu">
 			            	<li><a href=""></a></li>
 			            	<li role="separator" class="divider"></li>
-			            	<li><a href="{{ url('/') }}">Salir</a></li>
+			            	<li><a href="{{ url('/logOut') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Salir</a></li>
 			          	</ul>
 			        </li>
 		      	</ul>

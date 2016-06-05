@@ -41,8 +41,6 @@ Route::get('contactos', function(){
 
 // Auth
 Route::group(['middleware' => ['auth']], function () {
-    
-	Route::resource('/acuerdos', 'Acuerdos');
 
 });
 
@@ -51,25 +49,31 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-// admin
-Route::get('/admin/acuerdos' , function(){
+// admin  //////////////////////////////////////////////////
+Route::get('/admin/main', ['middleware' => 'auth', function() {
+    return view('admin.adminMain');
+}]);
+Route::get('/admin/acuerdos' , ['middleware' => 'auth', function(){
 	return view('admin.acuerdos');
-});
-Route::get('/admin/main' , function(){
-	return view('admin.adminMain');
-});
-Route::get('/admin/eventos' , function(){
+}]);
+Route::get('/admin/eventos' , ['middleware' => 'auth', function(){
 	return view('admin.eventos');
-});
-Route::get('/admin/noticias' , function(){
+}]);
+Route::get('/admin/noticias' , ['middleware' => 'auth', function(){
 	return view('admin.noticias');
-});
-Route::get('/admin/repositorio' , function(){
+}]);
+Route::get('/admin/repositorio' , ['middleware' => 'auth', function(){
 	return view('admin.repositorio');
-});
-Route::get('/admin/sede' , function(){
+}]);
+Route::get('/admin/sede' , ['middleware' => 'auth', function(){
 	return view('admin.sede');
-});
-Route::get('/admin/users' , function(){
+}]);
+Route::get('/admin/users' , ['middleware' => 'auth', function(){
 	return view('admin.users');
-});
+}]);
+Route::get('/logOut' , ['middleware' => 'auth', function(){
+	Auth::logout();
+	return view('index', ['homeActive' => true]);
+}]);
+
+//////

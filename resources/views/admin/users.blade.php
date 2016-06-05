@@ -7,7 +7,7 @@
 				<!-- panel usuairos -->
 				<div class="col-xs-12">
 					<div class="panel panel-default">
-						<div class="panel-heading p1"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Panel de usuarios  </h4>  </div>
+						<div class="panel-heading p1"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Usuarios Activados  </h4>  </div>
 					  	<div class="panel-body" >
 					  		<input type="search" class="form-control" placeholder="Buscar usuario..."></input>
 					  		<table class="table table-hover">
@@ -26,6 +26,48 @@
 							  			<td>Datos de entrada</td>
 							  			<td class="hidden-xs">San Ramon</td>
 							  			<td data-toggle="modal" data-target="#modalDesactivarUsuario" class="hidden-xs"><a class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i> activo</a></td>
+							  			<td>
+							  				<a data-toggle="modal" data-target="#modalEliminarUsuario" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+							  			</td>
+							  		</tr>
+							  		<tr>
+							  			<td>Datos de entrada</td>
+							  			<td >Datos de entrada</td>
+							  			<td>Datos de entrada</td>
+							  			<td class="hidden-xs">San Ramon</td>
+							  			<td data-toggle="modal" data-target="#modalDesactivarUsuario" class="hidden-xs"><a class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i> activo</a></td>
+							  			<td>
+							  				<a data-toggle="modal" data-target="#modalEliminarUsuario" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+							  			</td>
+							  		</tr>
+							  		
+							  	</tbody>
+							</table>
+					 	</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading p3"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Usuarios Desactivados </h4>  </div>
+					  	<div class="panel-body" >
+					  		<input type="search" class="form-control" placeholder="Buscar usuario..."></input>
+					  		<table class="table table-hover">
+								<thead>
+								  	<th>Email</th>
+								  	<th>Nombre</th>
+								  	<th>Teléfono</th>
+								  	<th class="hidden-xs">Sede</th>
+								  	<th>Estado</th>
+								  	<th></th>
+								 </thead>
+								 <tbody>
+							  		<tr>
+							  			<td>Datos de entrada</td>
+							  			<td >Datos de entrada</td>
+							  			<td>Datos de entrada</td>
+							  			<td class="hidden-xs">San Ramon</td>
+							  			<td data-toggle="modal" data-target="#modalActivarUsuario"  class="hidden-xs"><a class="btn btn-default btn-xs"><i class="fa fa-ban" aria-hidden="true"></i> desactivado</a></td>
 							  			<td>
 							  				<a data-toggle="modal" data-target="#modalEliminarUsuario" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 							  			</td>
