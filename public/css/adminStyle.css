@@ -452,3 +452,9 @@ input:focus, select:focus {
 .panelConversacionesAdmin .conversacionesList img {
   max-width: 50px;
 }
+
+footer {
+  position: absolute;
+  top: 60px;
+  right: 30px;
+}

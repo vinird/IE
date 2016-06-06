@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+/// added
+
+use App\User;
+use Hash;
+use Laracasts\Flash\Flash;
+
 class Users extends Controller
 {
     /**
@@ -71,6 +77,31 @@ class Users extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($id);
+       
+        dd('En function User@update nombre: '.$request->phone." Id: ".$id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request, $id )
+    {
+        $user = User::find($id);
+        Flash::error(' Contraseña invalida ');
+        if (Hash::check($request->password, $user->password)) { 
+            Flash::error(' Las contraseñas no coinciden ');
+            if($request->newPassword == $request->confirmPassword){
+                $user->password = bcrypt($request->newPassword);
+                $user->save();
+                Flash::success(' Se modificó la contraseña exitosamente ');
+            }
+        }
+        return redirect($request->url);
     }
 
     /**

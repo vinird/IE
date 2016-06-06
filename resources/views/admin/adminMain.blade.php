@@ -2,11 +2,6 @@
 @include('admin.partials.nav')
 	@include('admin.partials.aside')
 
-	
-
-
-	
-
  <!-- contenedor principal -->
 <div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container">
 	<div class="rowContainerAdmin">
@@ -30,55 +25,39 @@
 						@endif
 			  		</div> 
 			  		<div class="col-xs-8 col-lg-9 col-xl-10">
-			  			<form class="form-horizontal">
+			  			{!! Form::open( ['route' => ['users.update', Auth::user()->id] , 'class' => 'form-horizontal'] ) !!}
+			  				<input type="hidden" name="_method" value="PUT">
+			  				<br><br>
 						  	<div class="form-group">
-						    	<label for="" class="col-sm-3 control-label">Email:</label>
+						  		{!! Form::label('email', 'Email: ', array('class' => 'col-sm-3 control-label')); !!}
 						    	<div class="col-sm-9">
-						      		<input type="email" class="form-control search" name="" value="{{ Auth::user()->email }}" disabled>
+						    		{!! Form::email('email', Auth::user()->email , ['class' => 'form-control search' , 'disabled']) !!}
 						    	</div>
 						  	</div>
 						  	<div class="form-group">
-						    	<label for="phone" class="col-sm-3 control-label">Teléfono:</label>
-							    	<div class="col-sm-9">
-						    	  	<input type="text" class="form-control search" name="phone" value="{{ Auth::user()->phone }}">
+						  		{!! Form::label('name', 'Nombre: ', array('class' => 'col-sm-3 control-label')); !!}
+							    <div class="col-sm-9">
+						    		{!! Form::text('name', Auth::user()->name , ['class' => 'form-control search']) !!}
+						    	</div>
+						  	</div>
+						  	<div class="form-group">
+						  		{!! Form::label('phone', 'Teléfono: ', array('class' => 'col-sm-3 control-label')); !!}
+							    <div class="col-sm-9">
+						    		{!! Form::text('phone', Auth::user()->phone , ['class' => 'form-control search']) !!}
 						    	</div>
 						  	</div>
 						  	<div class="form-group"> 
-							    <label for="sede" class="col-sm-3 control-label">sede:</label>
+						  		{!! Form::label('sede', 'Sede: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
-							      	<select class="form-control search" name="sede">
-								  	<option>1</option>
-									  	<option>2</option>
-									  	<option>3</option>
-									  	<option>4</option>
-									  	<option>5</option>
-									</select>
+							      	{!! Form::select('sede', array('L' => 'Large', 'S' => 'Small'), 'S' , ['class' => 'form-control search']) !!}
 							    </div>
 							</div>
-						  	<div class="form-group">
-						    	<label for="password" class="col-sm-3 control-label">Contraseña:</label>
-						    	<div class="col-sm-9">
-						    	  	<input type="password" class="form-control search" name="password">
-						    	</div>
-						  	</div>
-						  	<div class="form-group">
-						    	<label for="newPassword" class="col-sm-3 control-label text-danger">Nueva contraseña:</label>
-						    	<div class="col-sm-9">
-						    	  	<input type="password" class="form-control search" name="newPassword">
-						    	</div>
-						  	</div>
-						  	<div class="form-group">
-						    	<label for="confirmPassword" class="col-sm-3 control-label text-danger">Verificar contraseña:</label>
-						    	<div class="col-sm-9">
-						    	  	<input type="password" class="form-control search" name="confirmPassword">
-						    	</div>
-						  	</div>
 				      		<br>
 							<br>
 				      		<div class="form-group">
 				        		<button type="submit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar</button>
 				      		</div>
-						</form>
+						{!! Form::close() !!}
 			  		</div> 
 				 	</div>
 			</div>
@@ -570,7 +549,8 @@
 		    </form>
 		  </div>
 		</div>
-		<!-- fin modal finalizar -->
+		<!-- fin modal -->
+		
 		<!-- Modal Eliminar -->
 	</div>
 </div>

@@ -76,4 +76,7 @@ Route::get('/logOut' , ['middleware' => 'auth', function(){
 	return view('index', ['homeActive' => true]);
 }]);
 
-//////
+////////////////////////////////////////////////////
+// Users
+Route::post('users/updatePassword/{id}', 'Users@updatePassword')->name('users.update.password');
+Route::resource('users', 'Users' , ['middleware' => 'auth']);
