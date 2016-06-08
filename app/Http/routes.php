@@ -50,28 +50,25 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 // admin  //////////////////////////////////////////////////
-Route::get('/admin/main', ['middleware' => 'auth', function() {
+Route::get('/admin/main', ['middleware' => ['auth', 'userActive'], function() {
     return view('admin.adminMain');
 }]);
-Route::get('/admin/acuerdos' , ['middleware' => 'auth', function(){
+Route::get('/admin/acuerdos' , ['middleware' => ['auth' , 'userActive'], function(){
 	return view('admin.acuerdos');
 }]);
-Route::get('/admin/eventos' , ['middleware' => 'auth', function(){
+Route::get('/admin/eventos' , ['middleware' => ['auth' , 'userActive'], function(){
 	return view('admin.eventos');
 }]);
-Route::get('/admin/noticias' , ['middleware' => 'auth', function(){
+Route::get('/admin/noticias' , ['middleware' => ['auth' , 'userActive'], function(){
 	return view('admin.noticias');
 }]);
-Route::get('/admin/repositorio' , ['middleware' => 'auth', function(){
+Route::get('/admin/repositorio' , ['middleware' => ['auth' , 'userActive'], function(){
 	return view('admin.repositorio');
 }]);
-Route::get('/admin/sede' , ['middleware' => 'auth', function(){
-	return view('admin.sede');
-}]);
-Route::get('/admin/users' , ['middleware' => 'auth', function(){
-	return view('admin.users');
-}]);
-Route::get('/logOut' , ['middleware' => 'auth', function(){
+Route::get('/admin/sede' , [ 'uses' => 'Sedes@index' , 'middleware' => ['auth' , 'userActive' , 'admin'] ]);
+Route::get('/admin/users' , ['uses' => 'Users@index' , 'middleware' => ['auth', 'userActive' , 'admin']]);
+
+Route::get('/logOut' , ['middleware' => ['auth' , 'userActive'], function(){
 	Auth::logout();
 	return view('index', ['homeActive' => true]);
 }]);
@@ -79,4 +76,11 @@ Route::get('/logOut' , ['middleware' => 'auth', function(){
 ////////////////////////////////////////////////////
 // Users
 Route::post('users/updatePassword/{id}', 'Users@updatePassword')->name('users.update.password');
-Route::resource('users', 'Users' , ['middleware' => 'auth']);
+
+Route::post('users/deleteUser/' , ['uses' => 'Users@delete' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.delete');
+
+Route::post('users/activateUser/',  ['uses' => 'Users@activateUser' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.activateUser');
+
+
+
+Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);

@@ -11,7 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/adminStyle.css') }}">
 	<script src="{{ asset('js/js_resources/jquery-1.12.3.min.js') }}"></script>
 	<script src="{{ asset('js/js_resources/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('js/adminScript.js') }}"></script>
+	<script src="{{ asset('js/js_resources/angular.min.js') }}"></script>
+	<script src="{{ asset('js/adminScript.js') }}"></script> 
 </head>
 <body>
 <a class="btn hidden-sm hidden-md hidden-lg" id="hiddenButton"><i class="fa fa-arrow-circle-right fa-lg" aria-hidden="true"></i></a>

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('lastName')->nullable();
             $table->tinyInteger('userType')->nullable();
+            $table->tinyInteger('active')->nullable();
             $table->string('phone')->nullable();
             $table->string('img')->nullable();
             $table->integer('sede_id')->unsigned()->nullable();

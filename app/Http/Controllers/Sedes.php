@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Sede;
+
 class Sedes extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class Sedes extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.sede', ['sedes' => Sede::all()]);
     }
 
     /**

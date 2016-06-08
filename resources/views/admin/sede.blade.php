@@ -2,12 +2,12 @@
 @include('admin.partials.nav')
 	@include('admin.partials.aside')
  <!-- contenedor principal -->
-		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container">
+		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="sedesController" ng-init="sedes = {{ $sedes }}">
 			
 				<!-- panel usuairos -->
 				<div class="col-xs-12 col-md-8 col-xl-9">
 					<div class="panel panel-default">
-						<div class="panel-heading p3"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp; Panel de Sedes  </h4>  </div>
+						<div class="panel-heading p3"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp; Panel de Sedes </h4>  </div>
 					  	<div class="panel-body" >
 					  		<input type="search" class="form-control" placeholder="Buscar sede..."></input>
 					  		<table class="table table-hover">
@@ -19,11 +19,11 @@
 								  	<th></th>
 								 </thead>
 								 <tbody>
-							  		<tr>
-							  			<td>Datos de entrada</td>
-							  			<td>Datos de entrada</td> 
-							  			<td>Datos de entrada</td>
-							  			<td>Usuario</td>
+							  		<tr ng-repeat=" x in sedes">
+							  			<td>@{{ x.name }}</td>
+							  			<td>@{{ x. }}</td> 
+							  			<td>@{{ x.name }}</td>
+							  			<td>@{{ x.name }}</td>
 							  			<td>
 							  				<a data-toggle="modal" data-target="#modalModificarUsuario" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
@@ -79,7 +79,7 @@
 				    	<div class="modal-content">
 				      		<div class="modal-header text-center">
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        		<h4 class="modal-title" id="myModalLabel">Modificar Sede</h4>
+				        		<h4 class="modal-title" id="myModalLabel">Modificar Sede </h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
 				        <form class="form-horizontal">
@@ -161,4 +161,6 @@
 				</div>
 		</div>
 	</div>
+
+<script src="{{ asset('js/adminScripts/sedesController.js') }}"></script>
 @include('admin.partials.footer')

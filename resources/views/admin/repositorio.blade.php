@@ -15,10 +15,12 @@
 						<!-- Agregar archivo -->
 						<div class="collapse row" id="collapseAgregarArchivo">
 						   	 	<div class="col-xs-12 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4">
+						   	 		<br>
+						   	 		<ul class="nav nav-tabs nav-justified">
+									  	<li role="presentation" class="active"><a href="#">Agregar Archivo</a></li>
+										<li role="presentation"><a href="#">Agregar Categoria</a></li>
+									</ul>
 						   	 		<form class="form-horizontal">
-						   	 			<div class="text-center">
-						   	 				<h4>Agregar Archivo</h4>
-						   	 			</div>
 						   	 			<br>
 						   	 			<div class="form-group">
 									    	<label for="file" class="col-sm-2 control-label">Archivo:</label>
@@ -48,6 +50,29 @@
 									   		<label for="resumen" class="col-sm-2 control-label">Resumen: </label>
 									    	<div class="col-sm-10">
 									     		<textArea type="text" class="form-control" name="resumen" ></textArea>
+									   	 	</div>
+									  	</div>
+									  	<br>
+									  	<div class="form-group">
+									    	<div class="col-sm-offset-2 col-sm-10">
+									      		<button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+									    	</div>
+									  	</div>
+									</form>
+
+									<form class="form-horizontal">
+						   	 			<br>
+									  	<div class="form-group">
+									   		<label for="title" class="col-sm-2 control-label">Título: </label>
+									    	<div class="col-sm-10">
+									     		<input type="text" class="form-control" name="title" placeholder="Título...">
+									   	 	</div>
+									  	</div>
+									  
+									  	<div class="form-group">
+									   		<label for="color" class="col-sm-2 control-label">Resumen: </label>
+									    	<div class="col-sm-10">
+									     		<input type="color" value="rgb(128,0,0);" class="form-control" name="color">
 									   	 	</div>
 									  	</div>
 									  	<br>
