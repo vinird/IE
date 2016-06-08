@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Sede;
+use Hash;
+use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Auth;
 
 class Sedes extends Controller
 {
@@ -38,7 +41,16 @@ class Sedes extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $sede= new Sede;
+      $sede->name= $request->name;
+      $sede->address= $request->address;
+      $sede->phone= $request->phone;
+      if($sede->save()) {
+        Flash::success(' Se guardó la sede exitosamente. ');
+      } else {
+        Flash::error(' Se produjó un problema al crear la sede. ');
+      }
+      return redirect('admin/sede');
     }
 
     /**
@@ -75,6 +87,21 @@ class Sedes extends Controller
         //
     }
 
+    public function updateSede(Request $request)
+    {
+      if (Hash::check($request->password, Auth::user()->password)) {
+        $sede= Sede::find($request->id);
+        $sede->name= $request->name;
+        $sede->address= $request->address;
+        $sede->phone= $request->phone;
+        if($sede->save()) {
+          Flash::success(' Se modificó la sede exitosamente. ');
+        } else {
+          Flash::error(' Se produjó un problema al modificar la sede. ');
+        }
+      }
+      return redirect('admin/sede');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -84,5 +111,17 @@ class Sedes extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deleteSede(Request $request)
+    {
+      if (Hash::check($request->password, Auth::user()->password)) {
+        if(Sede::destroy($request->id)) {
+          Flash::success(' Se eliminó la sede exitosamente. ');
+        } else {
+          Flash::error(' Se produjó un problema al eliminar la sede. ');
+        }
+      }
+      return redirect('admin/sede');
     }
 }

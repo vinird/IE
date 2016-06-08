@@ -16,6 +16,7 @@ class CreateSedesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address');
+            $table->string('phone');
             $table->string('link');
             $table->timestamps();
         });

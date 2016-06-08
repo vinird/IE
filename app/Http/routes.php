@@ -84,3 +84,12 @@ Route::post('users/activateUser/',  ['uses' => 'Users@activateUser' , 'middlewar
 
 
 Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);
+
+////////////////////////////////////////////////////
+// Sedes
+
+Route::post('sedes/updateSede/' , ['uses' => 'Sedes@updateSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.updateSede');
+
+Route::post('sedes/deleteSede/' , ['uses' => 'Sedes@deleteSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.deleteSede');
+
+Route::resource('sedes', 'Sedes' , ['middleware' => ['auth' , 'userActive']]);
