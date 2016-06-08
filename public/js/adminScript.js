@@ -102,5 +102,49 @@ btnAddUserToogle.click(function(event) {
 	}
  });
 
-// amimate
+// Repositorio 
+	var btnRepo1 = $(".btnRepo1");
+	var btnRepo2 = $(".btnRepo2");
+	var form1Repo = $(".form1Repo");
+	var form2Repo = $(".form2Repo");
+
+	btnRepo2.click(function() {
+		resetForm();
+		btnRepo2.parent("li").addClass('active');
+		btnRepo1.parent("li").removeClass('active');
+
+		form1Repo.addClass('animated fadeOutLeft');
+		setTimeout(function(){
+			
+			form2Repo.removeClass('hide');
+			form1Repo.addClass('hide');
+			form2Repo.addClass('animated fadeInRight');
+			
+		},300);
+	});
+
+	btnRepo1.click(function() {
+		resetForm();
+		btnRepo1.parent("li").addClass('active');
+		btnRepo2.parent("li").removeClass('active');
+
+		form2Repo.addClass('fadeOutRight');
+
+		setTimeout(function(){
+			
+			form2Repo.addClass('hide');
+			form1Repo.removeClass('hide');
+			form1Repo.addClass('fadeInLeft');
+			
+		},300);
+	});
+
+	function resetForm(){
+		form1Repo.removeClass('fadeOutLeft');
+		form1Repo.removeClass('fadeInLeft');
+		form2Repo.removeClass('fadeInRight');
+		form2Repo.removeClass('fadeOutRight');
+	}
+
+/// end
 });

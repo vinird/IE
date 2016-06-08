@@ -9,7 +9,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading p5"> 
 							<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text" aria-hidden="true">
-								</i>&nbsp;&nbsp; Repositorio / tipoArchivos  <a class="pull-right white"><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+								</i>&nbsp;&nbsp; Repositorio / tipoArchivos  <a class="pull-right white "><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 							</h4>  
 						</div>
 						<!-- Agregar archivo -->
@@ -17,10 +17,10 @@
 						   	 	<div class="col-xs-12 col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-4">
 						   	 		<br>
 						   	 		<ul class="nav nav-tabs nav-justified">
-									  	<li role="presentation" class="active"><a href="#">Agregar Archivo</a></li>
-										<li role="presentation"><a href="#">Agregar Categoria</a></li>
+									  	<li role="presentation" class="active"><a class="btnRepo1" href="#">Agregar Archivo</a></li>
+										<li role="presentation"><a class="btnRepo2" href="#">Agregar Categoria</a></li>
 									</ul>
-						   	 		<form class="form-horizontal">
+						   	 		<form class="form-horizontal form1Repo">
 						   	 			<br>
 						   	 			<div class="form-group">
 									    	<label for="file" class="col-sm-2 control-label">Archivo:</label>
@@ -59,18 +59,20 @@
 									    	</div>
 									  	</div>
 									</form>
+									<!-- form close -->
 
-									<form class="form-horizontal">
-						   	 			<br>
+									<!-- form open -->
+									<form class="form-horizontal form2Repo hide">
+						   	 			<br><br>
 									  	<div class="form-group">
-									   		<label for="title" class="col-sm-2 control-label">Título: </label>
+									   		<label for="name" class="col-sm-2 control-label">Nombre: </label>
 									    	<div class="col-sm-10">
-									     		<input type="text" class="form-control" name="title" placeholder="Título...">
+									     		<input type="text" class="form-control" name="name" placeholder="Nombre...">
 									   	 	</div>
 									  	</div>
 									  
 									  	<div class="form-group">
-									   		<label for="color" class="col-sm-2 control-label">Resumen: </label>
+									   		<label for="color" class="col-sm-2 control-label">Color: </label>
 									    	<div class="col-sm-10">
 									     		<input type="color" value="rgb(128,0,0);" class="form-control" name="color">
 									   	 	</div>
@@ -81,6 +83,7 @@
 									      		<button type="submit" class="btn btn-primary btn-sm">Agregar</button>
 									    	</div>
 									  	</div>
+									  	<br><br><br><br><br>
 									</form>
 						   	 	</div>
 						</div>
