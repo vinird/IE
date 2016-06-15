@@ -101,8 +101,15 @@ Route::post('categoria/delete' , ['uses' => 'Categorias@delete' ,  'middleware' 
 
 Route::post('repositorio/store' , ['uses' => 'Archivos@store' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.store');
 Route::post('repositorio/delete' , ['uses' => 'Archivos@delete' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.delete');
+Route::post('repositorio/updateData' , ['uses' => 'Archivos@updateData' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.updateData');
 Route::get('repositorio/categoria/{id}' , ['uses' => 'Archivos@indexCategory' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.indexCategory');
 
 
 
 
+
+
+////////////////////////////////////////////////
+// Descargar archivos 
+///////////////////////////////////////////////
+Route::get('file/getRepositorio/{id}' , ['uses' => 'Archivos@getFileRepositorio' ,  'middleware' => ['auth' , 'userActive']])->name('file.getRepositorio');

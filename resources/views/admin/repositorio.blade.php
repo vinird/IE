@@ -144,7 +144,7 @@
 								  	<th ng-click="myOrder = 'user_id' " class="hidden-xs hidden-sm">Subido por</th>
 								  	<th ng-click="myOrder = 'created_at' " class="hidden-xs hidden-sm">Fecha de subida</th>
 								  	<th ng-click="myOrder = 'updated_at' " class="hidden-xs hidden-sm hidden-md">Fecha modificación</th>
-								  	<th>Descarga</th>
+								  	<th>Descargar</th>
 								  	<th></th>
 								 </thead>
 								 <tbody>
@@ -164,10 +164,10 @@
 									  	<td class="hidden-xs hidden-sm"> @{{ x.created_at }} </td>
 									  	<td class="hidden-xs hidden-sm hidden-md"> @{{ x.updated_at }} </td>
 									  	<td >
-									  		<a href="{{ asset('storage/') }}@{{ '/' + x.file_route}}"><i class="fa fa-download" aria-hidden="true"></i></a>
+									  		<a href="/file/getRepositorio/@{{ x.file_route }}"><i class="fa fa-download" aria-hidden="true"></i></a>
 									  	</td>
 							  			<td ng-if="x.user_id == userID || userType == 1">
-							  				<a ng-click="setFileValues( x.id , x.name , x.user_id , x.file_route)" data-toggle="modal" data-target="#modalModificarArchivo" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+							  				<a ng-if="x.editable != null" ng-click="setEdit( x.id , x.name , x.title , x.keyWords, x.categoria_id, x.file_route)" data-toggle="modal" data-target="#modalModificarArchivo" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 							  				<a ng-click="setFileValues( x.id , x.name , x.user_id , x.file_route)" data-toggle="modal" data-target="#modalEliminarArchivo" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 							  			</td>
@@ -188,18 +188,21 @@
 				        		<h4 class="modal-title" id="myModalLabel">Modificar @{{fileName}}</h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
-				        <form class="form-horizontal">
+						{!! Form::open(array('route'=>'repositorio.updateData','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input class="hide" type="text" name="id" ng-model="fileID">
+							<input class="hide" type="text" name="url" ng-model="fileUrl">
 				      		<div class="modal-body">
 							  	<div class="form-group">
 							    	<label for="title" class="col-sm-2 control-label">Título:</label>
 							    	<div class="col-sm-10">
-							      		<input type="text" class="form-control" name="title" placeholder="Título...">
+							      		<input type="text" class="form-control" name="title" ng-model="fileTitle">
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label for="resumen" class="col-sm-2 control-label">Resumen:</label>
 							    	<div class="col-sm-10">
-							    	  	<textArea type="textArea" class="form-control" name="resumen"> +ResumenPalabras+
+							    	  	<textArea type="textArea" class="form-control" name="resumen">@{{ fileKeyWords }}
 							    	  	</textArea>
 							    	</div>
 							  	</div>
@@ -213,11 +216,8 @@
 							    	<label for="category" class="col-sm-2 control-label">Categoria:</label>
 							    	<div class="col-sm-10">
 							    	  	<select class="form-control" name="category">
-										  	<option>1</option>
-										  	<option>2</option>
-										  	<option>3</option>
-										  	<option>4</option>
-										  	<option>5</option>
+							    	  		<option value="@{{ fileCategoryID }}"></option>
+											<option ng-repeat="y in categorias" value="@{{ y.id }}">@{{ y.name }}</option> 
 										</select>
 							    	</div>
 							  	</div>
