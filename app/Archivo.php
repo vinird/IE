@@ -13,4 +13,7 @@ class Archivo extends Model
     public function user(){
     	return $this->belongsTo('App\User');
     }
+    public function Categoria(){
+    	return $this->belongsTo('App\Categoria');
+    }
 }

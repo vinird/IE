@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => 'repositorio',
 
     /*
     |--------------------------------------------------------------------------
@@ -46,6 +46,11 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+        ],
+
+        'repositorio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/repositorio'),
         ],
 
         'public' => [

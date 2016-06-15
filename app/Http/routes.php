@@ -50,22 +50,17 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 // admin  //////////////////////////////////////////////////
-Route::get('/admin/main', ['middleware' => ['auth', 'userActive'], function() {
-    return view('admin.adminMain');
-}]);
-Route::get('/admin/acuerdos' , ['middleware' => ['auth' , 'userActive'], function(){
-	return view('admin.acuerdos');
-}]);
-Route::get('/admin/eventos' , ['middleware' => ['auth' , 'userActive'], function(){
-	return view('admin.eventos');
-}]);
-Route::get('/admin/noticias' , ['middleware' => ['auth' , 'userActive'], function(){
-	return view('admin.noticias');
-}]);
-Route::get('/admin/repositorio' , ['middleware' => ['auth' , 'userActive'], function(){
-	return view('admin.repositorio');
-}]);
+Route::get('/admin/main', [ 'uses' => 'Main@index' , 'middleware' => ['auth', 'userActive']]);
+
+Route::get('/admin/acuerdos' , [ 'uses' =>'Acuerdos@index' , 'middleware' => ['auth' , 'userActive']]);
+
+Route::get('/admin/eventos' , [ 'uses' => 'Eventos@index' , 'middleware' => ['auth' , 'userActive']]);
+Route::get('/admin/noticias' , [ 'uses' => 'Noticias@index' , 'middleware' => ['auth' , 'userActive']]);
+
+Route::get('/admin/repositorio' , ['uses' => 'Archivos@index' , 'middleware' => ['auth' , 'userActive']]);
+
 Route::get('/admin/sede' , [ 'uses' => 'Sedes@index' , 'middleware' => ['auth' , 'userActive' , 'admin'] ]);
+
 Route::get('/admin/users' , ['uses' => 'Users@index' , 'middleware' => ['auth', 'userActive' , 'admin']]);
 
 Route::get('/logOut' , ['middleware' => ['auth' , 'userActive'], function(){
@@ -93,3 +88,21 @@ Route::post('sedes/updateSede/' , ['uses' => 'Sedes@updateSede' , 'middleware' =
 Route::post('sedes/deleteSede/' , ['uses' => 'Sedes@deleteSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.deleteSede');
 
 Route::resource('sedes', 'Sedes' , ['middleware' => ['auth' , 'userActive']]);
+
+////////////////////////////////////////////////////
+// Categorias
+
+Route::post('categoria/store' , ['uses' => 'Categorias@store' ,  'middleware' => ['auth' , 'userActive']])->name('categoria.store');
+Route::post('categoria/delete' , ['uses' => 'Categorias@delete' ,  'middleware' => ['auth' , 'userActive']])->name('categoria.delete');
+
+
+////////////////////////////////////////////////////
+// Repositorio
+
+Route::post('repositorio/store' , ['uses' => 'Archivos@store' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.store');
+Route::post('repositorio/delete' , ['uses' => 'Archivos@delete' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.delete');
+Route::get('repositorio/categoria/{id}' , ['uses' => 'Archivos@indexCategory' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.indexCategory');
+
+
+
+

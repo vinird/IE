@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+// added
+use App\Categoria;
+
 class Acuerdos extends Controller
 {
     /**
@@ -15,7 +18,8 @@ class Acuerdos extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        return view('admin/acuerdos' , ['categorias' => $categorias]);
     }
 
     /**

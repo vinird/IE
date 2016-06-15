@@ -103,47 +103,125 @@ btnAddUserToogle.click(function(event) {
  });
 
 // Repositorio 
+ 	var state = $('#hiddenStateRepo');
 	var btnRepo1 = $(".btnRepo1");
 	var btnRepo2 = $(".btnRepo2");
+	var btnRepo3 = $(".btnRepo3");
+
 	var form1Repo = $(".form1Repo");
 	var form2Repo = $(".form2Repo");
-
-	btnRepo2.click(function() {
-		resetForm();
-		btnRepo2.parent("li").addClass('active');
-		btnRepo1.parent("li").removeClass('active');
-
-		form1Repo.addClass('animated fadeOutLeft');
-		setTimeout(function(){
-			
-			form2Repo.removeClass('hide');
-			form1Repo.addClass('hide');
-			form2Repo.addClass('animated fadeInRight');
-			
-		},300);
-	});
+	var form3Repo = $(".form3Repo");
+	form1Repo.addClass('animated');
+	form2Repo.addClass('animated');
+	form3Repo.addClass('animated');
 
 	btnRepo1.click(function() {
 		resetForm();
 		btnRepo1.parent("li").addClass('active');
 		btnRepo2.parent("li").removeClass('active');
+		btnRepo3.parent("li").removeClass('active');
 
-		form2Repo.addClass('fadeOutRight');
+		if (state.attr('stateIndex') == '2') {
+			form2Repo.addClass('fadeOutRight');
 
-		setTimeout(function(){
-			
-			form2Repo.addClass('hide');
-			form1Repo.removeClass('hide');
-			form1Repo.addClass('fadeInLeft');
-			
-		},300);
+			setTimeout(function(){
+				
+				form2Repo.addClass('hide');
+				form1Repo.removeClass('hide');
+				form1Repo.addClass('fadeInLeft');
+				state.attr('stateIndex' , '1');
+			},300);
+		} else {
+			if(state.attr('stateIndex') == '3'){
+				form3Repo.addClass('fadeOutRight');
+
+				setTimeout(function(){
+					
+					form3Repo.addClass('hide');
+					form1Repo.removeClass('hide');
+					form1Repo.addClass('fadeInLeft');
+					state.attr('stateIndex' , '1');
+				},300);
+			}
+		}
+	});
+
+	btnRepo2.click(function() {
+		resetForm();
+		btnRepo2.parent("li").addClass('active');
+		btnRepo1.parent("li").removeClass('active');
+		btnRepo3.parent("li").removeClass('active');
+
+		if (state.attr('stateIndex') == '1') {
+			form1Repo.addClass('animated fadeOutLeft');
+			setTimeout(function(){
+				
+				form1Repo.addClass('hide');
+				form2Repo.removeClass('hide');
+				form2Repo.addClass('fadeInRight');
+				state.attr('stateIndex', '2')
+			},300);
+		} else {
+			if (state.attr('stateIndex') == '3'){
+				form3Repo.addClass('fadeOutRight');
+				setTimeout(function(){
+					
+					form3Repo.addClass('hide');
+					form2Repo.removeClass('hide');
+					form2Repo.addClass('fadeInLeft');
+					state.attr('stateIndex', '2')
+				},300);
+			}
+		}
+
+	});
+
+	btnRepo3.click(function() {
+		resetForm();
+		btnRepo3.parent("li").addClass('active');
+		btnRepo2.parent("li").removeClass('active');
+		btnRepo1.parent("li").removeClass('active');
+
+		if (state.attr('stateIndex') == '2') {
+			form2Repo.addClass('fadeOutLeft');
+
+			setTimeout(function(){
+				
+				form2Repo.addClass('hide');
+				form3Repo.removeClass('hide');
+				form3Repo.addClass('fadeInRight');
+				state.attr('stateIndex' , '3');
+			},300);
+		} else {
+			if(state.attr('stateIndex') == '1'){
+				form1Repo.addClass('fadeOutLeft');
+
+				setTimeout(function(){
+					
+					form1Repo.addClass('hide');
+					form3Repo.removeClass('hide');
+					form3Repo.addClass('fadeInRight');
+					state.attr('stateIndex' , '3');
+				},300);
+			}
+		}
 	});
 
 	function resetForm(){
 		form1Repo.removeClass('fadeOutLeft');
 		form1Repo.removeClass('fadeInLeft');
+		form1Repo.removeClass('fadeOutRight');
+		form1Repo.removeClass('fadeInRight');
+
 		form2Repo.removeClass('fadeInRight');
 		form2Repo.removeClass('fadeOutRight');
+		form2Repo.removeClass('fadeInLeft');
+		form2Repo.removeClass('fadeOutLeft');
+
+		form3Repo.removeClass('fadeInRight');
+		form3Repo.removeClass('fadeOutRight');
+		form3Repo.removeClass('fadeInLeft');
+		form3Repo.removeClass('fadeOutLeft');
 	}
 
 /// end

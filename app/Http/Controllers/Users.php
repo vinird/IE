@@ -12,6 +12,8 @@ use App\User;
 use Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Auth;
+use App\Categoria;
+
 
 class Users extends Controller
 {
@@ -23,7 +25,8 @@ class Users extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin/users' , ['users' => $users]);
+        $categorias = Categoria::all();
+        return view('admin/users' , ['users' => $users , 'categorias' => $categorias]);
     }
 
     /**

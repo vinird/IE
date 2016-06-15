@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+// added
+use App\Categoria;
+
+
 class Noticias extends Controller
 {
     /**
@@ -15,7 +19,8 @@ class Noticias extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        return view('admin/noticias' , ['categorias' => $categorias]);
     }
 
     /**
