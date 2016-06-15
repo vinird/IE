@@ -81,6 +81,24 @@ Route::post('users/activateUser/',  ['uses' => 'Users@activateUser' , 'middlewar
 Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////
+// Noticias
+
+Route::post('noticias/updateNoticia/' , ['uses' => 'Noticias@updateNoticia' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('noticias.updateNoticia');
+
+Route::post('noticias/deleteNoticia/' , ['uses' => 'Noticias@deleteNoticia' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('noticias.deleteNoticia');
+
+Route::resource('noticias', 'Noticias' , ['middleware' => ['auth' , 'userActive']]);
+
+////////////////////////////////////////////////////
+// Eventos
+
+Route::post('eventos/updateEvento/' , ['uses' => 'Eventos@updateEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.updateEvento');
+
+Route::post('eventos/deleteEvento/' , ['uses' => 'Eventos@deleteEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.deleteEvento');
+
+Route::resource('eventos', 'Eventos' , ['middleware' => ['auth' , 'userActive']]);
+
+////////////////////////////////////////////////////
 // Sedes
 
 Route::post('sedes/updateSede/' , ['uses' => 'Sedes@updateSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.updateSede');
@@ -102,7 +120,3 @@ Route::post('categoria/delete' , ['uses' => 'Categorias@delete' ,  'middleware' 
 Route::post('repositorio/store' , ['uses' => 'Archivos@store' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.store');
 Route::post('repositorio/delete' , ['uses' => 'Archivos@delete' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.delete');
 Route::get('repositorio/categoria/{id}' , ['uses' => 'Archivos@indexCategory' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.indexCategory');
-
-
-
-

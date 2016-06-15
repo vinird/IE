@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 // added
+use Laracasts\Flash\Flash;
+use App\Noticia;
 use App\Categoria;
+use Illuminate\Support\Facades\Auth;
+use Storage;
+use File;
 
 
 class Noticias extends Controller
@@ -41,7 +46,33 @@ class Noticias extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $noticia= new Noticia;
+      $noticia->title= $request->title;
+      $noticia->content= $request->content;
+      $noticia->auth= $request->author;
+      $noticia->user_id= Auth::user()->id;
+      $file= $request->file('file');
+      if($file != null) {
+          $file_route = time().'_'.$file->getClientOriginalName();
+
+          if(Storage::disk('noticia/archivo')->put($file_route, file_get_contents($file->getRealPath()))){
+              $noticia->url_document= $file_route;
+          }
+      }
+      $img= $request->file('img');
+      if($img != null) {
+          $img_route = time().'_'.$img->getClientOriginalName();
+
+          if(Storage::disk('noticia/img')->put($img_route, file_get_contents($img->getRealPath()))){
+              $noticia->url_img= $img_route;
+          }
+      }
+      if($noticia->save()) {
+        Flash::success(' Se guardó la noticia exitosamente. ');
+      } else {
+        Flash::error(' Se produjó un problema al crear la noticia. ');
+      }
+      return redirect('admin/noticias');
     }
 
     /**

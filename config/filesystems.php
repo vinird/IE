@@ -53,6 +53,16 @@ return [
             'root' => storage_path('app/public/repositorio'),
         ],
 
+        'noticia/archivo' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/noticia/archivo'),
+        ],
+
+        'noticia/img' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/noticia/img'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

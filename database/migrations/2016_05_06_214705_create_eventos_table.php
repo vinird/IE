@@ -14,14 +14,14 @@ class CreateEventosTable extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
+            $table->string('title');
             $table->string('url_img');
             $table->string('url_document');
             $table->string('content');
             $table->string('auth');
             $table->dateTime('event_date');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');            
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
