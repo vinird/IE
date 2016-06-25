@@ -24,6 +24,10 @@ body, html, div {
   background-color: #F3F3F3 !important;
 }
 
+.red {
+  color: red;
+}
+
 .btn {
   border-radius: 2px !important;
   border: 0px !important;
@@ -61,6 +65,7 @@ input:focus, select:focus {
   -webkit-box-shadow: 0px 0px 42px 0px rgba(0, 0, 0, 0.07);
   -moz-box-shadow: 0px 0px 42px 0px rgba(0, 0, 0, 0.07);
   box-shadow: 0px 0px 42px 0px rgba(0, 0, 0, 0.07);
+  border-bottom: 1px solid #D91B1B;
 }
 
 .navbar ul .dropdown-menu a {
@@ -455,17 +460,22 @@ input:focus, select:focus {
 }
 
 .panelNotificacionesAdmin {
-  height: 514px;
+  height: 514px !important;
+  border-top: 1px #E02424 solid;
   overflow-y: scroll;
 }
 
 .panelConversacionesAdmin {
-  height: 515px;
+  height: 515px !important;
   overflow-y: scroll;
 }
 
 .panelUserImgMain {
-  min-height: 520px;
+  min-height: 520px !important;
+}
+
+.panelConversacionesAdmin {
+  border-top: 1px #E02424 solid;
 }
 
 .panelConversacionesAdmin .conversacionesList {
@@ -483,6 +493,10 @@ input:focus, select:focus {
 
 .panelConversacionesAdmin .conversacionesList img {
   max-width: 50px;
+}
+
+.ttip {
+  color: #4A4A4A;
 }
 
 footer {

@@ -54,8 +54,7 @@ class Categorias extends Controller
         } else {
             Flash::error('Algo salió mal al insertar los datos.');  
         }
-        return redirect('/admin/repositorio');
-
+        return redirect($request->url);
     }
 
     /**
@@ -124,6 +123,6 @@ class Categorias extends Controller
         } else {
             Flash::error('Error al eliminar la categoria.');   
         }
-        return redirect('/admin/repositorio');
+        return redirect($request->url);
     }
 }

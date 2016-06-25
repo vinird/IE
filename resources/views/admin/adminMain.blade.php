@@ -28,7 +28,7 @@
 			  			@if(Auth::user()->img == null)
 							<a data-toggle="modal" data-target="#modalModificarImgUser"><i class="fa fa-picture-o fa-5x img-responsive" aria-hidden="true"></i></a>
 						@else 
-							<a data-toggle="modal" data-target="#modalModificarImgUser"><img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle"></a>
+							<a data-toggle="modal" data-target="#modalModificarImgUser"><img src="{{ asset('img/users/'.Auth::user()->img) }}" class="img-responsive img-circle"></a>
 						@endif
 			  		</div> 
 			  		<div class="col-xs-8 col-lg-9 col-xl-10">
@@ -38,7 +38,7 @@
 						  	<div class="form-group">
 						  		{!! Form::label('email', 'Email: ', array('class' => 'col-sm-3 control-label')); !!}
 						    	<div class="col-sm-9">
-						    		{!! Form::email('email', Auth::user()->email , ['class' => 'form-control search' , 'disabled']) !!}
+						    		{!! Form::email('email', Auth::user()->email , ['class' => 'form-control search']) !!}
 						    	</div>
 						  	</div>
 						  	<div class="form-group">
@@ -50,7 +50,7 @@
 						  	<div class="form-group">
 						  		{!! Form::label('phone', 'Teléfono: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
-							    	<input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control search" pattern="\d{4}[\-]\d{2}[\-]\d{2}" title="El formato correctos es: 8888-88-88" required>
+							    	<input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control search" placeholder="0000-00-00" pattern="\d{4}[\-]\d{2}[\-]\d{2}" title="El formato correctos es: 8888-88-88" required>
 						    	</div>
 						  	</div>
 						  	<div class="form-group"> 
@@ -67,6 +67,14 @@
 							</div>
 				      		<br>
 							<br>
+							<br>
+				      		<div class="form-group">
+						  		{!! Form::label('password', 'Password: ', array('class' => 'col-sm-3 control-label')); !!}
+							    <div class="col-sm-9">
+						    		{!! Form::password('password' , ['class' => 'form-control search', 'required']) !!}
+							   		<p class="help-block">Confirme su contraseña para realizar los cambios.</p>
+						    	</div>
+						  	</div>
 				      		<div class="form-group">
 				        		<button type="submit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar</button>
 				      		</div>
@@ -325,10 +333,10 @@
 				</div>
 				<!-- fin agregra acuerdo -->
 			  	<div class="panel-body" >
-			  		<input type="search" class="form-control" placeholder="Buscar acuerdos..."></input>
+			  		<input type="search" class="form-control" placeholder="Buscar acuerdos..." ng-model="filterAcuerdo"></input>
 			  		<!-- /// -->
 			  		<div ng-repeat="x in acuerdos |  orderBy : 'agreement_date' | filter : filterAcuerdo" ng-if="x.complete != 1">
-				  		<div class="col-xs-6" >
+				  		<div class="col-xs-12 col-sm-6" >
 							<div class="panel panel-default boxAcuerdos">
 								<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p"> 
 									<h4>
@@ -357,7 +365,7 @@
 							 	</div>
 							</div>
 						</div>
-						<div ng-if="$even" class="clearfix"></div>
+						<!-- <div ng-if="$even" class="clearfix"></div> -->
 					</div>
 					<!-- /// --> 
 			 	</div>
@@ -383,7 +391,9 @@
 					  	<div class="form-group">
 				    	<label for="imgUsers" class="col-sm-2 control-label">Imagen:</label>
 					    	<div class="col-sm-10">
-					      		<input type="file" class="form-control" name="imgUsers" >
+					    		<input type="hidden" name="MAX_FILE_SIZE" value="1999999"> 
+					      		<input type="file" class="form-control" name="imgUsers" required >
+							   	<p class="help-block">El tamaño de la imagen debe ser menor a 2M.</p>
 					    	</div>
 					  	</div>
 		      		</div>

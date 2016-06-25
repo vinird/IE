@@ -69,7 +69,7 @@ return [
 
         'userPhotos' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/userPhotos'),
+            'root' => public_path('img/users/'),
             'visibility' => 'public',
         ],
 

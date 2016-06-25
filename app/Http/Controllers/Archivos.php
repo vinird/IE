@@ -57,7 +57,7 @@ class Archivos extends Controller
 
         $file = $request->file('file');
         if($file != null) {
-            // toda la logica aqui
+            // toda la logica aqui 
             $file_route = time().'_'.$file->getClientOriginalName();
 
             $archivo                = new Archivo();
@@ -84,7 +84,7 @@ class Archivos extends Controller
         } else {
             Flash::error(' Debe seleccionar un archivo. ');
         }
-        return $this->index();
+        return redirect($request->url);
     }
 
     /**
@@ -152,11 +152,10 @@ class Archivos extends Controller
             } else {
                 Flash::error(' Error al eliminar el archivo. ');
             }
-            return $this->index();
         } else {
             Flash::error(' Contraseña invalida. '); 
         }
-        return $this->index();
+        return redirect($request->url);
     }
 
 
@@ -190,8 +189,9 @@ class Archivos extends Controller
         // $archivos   = Archivo::all();
 
         $categorias = Categoria::all();
+        $currentCategory = Categoria::find($id);
         $users      = User::select('id' , 'name' )->get();
-        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'archivos' => $collection , 'users' => $users ]);
+        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'currentCategory' => $currentCategory , 'archivos' => $collection , 'users' => $users ]);
     }
 
 
@@ -259,7 +259,7 @@ class Archivos extends Controller
         } else {
             Flash::error(' Contraseña incorrecta. ');
         }
-        return $this->index();
+        return redirect($request->url);
     }
     
 

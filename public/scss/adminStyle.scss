@@ -19,6 +19,9 @@ body, html , div{
 .btn-default{
 	background-color: #F3F3F3 !important;
 }
+.red{
+	color: red;
+}
 .btn{
 	border-radius: 2px !important;
 	border: 0px !important;
@@ -56,6 +59,7 @@ input , select{
 	-webkit-box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.07);
 	-moz-box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.07);
 	box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.07);
+	border-bottom: 1px solid #D91B1B;
 	ul{
 		.dropdown-menu{
 			a{
@@ -410,18 +414,20 @@ input , select{
 	}
 }
 .panelNotificacionesAdmin{
-	height: 514px;
+	height: 514px !important;
+	border-top: 1px #E02424 solid;
 	overflow-y: scroll;
 }
 .panelConversacionesAdmin{
-	height: 515px;
+	height: 515px !important;
 	overflow-y: scroll;
 }
 .panelUserImgMain{
-	min-height: 520px;
+	min-height: 520px !important;
 }
 //conversaciones
 .panelConversacionesAdmin{
+	border-top: 1px #E02424 solid;
 	.conversacionesList{
 		background-color: #EFF2F7;
 		padding: 10px 0 !important;
@@ -436,6 +442,10 @@ input , select{
 			max-width: 50px;
 		}
 	}
+}
+// tooltip
+.ttip{
+	color: #4A4A4A;
 }
 // footer
 footer{

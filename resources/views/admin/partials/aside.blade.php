@@ -1,11 +1,15 @@
 <div class="col-sm-3 col-md-2 col-xl-1 b-black side-nav side-nav-lg hidden-xs" id="side-nav-1">
 		<ul>
 			<li> 
-				<a href="{{url('/admin/users')}}"> <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Users </a> 
+				<a href="{{url('/admin/users')}}"> <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Usuarios </a> 
 			</li>
 			<li id="repositorio-dropdown-btn"> 
 				<a href="{{ url('/admin/repositorio') }}">
-					<i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp; Repositorio <i id="dropdown-chevron" class="fa fa-chevron-down pull-right" aria-hidden="true"></i>  
+					<i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp; Repositorio 
+						@if(count($categorias) > 0)
+							<i id="dropdown-chevron" class="fa fa-chevron-down pull-right" aria-hidden="true">
+						@endif
+					</i>  
 				</a> 
 			</li>
 				<ul id="repositorio-dropdown-ul" class="hide" isActive="false">
@@ -35,18 +39,27 @@
 			<li> 
 				<a href="{{url('/admin/users')}}"> <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp; Users </a> 
 			</li>
+			@if(count($categorias) > 0)
 			<li id="dropdown-chevron2"> 
 				<a> 
 					<i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp; Repositorio <i id="" class="fa fa-chevron-down pull-right" aria-hidden="true"></i>  
 				</a> 
 			</li>
 				<ul id="repositorio-dropdown-ul2" class="hide" isActive="false">
-					@if(count($categorias) > 0)
-						@foreach ($categorias as $c)
-							<li> <a href="{{ route('repositorio.indexCategory', $c->id ) }}">{{ $c->name }}</a></li>
-						@endforeach
-					@endif
+					@foreach ($categorias as $c)
+						<li> <a href="{{ route('repositorio.indexCategory', $c->id ) }}">{{ $c->name }}</a></li>
+					@endforeach
 				</ul>
+			@else
+			<li id="dropdown-chevron2"> 
+				<a href="{{ url('/admin/repositorio') }}"> 
+					<i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp; Repositorio </i>  
+				</a> 
+			</li>
+			<li> 
+				<a href="{{ url('/admin/noticias') }}"> <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias </a> 
+			</li>
+			@endif
 			<li> 
 				<a href="{{ url('/admin/noticias') }}"> <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias </a> 
 			</li>

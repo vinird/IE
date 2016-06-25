@@ -47,7 +47,7 @@
 		<!-- fin modal -->
 
 <!-- alertas -->
-<footer class="animated fadeInDown">
+<footer class="animated bounceInLeft">
 		@include('flash::message')
 </footer>
 </body>
