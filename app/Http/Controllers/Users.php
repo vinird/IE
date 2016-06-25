@@ -13,6 +13,7 @@ use Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Auth;
 use App\Categoria;
+use Storage;
 
 
 class Users extends Controller
@@ -83,8 +84,16 @@ class Users extends Controller
     {
         //
         $user = User::find($id);
-       
-        dd('En function User@update nombre: '.$request->phone." Id: ".$id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->sede_id = $request->sede;
+
+        if($user->save()){
+            Flash::success(' Se modificó el usuario exitosamente. ');
+        } else {
+            Flash::error(' Error al modificar el usuario. ');
+        }
+       return redirect('/admin/main');
     }
 
     /**
@@ -159,5 +168,40 @@ class Users extends Controller
             Flash::error(' Contraseña invalida. ');
         }
         return redirect($request->url);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function modifyIMG(Request $request)
+    { 
+        $user = User::find(Auth::user()->id);
+
+        $file = $request->file('imgUsers');
+        $file_route = time().'_'.$file->getClientOriginalName();
+
+        $user->img = $file_route;
+///////////////////////
+        // $data = Input::all();
+        // $png_url = "perfil-".time().".jpg";
+        // $path = public_path() . "/img/designs/" . $png_url;
+        // $img = $data['fileo'];
+        // $img = substr($img, strpos($img, ",")+1);
+        // $data = base64_decode($img);
+        // $success = file_put_contents($path, $data);
+        // print $success ? $png_url : 'Unable to save the file.';
+/////////////////////
+
+        if(Storage::disk('userPhotos')->put( $file_route , file_get_contents($file->getRealPath()))){
+            Flash::success(' Imagen guardada exitosamente. ');
+            $user->save();
+        } else {
+            Flash::error(' Error al guardar la imagen. ');
+        }
+
+
+        dd('en user modifyIMG');
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 // added
 use App\Categoria;
+use App\Acuerdo;
+use App\Sede;
 
 
 class Main extends Controller
@@ -20,7 +22,9 @@ class Main extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('admin/adminMain' , ['categorias' => $categorias]);
+        $acuerdos = Acuerdo::take(25)->get();
+        $sedes = Sede::all();
+        return view('admin/adminMain' , ['categorias' => $categorias , 'acuerdos' => $acuerdos, 'sedes' => $sedes]);
     }
 
     /**

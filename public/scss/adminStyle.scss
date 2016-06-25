@@ -51,20 +51,34 @@ input , select{
 	width: 80%;
 }
 .navbar{
-	background-color: #FFF;
+	background-color: #1B2331;
 	border:none;
 	-webkit-box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.07);
 	-moz-box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.07);
 	box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.07);
 	ul{
-		li{
+		.dropdown-menu{
 			a{
-				color: #878787 !important;
+				color: #5A5A5A !important;
 			}
 			a:hover{
 				color: #000000 !important;
 			}
 		}
+		li{
+			a{
+				color: #CDCDCD !important;
+			}
+			a:hover{
+				color: #fff !important;
+			}
+		}
+	}
+	.navbar-brand{
+		color: #CDCDCD !important;
+	}
+	.navbar-brand:hover{
+		color: #fff !important;
 	}
 
 }
@@ -163,13 +177,13 @@ input , select{
 }
 // panels
 .boxAcuerdos{
-	-webkit-box-shadow: 0px 10px 40px -8px rgba(0,0,0,0.15) !important;
-	-moz-box-shadow: 0px 10px 40px -8px rgba(0,0,0,0.15) !important;
-	box-shadow: 0px 10px 40px -8px rgba(0,0,0,0.15) !important;
+	-webkit-box-shadow: 0px 10px 40px -8px rgba(0,0,0,0.3) !important;
+	-moz-box-shadow: 0px 10px 40px -8px rgba(0,0,0,0.3) !important;
+	box-shadow: 0px 10px 40px -8px rgba(0,0,0,0.3) !important;
 }
 .acuerdosGenerales{
 	.boxAcuerdos{
-	margin: 5%;
+	margin: 3%;
 }
 }
 .btnAddAcuerdoToogle{
@@ -240,6 +254,18 @@ input , select{
 	}
 	.p8{
 		background-color: #EFF2F7;
+		h3,h4,h5,h6, p{
+			color: #555;
+		}
+	}
+	.pGreen{
+		background-color: rgba(#BAE5A4, 0.5);
+		h3,h4,h5,h6, p{
+			color: #555;
+		}
+	}
+	.pOrange{
+		background-color: rgba(#F78B11, 0.5);
 		h3,h4,h5,h6, p{
 			color: #555;
 		}

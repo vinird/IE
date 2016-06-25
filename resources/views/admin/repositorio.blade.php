@@ -23,7 +23,6 @@
 									</ul>
 									{!! Form::open(array('route'=>'repositorio.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal form1Repo')) !!}
 										@if( count($categorias) > 0 )
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						   	 			<br>
 						   	 			<div class="form-group">
 									    	<label for="file" class="col-sm-3 control-label">Archivo:</label>

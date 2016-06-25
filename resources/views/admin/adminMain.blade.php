@@ -3,7 +3,7 @@
 	@include('admin.partials.aside')
 
  <!-- contenedor principal -->
-<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container">
+<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}">
 	<div class="rowContainerAdmin">
 		<!-- panel usuario  -->
 		<div class="clearfix"></div>
@@ -11,7 +11,14 @@
 		<div class="col-xs-12 col-md-12 col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading p8"> 
-					<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; {{ Auth::user()->name }}
+					<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; {{ Auth::user()->name }} /
+					@if(isset($sedes) && isset(Auth::user()->sede_id))
+						@foreach($sedes as $x)
+							@if($x->id == Auth::user()->sede_id)
+								{!! $x->name !!}
+							@endif
+						@endforeach
+					@endif
 					</h4>  
 				</div>
 				
@@ -43,13 +50,19 @@
 						  	<div class="form-group">
 						  		{!! Form::label('phone', 'Teléfono: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
-						    		{!! Form::text('phone', Auth::user()->phone , ['class' => 'form-control search']) !!}
+							    	<input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control search" pattern="\d{4}[\-]\d{2}[\-]\d{2}" title="El formato correctos es: 8888-88-88" required>
 						    	</div>
 						  	</div>
 						  	<div class="form-group"> 
 						  		{!! Form::label('sede', 'Sede: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
-							      	{!! Form::select('sede', array('L' => 'Large', 'S' => 'Small'), 'S' , ['class' => 'form-control search']) !!}
+							      	<select name="sede" class="form-control">
+							      		@if(isset($sedes))
+											@foreach($sedes as $x) 
+												<option value="{{$x->id}}">{!! $x->name !!}</option>
+											@endforeach
+							      		@endif
+							      	</select>
 							    </div>
 							</div>
 				      		<br>
@@ -275,7 +288,9 @@
 				<!-- Agregar acuerdo -->
 				<div class="collapse row" id="collapseAgregarArchivo">
 				   	 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-				   	 		<form class="form-horizontal">
+				   	 		<form class="form-horizontal" action="{{ route('acuerdos.store') }}" method="POST">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<input class="hidden" name="main" value="true">
 				   	 			<div class="text-center">
 				   	 				<h3>Agregar Acuerdo</h3>
 				   	 			</div>
@@ -312,177 +327,43 @@
 			  	<div class="panel-body" >
 			  		<input type="search" class="form-control" placeholder="Buscar acuerdos..."></input>
 			  		<!-- /// -->
-						<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<s><h5>Fecha límite <span>12/12/1222</span></h5></s>
+			  		<div ng-repeat="x in acuerdos |  orderBy : 'agreement_date' | filter : filterAcuerdo" ng-if="x.complete != 1">
+				  		<div class="col-xs-6" >
+							<div class="panel panel-default boxAcuerdos">
+								<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p"> 
+									<h4>
+										@{{x.title}} 
+									</h4>   
+									<s><h5>Fecha límite <span> @{{x.agreement_date}} </span></h5></s>
+								</div>
+								<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7"> 
+									<h4>
+										@{{x.title}} 
+									</h4>   
+									<h5 class="passDate animated flash">Fecha límite <span>@{{x.agreement_date}} </span></h5>
+								</div>
+								<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4"> 
+									<h4>
+										@{{x.title}} 
+									</h4>   
+									<h5 >Fecha límite <span>@{{x.agreement_date}} </span></h5>
+								</div>
+							  	<div class="panel-body text-justify" >
+							  		<p> @{{ x.content }} </p>
+							  		<a data-toggle="modal" data-target="#modalModificarAcuerdo"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+							 	</div>
+							 	<div class="panel-footer p0 pAcuerdos" >
+							 		<p>Creado por: <em>@{{x.mainUser_name}}</em></p>
+							 	</div>
 							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
 						</div>
+						<div ng-if="$even" class="clearfix"></div>
 					</div>
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p7 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5 class="passDate animated flash">Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p7 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5 class="passDate animated flash">Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p2 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5>Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
-					<div class="clearfix"></div>
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p4 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5>Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p4 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5>Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
-					<div class="clearfix"></div>
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p4 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5>Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
-					<div class="col-xs-12 col-md-6">
-						<div class="panel panel-default boxAcuerdos">
-							<div class="panel-heading p4 pAcuerdos"> 
-								<h4>Título del acuerdo</h4>  
-								<h5>Fecha límite <span>12/12/1222</span></h5>
-							</div>
-						  	<div class="panel-body text-justify" >
-						  		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						  		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						  		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						  		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						 	</div>
-						 	<div class="panel-footer p0 pAcuerdos" >
-						 		<p>Creado por: <em>Usuario</em></p>
-						 	</div>
-						</div>
-					</div>
-					<!-- /// -->
 					<!-- /// --> 
 			 	</div>
 			</div>
 		</div>
-			<!-- Modal Modificar -->
+			<!-- Modal Agregar imagen -->
 		<div class="modal fade" id="modalModificarImgUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  	<div class="modal-dialog" role="document">
 		    	<div class="modal-content">
@@ -497,7 +378,7 @@
 		        		</h4>
 		      		</div>
 		      	<!-- inicia el formulario -->
-		        <form class="form-horizontal">
+		        {!!Form::open(array('route'=>'users.modifyIMG','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))!!}
 		      		<div class="modal-body">
 					  	<div class="form-group">
 				    	<label for="imgUsers" class="col-sm-2 control-label">Imagen:</label>
@@ -555,5 +436,7 @@
 	</div>
 </div>
 </div>
+
+<script src="{{ asset('js/adminScripts/mainController.js') }}"></script>
 
 @include('admin.partials.footer')

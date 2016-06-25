@@ -41,9 +41,11 @@
 				</a> 
 			</li>
 				<ul id="repositorio-dropdown-ul2" class="hide" isActive="false">
-					<li> <a href="repositorio.html">prueba1</a></li>
-					<li> <a href="">prueba2</a></li>
-					<li> <a href="">prueba3</a></li>
+					@if(count($categorias) > 0)
+						@foreach ($categorias as $c)
+							<li> <a href="{{ route('repositorio.indexCategory', $c->id ) }}">{{ $c->name }}</a></li>
+						@endforeach
+					@endif
 				</ul>
 			<li> 
 				<a href="{{ url('/admin/noticias') }}"> <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias </a> 

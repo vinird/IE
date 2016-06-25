@@ -67,6 +67,12 @@ return [
             'bucket' => 'your-bucket',
         ],
 
+        'userPhotos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/userPhotos'),
+            'visibility' => 'public',
+        ],
+
     ],
 
 ];

@@ -56,19 +56,35 @@ input:focus, select:focus {
 }
 
 .navbar {
-  background-color: #FFF;
+  background-color: #1B2331;
   border: none;
   -webkit-box-shadow: 0px 0px 42px 0px rgba(0, 0, 0, 0.07);
   -moz-box-shadow: 0px 0px 42px 0px rgba(0, 0, 0, 0.07);
   box-shadow: 0px 0px 42px 0px rgba(0, 0, 0, 0.07);
 }
 
+.navbar ul .dropdown-menu a {
+  color: #5A5A5A !important;
+}
+
+.navbar ul .dropdown-menu a:hover {
+  color: #000000 !important;
+}
+
 .navbar ul li a {
-  color: #878787 !important;
+  color: #CDCDCD !important;
 }
 
 .navbar ul li a:hover {
-  color: #000000 !important;
+  color: #fff !important;
+}
+
+.navbar .navbar-brand {
+  color: #CDCDCD !important;
+}
+
+.navbar .navbar-brand:hover {
+  color: #fff !important;
 }
 
 /*side nav*/
@@ -174,13 +190,13 @@ input:focus, select:focus {
 }
 
 .boxAcuerdos {
-  -webkit-box-shadow: 0px 10px 40px -8px rgba(0, 0, 0, 0.15) !important;
-  -moz-box-shadow: 0px 10px 40px -8px rgba(0, 0, 0, 0.15) !important;
-  box-shadow: 0px 10px 40px -8px rgba(0, 0, 0, 0.15) !important;
+  -webkit-box-shadow: 0px 10px 40px -8px rgba(0, 0, 0, 0.3) !important;
+  -moz-box-shadow: 0px 10px 40px -8px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0px 10px 40px -8px rgba(0, 0, 0, 0.3) !important;
 }
 
 .acuerdosGenerales .boxAcuerdos {
-  margin: 5%;
+  margin: 3%;
 }
 
 .btnAddAcuerdoToogle:hover {
@@ -268,6 +284,22 @@ input:focus, select:focus {
 }
 
 .panel .p8 h3, .panel .p8 h4, .panel .p8 h5, .panel .p8 h6, .panel .p8 p, .panel-default .p8 h3, .panel-default .p8 h4, .panel-default .p8 h5, .panel-default .p8 h6, .panel-default .p8 p, .panel-body .p8 h3, .panel-body .p8 h4, .panel-body .p8 h5, .panel-body .p8 h6, .panel-body .p8 p, .p1 .p8 h3, .p1 .p8 h4, .p1 .p8 h5, .p1 .p8 h6, .p1 .p8 p, .p2 .p8 h3, .p2 .p8 h4, .p2 .p8 h5, .p2 .p8 h6, .p2 .p8 p, .p3 .p8 h3, .p3 .p8 h4, .p3 .p8 h5, .p3 .p8 h6, .p3 .p8 p, .p4 .p8 h3, .p4 .p8 h4, .p4 .p8 h5, .p4 .p8 h6, .p4 .p8 p {
+  color: #555;
+}
+
+.panel .pGreen, .panel-default .pGreen, .panel-body .pGreen, .p1 .pGreen, .p2 .pGreen, .p3 .pGreen, .p4 .pGreen {
+  background-color: rgba(186, 229, 164, 0.5);
+}
+
+.panel .pGreen h3, .panel .pGreen h4, .panel .pGreen h5, .panel .pGreen h6, .panel .pGreen p, .panel-default .pGreen h3, .panel-default .pGreen h4, .panel-default .pGreen h5, .panel-default .pGreen h6, .panel-default .pGreen p, .panel-body .pGreen h3, .panel-body .pGreen h4, .panel-body .pGreen h5, .panel-body .pGreen h6, .panel-body .pGreen p, .p1 .pGreen h3, .p1 .pGreen h4, .p1 .pGreen h5, .p1 .pGreen h6, .p1 .pGreen p, .p2 .pGreen h3, .p2 .pGreen h4, .p2 .pGreen h5, .p2 .pGreen h6, .p2 .pGreen p, .p3 .pGreen h3, .p3 .pGreen h4, .p3 .pGreen h5, .p3 .pGreen h6, .p3 .pGreen p, .p4 .pGreen h3, .p4 .pGreen h4, .p4 .pGreen h5, .p4 .pGreen h6, .p4 .pGreen p {
+  color: #555;
+}
+
+.panel .pOrange, .panel-default .pOrange, .panel-body .pOrange, .p1 .pOrange, .p2 .pOrange, .p3 .pOrange, .p4 .pOrange {
+  background-color: rgba(247, 139, 17, 0.5);
+}
+
+.panel .pOrange h3, .panel .pOrange h4, .panel .pOrange h5, .panel .pOrange h6, .panel .pOrange p, .panel-default .pOrange h3, .panel-default .pOrange h4, .panel-default .pOrange h5, .panel-default .pOrange h6, .panel-default .pOrange p, .panel-body .pOrange h3, .panel-body .pOrange h4, .panel-body .pOrange h5, .panel-body .pOrange h6, .panel-body .pOrange p, .p1 .pOrange h3, .p1 .pOrange h4, .p1 .pOrange h5, .p1 .pOrange h6, .p1 .pOrange p, .p2 .pOrange h3, .p2 .pOrange h4, .p2 .pOrange h5, .p2 .pOrange h6, .p2 .pOrange p, .p3 .pOrange h3, .p3 .pOrange h4, .p3 .pOrange h5, .p3 .pOrange h6, .p3 .pOrange p, .p4 .pOrange h3, .p4 .pOrange h4, .p4 .pOrange h5, .p4 .pOrange h6, .p4 .pOrange p {
   color: #555;
 }
 

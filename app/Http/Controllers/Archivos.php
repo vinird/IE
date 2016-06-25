@@ -130,7 +130,7 @@ class Archivos extends Controller
     public function destroy($id)
     {
         //
-    }
+    } 
 
     /**
      * Remove the specified resource from storage.
