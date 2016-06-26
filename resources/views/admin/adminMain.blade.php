@@ -1,7 +1,7 @@
 @include('admin.partials.head')
 @include('admin.partials.nav')
 	@include('admin.partials.aside')
-
+<?php $contadorN = Auth::user()->notification; ?>
  <!-- contenedor principal -->
 <div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}">
 	<div class="rowContainerAdmin">
@@ -90,93 +90,33 @@
 				<br>
 			  	<div class="panel-body panelNotificacionesAdmin" >
 			  		<!-- /// -->
-						<div class="panel panel-default animated pulse animated-3 ">
-							<div class="panel-heading p2"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+			  		@if(isset($notifications))
+			  			@foreach($notifications as $n)
+			  				@if($contadorN > 0)
+								<div class="panel panel-default animated pulse animated-3 ">
+									<div class="panel-heading p2"> 
+								<?php $contadorN = $contadorN - 1; ?>
+			  				@else
+			  					<div class="panel panel-default">
+			  						<div class="panel-heading pBackground"> 
+			  				@endif
+									<strong>{{ $n->title }} </strong>  
+									<p>&nbsp;&nbsp; {{ $n->content }}</p>
+									<h6><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;{{$n->created_at}} <br>
+									<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; 
+									@if(isset($users))
+										@foreach($users as $u)
+											@if($u->id == $n->user_id)
+												{{ $u->name }}
+											@endif
+										@endforeach
+									@endif
+									</h6>
+								</div>
 							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default animated pulse animated-3">
-							<div class="panel-heading p2"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
-					<!-- /// -->
-						<div class="panel panel-default">
-							<div class="panel-heading pBackground"> 
-								<strong>&nbsp;&nbsp; Se cambio etc </strong>  
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-							</div>
-						</div>
-					<!-- /// -->
+						<!-- /// -->
+			  			@endforeach
+			  		@endif
 			 	</div>
 			 	<br>
 			</div>
@@ -358,7 +298,6 @@
 								</div>
 							  	<div class="panel-body text-justify" >
 							  		<p> @{{ x.content }} </p>
-							  		<a data-toggle="modal" data-target="#modalModificarAcuerdo"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 							 	</div>
 							 	<div class="panel-footer p0 pAcuerdos" >
 							 		<p>Creado por: <em>@{{x.mainUser_name}}</em></p>

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Hash;
 use DB;
+use App\Notification;
+use App\LogUser;
 
 class Archivos extends Controller
 {
@@ -28,8 +30,10 @@ class Archivos extends Controller
     {   
         $archivos   = Archivo::all();
         $categorias = Categoria::all();
-        $users      = User::select('id' , 'name' )->get();
-        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'archivos' => $archivos , 'users' => $users]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $users = User::select('id' , 'name' )->get();
+        $logUser = LogUser::find(1);
+        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'archivos' => $archivos , 'users' => $users, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
     /**
@@ -72,15 +76,16 @@ class Archivos extends Controller
             
             if(Storage::disk('repositorio')->put( $file_route , file_get_contents($file->getRealPath()))){
                 Flash::success(' Archivo guardado exitosamente. ');
+                if($archivo->save()){
+                    Flash::success(' Archivo agregado exitosamente. ');
+                    $this->addnotification("Nuevo archivo en el repositorio", $file->getClientOriginalName());
+                } else{
+                    Flash::error(' Error al agregar la información del archivo a la base de datos. ');
+                }
             } else {
                 Flash::error(' Error al guardar el archivo en el repositorio. ');
             }
 
-            if($archivo->save()){
-                Flash::success(' Archivo agregado exitosamente. ');
-            } else{
-                Flash::error(' Error al agregar la información del archivo a la base de datos. ');
-            }
         } else {
             Flash::error(' Debe seleccionar un archivo. ');
         }
@@ -139,16 +144,18 @@ class Archivos extends Controller
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request)
-    {
+    {   
         if(Auth::user()->userType != 1 && $request->userFileID != Auth::user()->id){
             Flash::error(' No tiene permisos para realizar esta acción. ');
             return $this->index();
         }
 
         if(Hash::check($request->password, Auth::user()->password)) {
+            $arch = Archivo::find($request->id);
             if(Archivo::destroy($request->id) == 1){
                 Storage::disk('repositorio')->delete($request->fileUrl);
                 Flash::success(' Archivo eliminado exitosamente. ');
+                $this->addnotification("Archivo eliminado del repositorio", $arch->name);
             } else {
                 Flash::error(' Error al eliminar el archivo. ');
             }
@@ -167,31 +174,16 @@ class Archivos extends Controller
      */
     public function indexCategory($id)
     {
-        // $archivos = Archivo::where('id', $id)->first();
-        // $archivos = DB::table('archivos')->where('categoria_id', $id);
         $archivos = DB::table('archivos')->where('categoria_id', '=', $id)->get();
-        // $archivos = Archivo::all();
-        // $archivos = $archivos->where('categoria_id', $id);
-        // $archivos->all();
 
         $collection = collect($archivos);
-
-
-        // $archivos = DB::table('archivos')
-        //              ->select(DB::raw('*'))
-        //              ->where('categoria_id', '=', $id)
-                  
-        //              ->get();
-
-        // dd($collection);
-        // $archivos->toJson();
-        // dd($archivos);
-        // $archivos   = Archivo::all();
 
         $categorias = Categoria::all();
         $currentCategory = Categoria::find($id);
         $users      = User::select('id' , 'name' )->get();
-        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'currentCategory' => $currentCategory , 'archivos' => $collection , 'users' => $users ]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $logUser = LogUser::find(1);
+        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'currentCategory' => $currentCategory , 'archivos' => $collection , 'users' => $users, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
 
@@ -245,6 +237,7 @@ class Archivos extends Controller
                 if(Storage::disk('repositorio')->put( $file_route , file_get_contents($file->getRealPath()))){
                     Flash::success(' Archivo guardado exitosamente. ');
                     Storage::disk('repositorio')->delete($request->url);
+                    $this->addnotification("Archivo modificado en el repositorio",$file->getClientOriginalName());
                 } else {
                     Flash::error(' Error al guardar el archivo en el repositorio. ');
                 }
@@ -262,5 +255,25 @@ class Archivos extends Controller
         return redirect($request->url);
     }
     
+    /**
+     * Add a new notification
+     *
+     * @param  String  $title, $content
+     */
+    private function addnotification($title, $content)
+    {
+        $notification = new Notification();
+        $notification->title = $title;
+        $notification->content = $content;
+        $notification->user_id = Auth::user()->id;
+        $notification->save();
 
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id != Auth::user()->id){
+                $user->notification = $user->notification + 1;
+                $user->save();  
+            }
+        }
+    }
 }

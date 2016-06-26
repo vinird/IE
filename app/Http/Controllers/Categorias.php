@@ -9,7 +9,10 @@ use App\Http\Requests;
 //added
 use App\Categoria;
 use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Auth;
 use App\Archivo;
+use App\User;
+use App\Notification;
 
 class Categorias extends Controller
 {
@@ -51,6 +54,7 @@ class Categorias extends Controller
         $categoria->color = $request->color;
         if($categoria->save()){
             Flash::success(' Categria agregada exitosamente.');
+            $this->addnotification("Nueva categoría agregada", $request->name);
         } else {
             Flash::error('Algo salió mal al insertar los datos.');  
         }
@@ -118,11 +122,35 @@ class Categorias extends Controller
                 return redirect('/admin/repositorio');
             }
         }
+        $categ = Categoria::find($request->id);
         if(Categoria::destroy($request->id)){
             Flash::success(' Categria eliminada exitosamente.');
+            $this->addnotification("Se eliminó una categoría", $categ->name);
         } else {
             Flash::error('Error al eliminar la categoria.');   
         }
         return redirect($request->url);
+    }
+
+    /**
+     * Add a new notification
+     *
+     * @param  String  $title, $content
+     */
+    private function addnotification($title, $content)
+    {
+        $notification = new Notification();
+        $notification->title = $title;
+        $notification->content = $content;
+        $notification->user_id = Auth::user()->id;
+        $notification->save();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id != Auth::user()->id){
+                $user->notification = $user->notification + 1;
+                $user->save();  
+            }
+        }
     }
 }

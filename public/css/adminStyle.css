@@ -92,6 +92,20 @@ input:focus, select:focus {
   color: #fff !important;
 }
 
+.navbar .dropNotifications .dropdown-menu .btn-success {
+  color: #fff !important;
+  width: 97%;
+  margin: 10px auto;
+}
+
+.navbar .dropNotifications .dropdown-menu .btn-success:hover {
+  background-color: #54AF54 !important;
+}
+
+.navbar .dropNotifications .dropdown-menu .bg-warning a:hover {
+  background-color: #FCF8E3 !important;
+}
+
 /*side nav*/
 .side-nav-lg {
   height: 100vh;

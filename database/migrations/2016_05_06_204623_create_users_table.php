@@ -20,8 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('lastName')->nullable();
             $table->tinyInteger('userType')->nullable();
             $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('isNew')->nullable();
             $table->string('phone')->nullable();
             $table->string('img')->nullable();
+            $table->integer('notification')->nullable();
             $table->integer('sede_id')->unsigned()->nullable();
             $table->foreign('sede_id')->references('id')->on('sedes');
             $table->rememberToken();

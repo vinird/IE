@@ -4,8 +4,9 @@
 		  	<div class="modal-dialog" role="document">
 		    	<div class="modal-content">
 		  			{!! Form::open( ['route' => ['users.update.password', Auth::user()->id] , 'class' => 'form-horizontal']) !!}
-		      		<div class="modal-header">
+		      		<div class="modal-header text-center">
 		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        		<h4 class="modal-title" id="myModalLabel">{{Auth::user()->email}}</h4>
 		      		</div>
 		      		<div class="modal-body">
 		      			<br>

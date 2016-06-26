@@ -29,5 +29,9 @@ class DatabaseSeeder extends Seeder
             'active' => 1,
         ]);
 
+        DB::table('log_users')->insert([
+            'count' => 0,
+        ]);
+
     }
 }

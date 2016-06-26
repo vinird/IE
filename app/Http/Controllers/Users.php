@@ -14,6 +14,9 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Auth;
 use App\Categoria;
 use Storage;
+use App\Notification;
+use App\LogUser;
+use Illuminate\Support\Facades\Redirect;
 
 
 class Users extends Controller
@@ -27,7 +30,9 @@ class Users extends Controller
     {
         $users = User::all();
         $categorias = Categoria::all();
-        return view('admin/users' , ['users' => $users , 'categorias' => $categorias]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $logUser = LogUser::find(1);
+        return view('admin/users' , ['users' => $users , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
     /**
@@ -169,9 +174,11 @@ class Users extends Controller
             if ($request->activate == 1){
                 $user->active = 1;
                 Flash::success(' Se activó el usuario correctamente. ');
+                $this->addnotification('Se activó un usuario', $user->name);
             } else {
                 $user->active = 0;
                 Flash::success(' Se desactivó el usuario correctamente. ');
+                $this->addnotification('Se activó un usuario', $user->name);
             }
             if($user->save() != true) Flash::error(' Error al cambian el estado del usuario. ');
         } else {
@@ -190,27 +197,12 @@ class Users extends Controller
         $this->validate($request, [
             'imgUsers' => 'image',
         ]);
-        dd($request->file('imgUsers'));
+
         $user = User::find(Auth::user()->id);
 
         $file = $request->file('imgUsers');
         $file_route = time().'_'.$file->getClientOriginalName();
         $user->img = $file_route;
-///////////////////////
-        // // $data = Input::all();
-        // $png_url = "perfil-".time().".jpg";
-        // // $path = public_path() . "/img/designs/" . $png_url;
-        // $path = public_path() . $png_url;
-        // // $img = $data['fileo'];
-        // $img = $request->file('imgUsers');
-        // $img = substr($img, strpos($img, ",")+1);
-        // $data = base64_decode($img);
-        // $success = file_put_contents($path,  file_get_contents($file->getRealPath()));
-        // print $success ? $png_url : 'Unable to save the file.';
-/////////////////////
-
-        // $success = file_put_contents(public_path(), file_get_contents($file->getRealPath()));
-
 
         if(Storage::disk('userPhotos')->put( $file_route , file_get_contents($file->getRealPath()))){
             Storage::disk('userPhotos')->delete(Auth::user()->img);
@@ -221,4 +213,84 @@ class Users extends Controller
         }
         return redirect('/admin/main');
     }
+
+    /**
+     * Add a new notification
+     *
+     * @param  String  $title, $content
+     */
+    private function addnotification($title, $content)
+    {
+        $notification = new Notification();
+        $notification->title = $title;
+        $notification->content = $content;
+        $notification->user_id = Auth::user()->id;
+        $notification->save();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id != Auth::user()->id){
+                $user->notification = $user->notification + 1;
+                $user->save();  
+            }
+        }
+    }
+
+    /**
+     * 
+     *
+     * 
+     */
+    public function clearNewUsers()
+    {
+        $this->clearNewU();
+        return Redirect::back();
+    }
+
+    /**
+     * 
+     *
+     * 
+     */
+    private function clearNewU(){
+        $loguser = LogUser::find(1);
+        $loguser->count = 0;
+        $loguser->save();
+        $users = User::all();
+
+        foreach ($users as $u ) {
+            if ($u->isNew == 1) {
+                $u->isNew = 0;
+                $u->save();
+            }
+        }
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAll(Request $request)
+    { 
+        if (Hash::check($request->password, Auth::user()->password)) { 
+            if (Auth::user()->userType == 1) {
+                $users = User::all();
+                foreach ($users as $u ) {
+                    if ($u->active != 1) {
+                        User::destroy($u->id);
+                    }
+                }
+                Flash::success(' Usuarios eliminados. ');  
+                $this->clearNewU();
+            } else {
+                Flash::error(' No tiene permisos para realizar esta acción. ');
+            }
+        } else {
+            Flash::error(' Contraseña invalida. ');
+        }
+        return Redirect::back();
+    }
+
 }

@@ -13,6 +13,8 @@ use App\Acuerdo;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use Hash;
+use App\Notification;
+use App\LogUser;
 
 
 class Acuerdos extends Controller
@@ -27,7 +29,9 @@ class Acuerdos extends Controller
         $categorias = Categoria::all();
         $acuerdos = Acuerdo::take(25)->get();
         $users = User::all();
-        return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $logUser = LogUser::find(1);
+        return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
     /**
@@ -69,6 +73,7 @@ class Acuerdos extends Controller
         
         if($acuerdo->save()){
             Flash::success(' Acuerdo agregado exitosamente. ');
+            $this->addnotification('Se agregó un nuevo acuerdo', $request->title);
         } else {
             Flash::error(' Ocurrio un problema al agregar el acuerdo. ');
         }
@@ -133,8 +138,10 @@ class Acuerdos extends Controller
     public function delete(Request $request)
     {
         if(Hash::check($request->password, Auth::user()->password)) {
+            $acuer = Acuerdo::find($request->id);
             if(Acuerdo::destroy($request->id)){
                 Flash::success(' Acuerdo eliminado exitosamente. ');
+                $this->addnotification('Se eliminó un acuerdo', $acuer->title);
             } else {
                 Flash::error(' Error al eliminar el acuerdo. ');
             }
@@ -157,6 +164,7 @@ class Acuerdos extends Controller
             $acuerdo->complete = 1;
             if($acuerdo->save()){
                 Flash::success(' Acuerdo finalizado exitosamente. ');
+                $this->addnotification('Se completó un acuerdo', $acuerdo->title);
             } else {
                 Flash::error(' Error al finalizar el acuerdo. ');
             }
@@ -174,6 +182,7 @@ class Acuerdos extends Controller
      */
     public function modify(Request $request)
     {
+        ///// This function is deprecate
         if(Hash::check($request->password, Auth::user()->password)) {
             if($request->contenido == "" || $request->date == "") {
                 Flash::error(' Debe ingresar todos los datos. ');
@@ -185,6 +194,7 @@ class Acuerdos extends Controller
 
             if($acuerdo->save()){
                 Flash::success(' Acuerdo modificado exitosamente. ');
+                $this->addnotification('Se modificó un acuerdo', $acuerdo->title);
             } else {
                 Flash::error(' Ocurrio un problema al modificar el acuerdo. ');
             }
@@ -194,5 +204,25 @@ class Acuerdos extends Controller
         return $this->index();
     }
 
-    
+    /**
+     * Add a new notification
+     *
+     * @param  String  $title, $content
+     */
+    private function addnotification($title, $content)
+    {
+        $notification = new Notification();
+        $notification->title = $title;
+        $notification->content = $content;
+        $notification->user_id = Auth::user()->id;
+        $notification->save();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id != Auth::user()->id){
+                $user->notification = $user->notification + 1;
+                $user->save();  
+            }
+        }
+    }
 }

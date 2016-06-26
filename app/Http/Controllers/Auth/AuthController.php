@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\LogUser;
 
 class AuthController extends Controller
 {
@@ -62,11 +63,18 @@ class AuthController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
+    {   
+        $logUser = LogUser::find(1);
+        $logUser->count = $logUser->count + 1;
+        $logUser->save();
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'isNew' => 1,
         ]);
     }
+
+
 }

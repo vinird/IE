@@ -84,7 +84,19 @@ input , select{
 	.navbar-brand:hover{
 		color: #fff !important;
 	}
-
+	.dropNotifications .dropdown-menu{
+		.btn-success{
+			color: #fff !important;
+			width: 97%;
+			margin: 10px auto;
+			&:hover{
+				background-color: #54AF54 !important;
+			}
+		}
+		.bg-warning a:hover{
+			background-color: #FCF8E3 !important;
+		}
+	}
 }
 /*side nav*/
 .side-nav-lg {

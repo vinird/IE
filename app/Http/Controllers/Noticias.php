@@ -8,6 +8,10 @@ use App\Http\Requests;
 
 // added
 use App\Categoria;
+use App\Notification;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\LogUser;
 
 
 class Noticias extends Controller
@@ -20,7 +24,9 @@ class Noticias extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('admin/noticias' , ['categorias' => $categorias]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $logUser = LogUser::find(1);
+        return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
     /**
@@ -88,4 +94,27 @@ class Noticias extends Controller
     {
         //
     }
+
+    /**
+     * Add a new notification
+     *
+     * @param  String  $title, $content
+     */
+    private function addnotification($title, $content)
+    {
+        $notification = new Notification();
+        $notification->title = $title;
+        $notification->content = $content;
+        $notification->user_id = Auth::user()->id;
+        $notification->save();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id != Auth::user()->id){
+                $user->notification = $user->notification + 1;
+                $user->save();  
+            }
+        }
+    }
+
 }
