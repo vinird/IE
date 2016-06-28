@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNoticiasTable extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      *
      * @return void
@@ -15,9 +15,9 @@ class CreateNoticiasTable extends Migration
         Schema::create('noticias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
-            $table->string('url_img');
-            $table->string('url_document');
-            $table->string('content');
+            $table->string('url_img')->nullable();
+            $table->string('url_document')->nullable();
+            $table->longText('content');
             $table->string('auth');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
