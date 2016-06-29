@@ -26,3 +26,27 @@ app.controller('acuerdosController', function($scope) {
 		$scope.content = content;
 	}
 });
+
+$(document).ready(function() {
+	var toUser = true;
+	$('.toUser').change(function(){
+		if(toUser) {
+			$('.forUser').removeClass('hide');
+			toUser = false;
+		} else {
+			$('.forUser').addClass('hide');
+			toUser = true;
+		}
+	});
+
+	var toFile = true;
+	$('.toFile').change(function(){
+		if(toFile) {
+			$('.forFile').removeClass('hide');
+			toFile = false;
+		} else {
+			$('.forFile').addClass('hide');
+			toFile = true;
+		}
+	});
+});

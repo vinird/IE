@@ -15,6 +15,7 @@ use Laracasts\Flash\Flash;
 use Hash;
 use App\Notification;
 use App\LogUser;
+use Storage;
 
 
 class Acuerdos extends Controller
@@ -57,18 +58,27 @@ class Acuerdos extends Controller
             Flash::error(' Debe ingresar todos los datos. ');
             if ($request->main == "true"){
                 return redirect('/admin/main');
-            } else {
+            } else { 
                 return $this->index();
             }
         }
-
-
         $acuerdo = new Acuerdo();
+
+        $file = $request->file('file');
+        if($file != null) {
+            // toda la logica aqui 
+            $file_route = time().'_'.$file->getClientOriginalName();
+            $acuerdo->file_url = $file_route;
+            Storage::disk('acuerdos')->put($file_route , file_get_contents($file->getRealPath()));
+        }
+
         $acuerdo->title         = $request->title;
         $acuerdo->content       = $request->contenido;
         $acuerdo->mainUser_id   = Auth::user()->id;
         $acuerdo->mainUser_name = Auth::user()->name;
-        // $acuerdo->primaryUser_id= 1;
+        if($request->primaryUser_id != ""){
+            $acuerdo->primaryUser_id= $request->primaryUser_id;
+        }
         $acuerdo->agreement_date= $request->date;
         
         if($acuerdo->save()){
@@ -139,6 +149,7 @@ class Acuerdos extends Controller
     {
         if(Hash::check($request->password, Auth::user()->password)) {
             $acuer = Acuerdo::find($request->id);
+            Storage::disk('acuerdos')->delete($acuer->file_url);
             if(Acuerdo::destroy($request->id)){
                 Flash::success(' Acuerdo eliminado exitosamente. ');
                 $this->addnotification('Se eliminó un acuerdo', $acuer->title);
@@ -191,6 +202,19 @@ class Acuerdos extends Controller
             $acuerdo = Acuerdo::find($request->id);
             $acuerdo->content       = $request->contenido;
             $acuerdo->agreement_date= $request->date;
+            
+                $file = $request->file('file');
+                if($file != null) {
+                    // toda la logica aqui 
+                    Storage::disk('acuerdos')->delete($acuerdo->file_url);
+                    $file_route = time().'_'.$file->getClientOriginalName();
+                    $acuerdo->file_url = $file_route;
+                    Storage::disk('acuerdos')->put($file_route , file_get_contents($file->getRealPath()));
+                }
+
+                if($request->primaryUser_id != ""){
+                    $acuerdo->primaryUser_id= $request->primaryUser_id;
+                }
 
             if($acuerdo->save()){
                 Flash::success(' Acuerdo modificado exitosamente. ');
@@ -224,5 +248,42 @@ class Acuerdos extends Controller
                 $user->save();  
             }
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getFileAcuerdos($id)
+    {
+        $exists = Storage::disk('acuerdos')->exists($id);
+        if($exists){
+            return response()->file(storage_path().'/app/public/acuerdos/'.$id);
+        } else {
+            Flash::error(' El archivo no se encuentra en el repositorio. ');
+            return $this->index();
+        }
+    }
+
+     /**
+     * Show the form for open an old acuerdo.
+     *
+     * @param  Request
+     * @return \Illuminate\Http\Response
+     */
+    public function open(Request $request)
+    {
+        $acuerdo = Acuerdo::find($request->id);
+        $acuerdo->complete = null;
+        $title = $acuerdo->title;
+        if($acuerdo->save()){
+            Flash::success(' Acuerdo reabierto exitosamente. ');
+            $this->addnotification('Se reabrió un acuerdo', $title);
+        } else {
+            Flash::error(' Error al reabrir el acuerdo. ');
+        }
+        return $this->index();
     }
 }

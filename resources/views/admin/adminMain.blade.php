@@ -3,7 +3,7 @@
 	@include('admin.partials.aside')
 <?php $contadorN = Auth::user()->notification; ?>
  <!-- contenedor principal -->
-<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}">
+<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}; users={{ $users }}">
 	<div class="rowContainerAdmin">
 		<!-- panel usuario  -->
 		<div class="clearfix"></div>
@@ -230,48 +230,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading p0"> 
 					<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square" aria-hidden="true">
-						</i>&nbsp;&nbsp; Acuerdos <a class="pull-right white btnAddAcuerdoToogle"><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+						</i>&nbsp;&nbsp; Acuerdos <!-- <a class="pull-right white btnAddAcuerdoToogle"><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; --> 
 					</h4> 
 				</div>
-				<!-- Agregar acuerdo -->
-				<div class="collapse row" id="collapseAgregarArchivo">
-				   	 	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-				   	 		<form class="form-horizontal" action="{{ route('acuerdos.store') }}" method="POST">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<input class="hidden" name="main" value="true">
-				   	 			<div class="text-center">
-				   	 				<h3>Agregar Acuerdo</h3>
-				   	 			</div>
-				   	 			<br>
-				   	 			<div class="form-group">
-							   		<label for="title" class="col-sm-2 control-label">Título: </label>
-							    	<div class="col-sm-10">
-							     		<input type="text" class="form-control" name="title" placeholder="Título del acuerdo...">
-							   		</div>
-							  	</div>
-							  	<div class="form-group">
-							   		<label for="contenido" class="col-sm-2 control-label">Descripción: </label>
-							    	<div class="col-sm-10">
-							     		<textArea type="text" class="form-control" name="contenido" ></textArea>
-							   	 	</div>
-							  	</div>
-								<div class="form-group">
-							   		<label for="date" class="col-sm-2 control-label">Fecha límite: </label>
-							    	<div class="col-sm-10">
-							     		<input type="date" class="form-control" name="date" placeholder="2012-12-12">
-							   		</div>
-							  	</div>
-							  	<br>
-							  	<div class="form-group">
-							    	<div class="col-sm-offset-2 col-sm-10">
-							      		<button type="submit" class="btn btn-primary btn-sm">Agregar</button>
-							    	</div>
-							    	<br><br>
-							  	</div>
-							</form>
-				   	 	</div>
-				</div>
-				<!-- fin agregra acuerdo -->
+
+				<!-- Mostrar acuerdos -->
 			  	<div class="panel-body" >
 			  		<input type="search" class="form-control" placeholder="Buscar acuerdos..." ng-model="filterAcuerdo"></input>
 			  		<!-- /// -->
@@ -282,26 +245,37 @@
 									<h4>
 										@{{x.title}} 
 									</h4>   
-									<s><h5>Fecha límite <span> @{{x.agreement_date}} </span></h5></s>
+									<h5>Próxima revisión <span> @{{x.agreement_date}} </span></h5>
 								</div>
 								<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7"> 
 									<h4>
 										@{{x.title}} 
 									</h4>   
-									<h5 class="passDate animated flash">Fecha límite <span>@{{x.agreement_date}} </span></h5>
+									<h5 class="passDate animated flash">Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 								</div>
 								<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4"> 
 									<h4>
 										@{{x.title}} 
 									</h4>   
-									<h5 >Fecha límite <span>@{{x.agreement_date}} </span></h5>
+									<h5 >Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 								</div>
 							  	<div class="panel-body text-justify" >
 							  		<p> @{{ x.content }} </p>
+							  		<br>
+								  		<div ng-if="x.primaryUser_id != null">
+								  			<h6>Asignado a:</h6>
+								  			<div ng-repeat="u in users" ng-if="u.id == x.primaryUser_id"><em>@{{ u.name }}</em></div>
+								  		</div>
+								  		<br>
+								  		<div ng-if="x.file_url != null">
+								  			<h6>Documento del acuerdo</h6>
+								  			<a href="/file/getAcuerdos/@{{ x.file_url }}">@{{ x.file_url }}</a>
+								  		</div>
+								  		<br>
 							 	</div>
 							 	<div class="panel-footer p0 pAcuerdos" >
-							 		<p>Creado por: <em>@{{x.mainUser_name}}</em></p>
-							 	</div>
+									<div ng-repeat="u in users" ng-if="u.id == x.mainUser_id">Creado por: <em>@{{u.name}}</em></div>
+								</div>
 							</div>
 						</div>
 						<!-- <div ng-if="$even" class="clearfix"></div> -->

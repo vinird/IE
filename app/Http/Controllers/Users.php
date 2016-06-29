@@ -146,6 +146,12 @@ class Users extends Controller
             return redirect($request->url);
         }
         if (Hash::check($request->password, Auth::user()->password)) { 
+            $user = User::find($request->id);
+            if($user->isNew == 1){
+                $log = LogUser::find(1);
+                $log->count = $log->count - 1;
+                $log->save();
+            }
             if(User::destroy($request->id) == 1){
                 Flash::success(' Se eliminó el usuario correctamente. ');
             } else {
@@ -174,13 +180,19 @@ class Users extends Controller
             if ($request->activate == 1){
                 $user->active = 1;
                 Flash::success(' Se activó el usuario correctamente. ');
+                if($user->isNew == 1){
+                    $user->isNew = 0;
+                    $log = LogUser::find(1);
+                    $log->count = $log->count - 1;
+                    $log->save();
+                }
                 $this->addnotification('Se activó un usuario', $user->name);
             } else {
                 $user->active = 0;
                 Flash::success(' Se desactivó el usuario correctamente. ');
                 $this->addnotification('Se activó un usuario', $user->name);
             }
-            if($user->save() != true) Flash::error(' Error al cambian el estado del usuario. ');
+            if($user->save() != true) Flash::error(' Error al cambiar el estado del usuario. ');
         } else {
             Flash::error(' Contraseña invalida. ');
         }

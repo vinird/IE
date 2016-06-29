@@ -72,6 +72,11 @@ return [
             'root' => public_path('img/users/'),
             'visibility' => 'public',
         ],
+        'acuerdos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/acuerdos'),
+            'visibility' => 'public',
+        ],
 
     ],
 

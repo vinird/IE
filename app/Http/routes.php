@@ -118,6 +118,7 @@ Route::post('acuerdos/store' , ['uses' => 'Acuerdos@store' ,  'middleware' => ['
 Route::post('acuerdos/delete' , ['uses' => 'Acuerdos@delete' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.delete');
 Route::post('acuerdos/complete' , ['uses' => 'Acuerdos@complete' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.complete');
 Route::post('acuerdos/modify' , ['uses' => 'Acuerdos@modify' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.modify');
+Route::post('acuerdos/open' , ['uses' => 'Acuerdos@open' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.open');
 
 
 
@@ -125,6 +126,7 @@ Route::post('acuerdos/modify' , ['uses' => 'Acuerdos@modify' ,  'middleware' => 
 // Descargar archivos 
 ///////////////////////////////////////////////
 Route::get('file/getRepositorio/{id}' , ['uses' => 'Archivos@getFileRepositorio' ,  'middleware' => ['auth' , 'userActive']])->name('file.getRepositorio');
+Route::get('file/getAcuerdos/{id}' , ['uses' => 'Acuerdos@getFileAcuerdos' ,  'middleware' => ['auth' , 'userActive']])->name('file.getAcuerdos');
 
 
 ////////////////////////////////////////////////
