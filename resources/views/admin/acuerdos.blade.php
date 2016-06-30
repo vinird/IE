@@ -5,7 +5,7 @@
 		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="acuerdosController" ng-init="users= {{ $users }}; acuerdos= {{ $acuerdos }}; idUser= {{Auth::user()->id}}">
 			
 				<!-- panel acuerdos  -->
-				<div class="clearfix"></div>
+				<div class="clearfix"></div> 
 				<div class="col-xs-12 col-md-4">
 					<div class="panel panel-default">
 						<div class="panel-heading p5"> 
@@ -267,12 +267,12 @@
 							    <div class="col-sm-offset-2 col-sm-10">
 							    	<div class="checkbox">
 									    <label>
-											<input type="checkbox" name="toUser" class="toUser"> Asignar a un usuario
+											<input type="checkbox" name="toUser" class="toUser2"> Asignar a un usuario
 										</label>
 									</div>
 								</div>
 							</div>
-							<div class="form-group forUser hide">
+							<div class="form-group forUser2 hide">
 								<label for="primaryUser_id" class="col-sm-2 control-label">Usuario: </label>
 								<div class="col-sm-10">
 									<select class="form-control" name="primaryUser_id" >
@@ -293,12 +293,12 @@
 								<div class="col-sm-offset-2 col-sm-10">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" name="file" class="toFile"> Actualizar documento
+											<input type="checkbox" name="file" class="toFile2"> Actualizar documento
 										</label>
 									</div>
 								</div>
 							</div>
-							<div class="form-group forFile hide">
+							<div class="form-group forFile2 hide">
 								<label for="file" class="col-sm-2 control-label">Archivo: </label>
 								<div class="col-sm-10">
 									<input type="file" class="form-control" name="file" >

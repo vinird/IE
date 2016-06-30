@@ -31,6 +31,16 @@ class Sedes extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexInformativa()
+    {
+        return view('informativa.ubicacion', ['sedes' => Sede::all()]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -52,6 +62,7 @@ class Sedes extends Controller
       $sede->name= $request->name;
       $sede->address= $request->address;
       $sede->phone= $request->phone;
+      $sede->link= $request->link;
       if($sede->save()) {
         Flash::success(' Se guardó la sede exitosamente. ');
       } else {
@@ -101,6 +112,7 @@ class Sedes extends Controller
         $sede->name= $request->name;
         $sede->address= $request->address;
         $sede->phone= $request->phone;
+        $sede->link= $request->link;
         if($sede->save()) {
           Flash::success(' Se modificó la sede exitosamente. ');
         } else {

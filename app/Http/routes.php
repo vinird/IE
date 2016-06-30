@@ -28,9 +28,12 @@ Route::get('eventos', function(){
 })->name('eventos');
 
 // ubicacion
-Route::get('ubicacion', function(){
-	return view('informativa.ubicacion', ['ubicacionActive' => true]);
-})->name('ubicacion');
+// Route::get('ubicacion', function(){
+// 	return view('informativa.ubicacion', ['ubicacionActive' => true]);
+// })->name('ubicacion');
+
+Route::get('ubicacion' , [ 'uses' => 'Sedes@indexInformativa' ])->name('ubicacion');
+
 
 // contactos
 Route::get('contactos', function(){

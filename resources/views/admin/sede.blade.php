@@ -2,9 +2,9 @@
 @include('admin.partials.nav')
 	@include('admin.partials.aside')
  <!-- contenedor principal -->
-		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="sedesController" ng-init="sedes = {{ $sedes }}">
+		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="sedesController" ng-init="sedes = {{ $sedes }}; linkMap= '';">
 
-				<!-- panel usuairos -->
+				<!-- panel sede -->
 				<div class="col-xs-12 col-md-8 col-xl-9">
 					<div class="panel panel-default">
 						<div class="panel-heading p3"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp; Panel de Sedes </h4></div>
@@ -23,7 +23,7 @@
 							  			<td>@{{ x.address }}</td>
 							  			<td>@{{ x.phone }}</td>
 							  			<td>
-							  				<a ng-click="fSedeID(x.id, x.name)" data-toggle="modal" data-target="#modalModificarUsuario" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+							  				<a ng-click="modSede(x.id, x.name, x.address, x.phone, x.link)" data-toggle="modal" data-target="#modalModificarUsuario" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 							  				<a ng-click="fSedeID(x.id, x.name)" data-toggle="modal" data-target="#modalEliminarUsuario" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 							  			</td>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 
-				<!-- panel agregar ususario -->
+				<!-- panel agregar sede -->
 				<div class="col-xs-12 col-md-4 col-xl-3">
 					<div class="panel panel-default">
 						<div class="panel-heading p4"> <h4>&nbsp;&nbsp;&nbsp;&nbsp; Agregar Sede  </h4></div>
@@ -52,6 +52,22 @@
 							  	<div class="form-group">
 							    	<label for="phone" >Teléfono:</label>
 							    	  	<input type="text" class="form-control" name="phone">
+							  	</div>
+							  	<div class="form-group">
+							    	<div class="checkbox">
+									    <label>
+									        <input type="checkbox" name="toMap" class="toMap" >Agregar link a mapa de google
+									    </label>
+									</div>
+							  	</div>
+							  	<div class="form-group forMap hide">
+							    	<label for="link" >Código de inserción del mapa:</label>
+							    	  	<textarea id="tAreaMap1" class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="linkMap" style="min-height: 70px;"></textarea>
+
+				        				<a class="btn btn-success btn-xs " ng-click="verMapa()">Ver mapa</a>
+				        				<br>
+				      					<div class="embed-responsive embed-responsive-16by9 frameMap hide"></div>
+
 							  	</div>
 							  	<br>
 				        		<button type="submit" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar</button>
@@ -71,25 +87,44 @@
 				      		</div>
 				      	<!-- inicia el formulario -->
 				        {!! Form::open(['route'=>['sedes.updateSede'], 'class'=>'form-horizontal'] ) !!}
+							<input class="hide" type="text" name="id" ng-model="sedeID">
 				      		<div class="modal-body">
 							  	<div class="form-group">
 										<input class="hide" type="text" name="id" ng-model="sedeID">
 							    	<label for="name" class="col-sm-2 control-label">Nombre:</label>
 							    	<div class="col-sm-10">
-							      		<input type="text" class="form-control" name="name" placeholder="Nombre...">
+							      		<input type="text" class="form-control" name="name" placeholder="Nombre..." ng-model="sedeName">
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label for="address" class="col-sm-2 control-label">Dirección:</label>
 							    	<div class="col-sm-10">
-							    	  	<input type="text" class="form-control" name="address" placeholder="Dirección...">
+							    	  	<input type="text" class="form-control" name="address" placeholder="Dirección..." ng-model="address">
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label for="phone" class="col-sm-2 control-label">Teléfono:</label>
 							    	<div class="col-sm-10">
-							    	  	<input type="text" class="form-control" name="phone" placeholder="Teléfono...">
+							    	  	<input type="text" class="form-control" name="phone" placeholder="Teléfono..." ng-model="phone">
 							    	</div>
+							  	</div>
+							  	<div class="form-group">
+							    	<div class="checkbox col-sm-12" >
+									    <label>
+									        <input type="checkbox" name="toMap2" class="toMap2" > 	
+									        	<div ng-if="link == ''">Agregar link a mapa de google</div> 
+									        	<div ng-if="link != ''">Modificar link a mapa de google</div>
+									    </label>
+									</div>
+							  	</div>
+							  	<div class="form-group forMap2 hide">
+							    	<label for="link" >Código de inserción del mapa:</label>
+							    	  	<textarea class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="link" style="min-height: 70px;" "></textarea>
+
+				        				<a class="btn btn-success btn-xs " ng-click="verMapa2()">Ver mapa</a>
+				        				<br>
+				      					<div class="embed-responsive embed-responsive-16by9 frameMap2 hide" style="max-height: 70px !important;"></div>
+
 							  	</div>
 				      		<br>
 				      		<div class="form-group">
@@ -118,6 +153,7 @@
 										<input class="hide" type="text" name="id" ng-model="sedeID">
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        		<h4>¿Desea eliminar la sede <em>@{{ sedeName }}</em>?</h4>
+							    <p class="help-block red">Si elimina una sede esto afectará la página informativa.</p>
 				      		</div>
 				      	<div class="modal-body text-center">
 				      		<br>
@@ -137,6 +173,26 @@
 				    </form>
 				  </div>
 				</div>
+
+				<!-- Modal Ver mapa -->
+			<!-- 	<div class="modal fade" id="modalVerMapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  	<div class="modal-dialog" role="document">
+				    	<div class="modal-content">
+				      		<div class="modal-header text-center">
+										<input class="hide" type="text" name="id" ng-model="sedeID">
+				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        		<h4>Mapa</h4>
+				      		</div>
+				      	<div class="modal-body text-center">
+				      		<div class="embed-responsive embed-responsive-16by9 frameMap"></div>
+				      	</div>
+				      	<div class="modal-footer">
+				        	<button class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button class="btn btn-danger btn-sm">Eliminar</button>
+				      	</div>
+				    </div>
+				  </div>
+				</div> -->
 		</div>
 	</div>
 
