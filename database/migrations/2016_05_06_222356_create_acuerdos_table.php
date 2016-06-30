@@ -15,12 +15,15 @@ class CreateAcuerdosTable extends Migration
         Schema::create('acuerdos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('content');
+            $table->longText('content');
+            $table->tinyInteger('complete')->nullable();
+            $table->string('mainUser_name')->nullable();
+            $table->string('file_url')->nullable();
             $table->integer('mainUser_id')->unsigned();
             $table->foreign('mainUser_id')->references('id')->on('users');
-            $table->integer('primaryUser_id')->unsigned();
+            $table->integer('primaryUser_id')->unsigned()->nullable();
             $table->foreign('primaryUser_id')->references('id')->on('users');
-            $table->dateTime('agreement_date');
+            $table->date('agreement_date');
             $table->timestamps();
         });
     }

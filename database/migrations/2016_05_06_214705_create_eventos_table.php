@@ -15,10 +15,10 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('url_img');
-            $table->string('url_document');
-            $table->string('content');
-            $table->string('auth');
+            $table->string('url_img')->nullable();
+            $table->string('url_document')->nullable();
+            $table->longText('content');
+            $table->string('auth')->nullable();
             $table->dateTime('event_date');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

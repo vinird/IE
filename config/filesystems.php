@@ -60,7 +60,8 @@ return [
 
         'noticia/img' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/noticia/img'),
+            'root' => public_path('img/noticias/'),
+            'visibility' => 'public',
         ],
 
         'public' => [
@@ -75,6 +76,17 @@ return [
             'secret' => 'your-secret',
             'region' => 'your-region',
             'bucket' => 'your-bucket',
+        ],
+
+        'userPhotos' => [
+            'driver' => 'local',
+            'root' => public_path('img/users/'),
+            'visibility' => 'public',
+        ],
+        'acuerdos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/acuerdos'),
+            'visibility' => 'public',
         ],
 
     ],

@@ -8,7 +8,11 @@ use App\Http\Requests;
 
 // added
 use App\Categoria;
-
+use App\Acuerdo;
+use App\Sede;
+use App\Notification;
+use App\User;
+use App\LogUser;
 
 class Main extends Controller
 {
@@ -20,7 +24,12 @@ class Main extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('admin/adminMain' , ['categorias' => $categorias]);
+        $acuerdos = Acuerdo::take(25)->get();
+        $sedes = Sede::all();
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $users = User::all();
+        $logUser = LogUser::find(1);
+        return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
     /**

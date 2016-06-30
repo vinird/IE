@@ -11,6 +11,8 @@ use Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Auth;
 use App\Categoria;
+use App\Notification;
+use App\LogUser;
 
 
 class Sedes extends Controller
@@ -23,7 +25,9 @@ class Sedes extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('admin.sede', ['sedes' => Sede::all() , 'categorias' => $categorias]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $logUser = LogUser::find(1);
+        return view('admin.sede', ['sedes' => Sede::all() , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
 
     /**

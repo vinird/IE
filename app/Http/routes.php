@@ -74,7 +74,13 @@ Route::post('users/updatePassword/{id}', 'Users@updatePassword')->name('users.up
 
 Route::post('users/deleteUser/' , ['uses' => 'Users@delete' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.delete');
 
+Route::post('users/deleteAll' , ['uses' => 'Users@deleteAll' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.deleteAll');
+
 Route::post('users/activateUser/',  ['uses' => 'Users@activateUser' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.activateUser');
+
+Route::post('users/modifyIMG',  ['uses' => 'Users@modifyIMG' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.modifyIMG');
+
+Route::get('users/clearNewUsers',  ['uses' => 'Users@clearNewUsers' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.clearNewUsers');
 
 
 
@@ -87,7 +93,6 @@ Route::post('noticias/updateNoticia/' , ['uses' => 'Noticias@updateNoticia' , 'm
 
 Route::post('noticias/deleteNoticia/' , ['uses' => 'Noticias@deleteNoticia' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('noticias.deleteNoticia');
 
-Route::resource('noticias', 'Noticias' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////
 // Eventos
@@ -96,7 +101,6 @@ Route::post('eventos/updateEvento/' , ['uses' => 'Eventos@updateEvento' , 'middl
 
 Route::post('eventos/deleteEvento/' , ['uses' => 'Eventos@deleteEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.deleteEvento');
 
-Route::resource('eventos', 'Eventos' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////
 // Sedes
@@ -123,7 +127,14 @@ Route::post('repositorio/updateData' , ['uses' => 'Archivos@updateData' ,  'midd
 Route::get('repositorio/categoria/{id}' , ['uses' => 'Archivos@indexCategory' ,  'middleware' => ['auth' , 'userActive']])->name('repositorio.indexCategory');
 
 
+////////////////////////////////////////////////////
+// Acuerdos
 
+Route::post('acuerdos/store' , ['uses' => 'Acuerdos@store' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.store');
+Route::post('acuerdos/delete' , ['uses' => 'Acuerdos@delete' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.delete');
+Route::post('acuerdos/complete' , ['uses' => 'Acuerdos@complete' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.complete');
+Route::post('acuerdos/modify' , ['uses' => 'Acuerdos@modify' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.modify');
+Route::post('acuerdos/open' , ['uses' => 'Acuerdos@open' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.open');
 
 
 
@@ -131,3 +142,10 @@ Route::get('repositorio/categoria/{id}' , ['uses' => 'Archivos@indexCategory' , 
 // Descargar archivos
 ///////////////////////////////////////////////
 Route::get('file/getRepositorio/{id}' , ['uses' => 'Archivos@getFileRepositorio' ,  'middleware' => ['auth' , 'userActive']])->name('file.getRepositorio');
+Route::get('file/getAcuerdos/{id}' , ['uses' => 'Acuerdos@getFileAcuerdos' ,  'middleware' => ['auth' , 'userActive']])->name('file.getAcuerdos');
+
+
+////////////////////////////////////////////////
+// Notificaciones
+///////////////////////////////////////////////
+Route::get('notification/clearNotification' , ['uses' => 'Notifications@clearNotification' ,  'middleware' => ['auth' , 'userActive']])->name('notification.clearNotification');

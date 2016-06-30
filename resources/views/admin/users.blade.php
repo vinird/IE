@@ -13,7 +13,7 @@
 					  		<br>
 					  		<table class="table table-hover">
 								<thead>
-								  	<th ng-click="myOrderActive = 'email' ">Email</th>
+								  	<th class="hidden-xs" ng-click="myOrderActive = 'email' ">Email</th>
 								  	<th ng-click="myOrderActive = 'name'">Nombre</th>
 								  	<th ng-click="myOrderActive = 'phone'">Teléfono</th>
 								  	<th ng-click="myOrderActive = 'sede'" class="hidden-xs">Sede</th>
@@ -23,7 +23,7 @@
 								 <tbody>
 							  	@if(isset($users))
 								  	<tr ng-repeat=" x in users | filter : searchUserActive | orderBy : myOrderActive" ng-if="x.active == 1">
-								  		<td>@{{ x.email }}</td>
+								  		<td class="hidden-xs">@{{ x.email }}</td>
 								  		<td >@{{ x.name }}</td>
 								  		<td>@{{ x.phone ? x.phone : '---'}}</td>
 								  		<td class="hidden-xs">@{{ x.sede ? x.sede : '---' }}</td>
@@ -45,19 +45,39 @@
 					  	<div class="panel-body" >
 					  		<input ng-model="searchUserDisabled" type="search" class="form-control" placeholder="Buscar usuario..."></input>
 					  		<br>
+					  		@if(isset($logUser) && Auth::user()->userType == 1)
+								@if($logUser->count > 0)
+					  				<a href="{{ route('users.clearNewUsers') }}" class="btn btn-success btn-xs">&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Marcar nuevos como vistos</a>
+					  			@endif
+					  		@endif
 					  		<table class="table table-hover">
 								<thead>
-								  	<th ng-click="myOrderDisable = 'email' ">Email</th>
+									<th class="hidden-xs"></th>
+								  	<th  class="hidden-xs" ng-click="myOrderDisable = 'email' ">Email</th>
 								  	<th ng-click="myOrderDisable = 'name' ">Nombre</th>
 								  	<th ng-click="myOrderDisable = 'phone' ">Teléfono</th>
 								  	<th ng-click="myOrderDisable = 'sede' " class="hidden-xs">Sede</th>
 								  	<th>Estado</th>
-								  	<th></th>
+								  	<th>
+								  	<?php $countU = 0; ?>
+								  	@if(isset($users))
+								  		@foreach($users as $u)
+								  			@if($u->active != 1)
+												<?php $countU = $countU + 1; ?>
+												@if($countU > 1)
+								  					<a href="" data-toggle="modal" data-target="#modalEliminarTodosUsuario" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; todos</a></th>
+												@endif
+								  			@endif
+								  		@endforeach
+								  	@endif
 								 </thead>
 								 <tbody>
 							  	@if(isset($users))
 							  		<tr ng-repeat=" x in users | filter : searchUserDisabled | orderBy : myOrderDisable" ng-if="x.active != 1">
-								  		<td>@{{ x.email }}</td>
+								  		<td class="hidden-xs">
+											<em style="color: red" ng-if="x.isNew == 1">nuevo</em>&nbsp;&nbsp;&nbsp;&nbsp;
+								  		</td>
+								  		<td  class="hidden-xs">@{{ x.email }}</td>
 								  		<td >@{{ x.name }}</td>
 								  		<td>@{{ x.phone ? x.phone : '---'}}</td>
 								  		<td class="hidden-xs">@{{ x.sede ? x.sede : '---' }}</td>
@@ -88,7 +108,7 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   		<p class="help-block">Debe ingresar su contraseña para poder eliminar usuarios.</p>
 							   	</div>
 							</div>
@@ -96,6 +116,35 @@
 				      	<div class="modal-footer">
 				      		<input class="hide" type="text" name="url" value="{{ url()->current() }}">
 				      		<input class="hide" type="text" name="id" ng-model="userId">
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+				      	</div>
+				    </div>
+				    {!! Form::close() !!}
+				  </div>
+				</div>
+				<!-- Modal Eliminar Todos-->
+				<div class="modal fade" id="modalEliminarTodosUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  	<div class="modal-dialog" role="document">
+				  	{!! Form::open( ['route' => 'users.deleteAll' , 'class' => 'form-horizontal' ,'method' => 'POST'] ) !!}
+				  	<input type="hidden" name="_method" value="POST">
+				    	<div class="modal-content">
+				      		<div class="modal-header text-center">
+				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        		<h4>¿ Desea eliminar todos los usuarios desactivados ?</h4>
+						   		<p class="help-block red">Esta acción no puede deshacerse.</p>
+				      		</div>
+				      	<div class="modal-body text-center">
+				      		<br>
+				      		<div class="form-group">
+							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
+							   	<div class="col-sm-10">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
+							   		<p class="help-block">Debe ingresar su contraseña para poder eliminar usuarios.</p>
+							   	</div>
+							</div>
+				      	</div>
+				      	<div class="modal-footer">
 				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
 				        	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 				      	</div>

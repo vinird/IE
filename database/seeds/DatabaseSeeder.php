@@ -21,5 +21,17 @@ class DatabaseSeeder extends Seeder
         // user(App\User::class, 50)->create();
         factory(App\Sede::class, 50)->create();
 
+        DB::table('users')->insert([
+            'name' => "Administrador",
+            'email' => "admin@admin.com",
+            'password' => bcrypt('password'),
+            'userType' => 1, 
+            'active' => 1,
+        ]);
+
+        DB::table('log_users')->insert([
+            'count' => 0,
+        ]);
+
     }
 }

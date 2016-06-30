@@ -10,9 +10,12 @@ use App\Http\Requests;
 use Laracasts\Flash\Flash;
 use App\Noticia;
 use App\Categoria;
-use Illuminate\Support\Facades\Auth;
 use Storage;
 use File;
+use App\Notification;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\LogUser;
 
 
 class Noticias extends Controller
@@ -26,7 +29,9 @@ class Noticias extends Controller
     {
         $categorias = Categoria::all();
         $noticias = Noticia::all();
-        return view('admin/noticias' , ['categorias' => $categorias, 'noticias' => $noticias]);
+        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $logUser = LogUser::find(1);
+        return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'noticias' => $noticias]);
     }
 
     /**
@@ -120,4 +125,27 @@ class Noticias extends Controller
     {
         //
     }
+
+    /**
+     * Add a new notification
+     *
+     * @param  String  $title, $content
+     */
+    private function addnotification($title, $content)
+    {
+        $notification = new Notification();
+        $notification->title = $title;
+        $notification->content = $content;
+        $notification->user_id = Auth::user()->id;
+        $notification->save();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            if($user->id != Auth::user()->id){
+                $user->notification = $user->notification + 1;
+                $user->save();
+            }
+        }
+    }
+
 }
