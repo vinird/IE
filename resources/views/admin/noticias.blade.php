@@ -3,7 +3,7 @@
 	@include('admin.partials.aside')
 
  <!-- contenedor principal -->
-		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container">
+		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="noticiasController" ng-init="noticias = {{ $noticias }}">
 
 				<!-- panel noticias -->
 				<div class="col-xs-12">
@@ -60,27 +60,27 @@
 						   	 	</div>
 						</div>
 					  	<div class="panel-body" >
-					  		<input type="search" class="form-control" placeholder="Buscar noticia..."></input>
+					  		<input ng-model="searchNoticia" type="search" class="form-control" placeholder="Buscar noticia..."></input>
 					  		<table class="table table-hover">
 								<thead>
-								  	<th>Título</th>
+								  	<th ng-click="myOrderActive = 'title'">Título</th>
 								  	<th>Noticia</th>
-								  	<th>Autor</th>
+								  	<th ng-click="myOrderActive = 'auth'">Autor</th>
 								  	<th>Publicado por</th>
-								  	<th class="hidden-xs">Fecha de publicación</th>
-								  	<th class="hidden-xs">Fecha de modificación</th>
+								  	<th class="hidden-xs" ng-click="myOrderActive = 'created_at'">Fecha de publicación</th>
+								  	<th class="hidden-xs" ng-click="myOrderActive = 'updated_at'">Fecha de modificación</th>
 									<th></th>
 								 </thead>
 								 <tbody>
-							  		<tr>
-							  			<td>titulo</td>
+							  		<tr ng-repeat=" x in noticias | filter : searchNoticia | orderBy : myOrderActive">
+							  			<td>@{{ x.title }}</td>
 							  			<td>
 							  				<a data-toggle="modal" data-target="#modalVerNoticia"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
 							  			</td>
-							  			<td>Autor</td>
-							  			<td>Wendy </td>
-							  			<td class="hidden-xs">12/12/1222</td>
-							  			<td class="hidden-xs">12/12/1222</td>
+							  			<td>@{{ x.auth }}</td>
+							  			<td>@{{ x.user_id }}</td>
+							  			<td class="hidden-xs">@{{ x.created_at }}</td>
+							  			<td class="hidden-xs">@{{ x.updated_at }}</td>
 							  			<td>
 							  				<a data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
@@ -199,4 +199,5 @@
 
 		</div>
 	</div>
+	<script src="{{ asset('js/adminScripts/noticiaController.js') }}"></script>
 @include('admin.partials.footer')

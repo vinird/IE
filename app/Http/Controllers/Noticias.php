@@ -25,7 +25,8 @@ class Noticias extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('admin/noticias' , ['categorias' => $categorias]);
+        $noticias = Noticia::all();
+        return view('admin/noticias' , ['categorias' => $categorias, 'noticias' => $noticias]);
     }
 
     /**
@@ -72,7 +73,7 @@ class Noticias extends Controller
       } else {
         Flash::error(' Se produjó un problema al crear la noticia. ');
       }
-      return redirect('admin/noticias');
+      return  $this->index();
     }
 
     /**

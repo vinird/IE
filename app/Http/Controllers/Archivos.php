@@ -195,4 +195,72 @@ class Archivos extends Controller
     }
 
 
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getFileRepositorio($id)
+    {
+        $exists = Storage::disk('repositorio')->exists($id);
+        if($exists){
+            return response()->file(storage_path().'/app/public/repositorio/'.$id);
+        } else {
+            Flash::error(' El archivo no se encuentra en el repositorio. ');
+            return $this->index();
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateData(Request $request)
+    {
+        if($request->title == '' || $request->category == '' || $request->resumen == ''){
+            Flash::error(' Debe ingresar todos los datos. ');
+            return $this->index();
+        }
+        
+        if(Hash::check($request->password, Auth::user()->password)) {
+
+            $file = $request->file('file');
+            if($file != null) {
+                // toda la logica aqui
+                $file_route = time().'_'.$file->getClientOriginalName();
+
+                $archivo                = Archivo::findOrFail($request->id);
+                $archivo->name          = $file->getClientOriginalName();
+                $archivo->title         = $request->title;
+                $archivo->file_route    = $file_route;
+                $archivo->categoria_id  = $request->category;
+                $archivo->extension     = File::extension($file->getClientOriginalName());
+                $archivo->keyWords      = $request->resumen;
+                $archivo->user_id       = Auth::user()->id;
+                
+                if(Storage::disk('repositorio')->put( $file_route , file_get_contents($file->getRealPath()))){
+                    Flash::success(' Archivo guardado exitosamente. ');
+                    Storage::disk('repositorio')->delete($request->url);
+                } else {
+                    Flash::error(' Error al guardar el archivo en el repositorio. ');
+                }
+                if($archivo->save()){
+                    Flash::success(' Archivo agregado exitosamente. ');
+                } else{
+                    Flash::error(' Error al agregar la información del archivo a la base de datos. ');
+                }
+            } else {
+                Flash::error(' Debe seleccionar un archivo. ');
+            }
+        } else {
+            Flash::error(' Contraseña incorrecta. ');
+        }
+        return $this->index();
+    }
+    
+
 }
