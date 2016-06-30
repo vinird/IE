@@ -49,4 +49,26 @@ $(document).ready(function() {
 			toFile = true;
 		}
 	});
+
+	var toUser2 = true;
+	$('.toUser2').change(function(){
+		if(toUser2) {
+			$('.forUser2').removeClass('hide');
+			toUser2 = false;
+		} else {
+			$('.forUser2').addClass('hide');
+			toUser2 = true;
+		}
+	});
+
+	var toFile2 = true;
+	$('.toFile2').change(function(){
+		if(toFile2) {
+			$('.forFile2').removeClass('hide');
+			toFile2 = false;
+		} else {
+			$('.forFile2').addClass('hide');
+			toFile2 = true;
+		}
+	});
 });
