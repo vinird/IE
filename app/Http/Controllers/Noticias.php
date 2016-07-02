@@ -43,7 +43,7 @@ class Noticias extends Controller
 
     public function indexInformativa()
     {
-        $noticias = Noticia::all();
+        $noticias = DB::table('noticias')->orderBy('updated_at', 'desc')->paginate(6);
         return view('informativa.noticias' , ['noticias' => $noticias]);
     }
 
@@ -65,11 +65,6 @@ class Noticias extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    public function storeNoticia(Request $request)
-    {
       if($request->title === '' || $request->content === '') {
           Flash::error(' Algunos datos son requeridos, por favor insértelos. ');
           return $this->index();
@@ -77,7 +72,11 @@ class Noticias extends Controller
       $noticia= new Noticia;
       $noticia->title= $request->title;
       $noticia->content= $request->content;
-      $noticia->auth= $request->author;
+      if($request->author !== '') {
+        $noticia->auth= $request->author;
+      } else {
+        $noticia->auth= Auth::user()->name;
+      }
       $noticia->user_id= Auth::user()->id;
       $file= $request->file('file');
       if($file != null) {
@@ -85,6 +84,8 @@ class Noticias extends Controller
 
           if(Storage::disk('noticia/archivo')->put($file_route, file_get_contents($file->getRealPath()))){
               $noticia->url_document= $file_route;
+          } else {
+              Flash::error(' Error al guardar el archivo en las noticias. ');
           }
       }
       $img= $request->file('img');
@@ -93,6 +94,8 @@ class Noticias extends Controller
 
           if(Storage::disk('noticia/img')->put($img_route, file_get_contents($img->getRealPath()))){
               $noticia->url_img= $img_route;
+          } else {
+              Flash::error(' Error al guardar la imagen en las noticias. ');
           }
       }
       if($noticia->save()) {
@@ -138,7 +141,7 @@ class Noticias extends Controller
         //
     }
 
-    public function updateNoticia(Request $request) {
+    public function modify(Request $request) {
       if(Hash::check($request->password, Auth::user()->password)) {
         if($request->title === '' || $request->content === '') {
             Flash::error(' Algunos datos son requeridos, por favor insértelos. ');
@@ -147,7 +150,11 @@ class Noticias extends Controller
         $noticia= Noticia::find($request->id);
         $noticia->title= $request->title;
         $noticia->content= $request->content;
-        $noticia->auth= $request->author;
+        if($request->author !== '') {
+          $noticia->auth= $request->author;
+        } else {
+          $noticia->auth= Auth::user()->name;
+        }
         $noticia->user_id= Auth::user()->id;
         $file= $request->file('file');
         if($file != null) {
@@ -156,6 +163,8 @@ class Noticias extends Controller
             if(Storage::disk('noticia/archivo')->put($file_route, file_get_contents($file->getRealPath()))){
               Storage::disk('noticia/archivo')->delete($noticia->url_document);
               $noticia->url_document= $file_route;
+            } else {
+                Flash::error(' Error al guardar el archivo en las noticias. ');
             }
         }
         $img= $request->file('img');
@@ -165,13 +174,15 @@ class Noticias extends Controller
             if(Storage::disk('noticia/img')->put($img_route, file_get_contents($img->getRealPath()))){
               Storage::disk('noticia/img')->delete($noticia->url_img);
               $noticia->url_img= $img_route;
+            } else {
+                Flash::error(' Error al guardar la imagen en las noticias. ');
             }
         }
         if($noticia->save()) {
-          Flash::success(' Se guardó la noticia exitosamente. ');
+          Flash::success(' Se modificó la noticia exitosamente. ');
           $this->addnotification("Noticia modificada ", $request->title);
         } else {
-          Flash::error(' Se produjó un problema al crear la noticia. ');
+          Flash::error(' Se produjó un problema al modificar la noticia. ');
         }
       } else {
         Flash::error(' Contraseña incorrecta. ');
@@ -199,7 +210,7 @@ class Noticias extends Controller
               Flash::success(' Noticia eliminada exitosamente. ');
               $this->addnotification("Noticia eliminada ", $noticia->title);
           } else {
-              Flash::error(' Error al eliminar el archivo. ');
+              Flash::error(' Error al eliminar la noticia. ');
           }
       } else {
           Flash::error(' Contraseña invalida. ');

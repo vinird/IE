@@ -9,6 +9,8 @@ app.controller('noticiasController', function($scope, $sce) {
 
   $scope.setEdit = function(id, title, content, auth) {
     $("#modalModificarNoticia input:checkbox").prop('checked', false);
+    $('#divFile2 > div > input').val('');
+    $('#divImg2 > div > input').val('');
     if (!$('#divFile2').hasClass('hide')) {
       $('#divFile2').addClass('hide');
     }
@@ -31,6 +33,9 @@ app.controller('noticiasController', function($scope, $sce) {
 jQuery(document).ready(function($) {
   $('textarea').trumbowyg({lang: 'es', btns: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['superscript', 'subscript'], 'btnGrp-justify', 'btnGrp-lists', ['horizontalRule'], ['removeformat'], ['fullscreen']]});
   $("#collapseAgregarArchivo > div > form input:checkbox").prop('checked', false);
+  $(':input').not(':button, :submit, :reset, :hidden, .hide, .hidden').val('').removeAttr('checked').removeAttr('selected');
+  $('#divFile > div > input').val('');
+  $('#divImg > div > input').val('');
 
 	$('#toFile').change(function(){
 		if(this.checked) {

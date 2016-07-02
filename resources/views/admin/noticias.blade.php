@@ -16,7 +16,7 @@
 						<!-- Agregar noticia -->
 						<div class="collapse row" id="collapseAgregarArchivo">
 						   	 	<div class="col-xs-12 col-md-8 col-md-offset-2 col-xl-6 col-xl-offset-3">
-						   	 		{!!  Form::open(array('route'=>'noticias.storeNoticia','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))  !!}
+						   	 		{!!  Form::open(array('route'=>'noticias.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))  !!}
 						   	 			<div class="text-center">
 						   	 				<h4>Agregar Noticia</h4>
 						   	 			</div>
@@ -62,7 +62,7 @@
 									  	<div class="form-group">
 									   		<label for="autor" class="col-sm-2 control-label">Autor: </label>
 									    	<div class="col-sm-10">
-									     		<input type="text" class="form-control" name="author" placeholder="Autor de la noticia...">
+									     		<input type="text" class="form-control" name="author" placeholder="Autor de la noticia... Puede dejar vacío si usted es el autor">
 									   	</div>
 									  	</div>
 									  	<br>
@@ -117,7 +117,7 @@
 				        		<h4 class="modal-title" id="myModalLabel">Modificar Noticia</h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
-				        {!! Form::open(array('route'=>'noticias.updateNoticia','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+				        {!! Form::open(array('route'=>'noticias.modify','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
 				      		<div class="modal-body">
 										<input class="hide" type="text" name="id" ng-model="newsID">
 							  	<div class="form-group">
@@ -161,7 +161,7 @@
 									  	<div class="form-group">
 									   		<label for="autor" class="col-sm-2 control-label">Autor: </label>
 									    	<div class="col-sm-10">
-									     		<input type="text" class="form-control" name="author" placeholder="Autor de la noticia..."  ng-model="newsAuth">
+									     		<input type="text" class="form-control" name="author" placeholder="Autor de la noticia... Puede dejar vacío si usted es el autor"  ng-model="newsAuth">
 									   	</div>
 									  	</div>
 							  	<br>

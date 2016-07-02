@@ -94,11 +94,11 @@ Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);
 ////////////////////////////////////////////////////
 // Noticias
 
-Route::post('noticias/storeNoticia' , ['uses' => 'Noticias@storeNoticia' ,  'middleware' => ['auth' , 'userActive']])->name('noticias.storeNoticia');
+Route::post('noticias/store' , ['uses' => 'Noticias@store' ,  'middleware' => ['auth' , 'userActive']])->name('noticias.store');
 
-Route::post('noticias/updateNoticia/' , ['uses' => 'Noticias@updateNoticia' , 'middleware' => ['auth' , 'userActive']])->name('noticias.updateNoticia');
+Route::post('noticias/modify' , ['uses' => 'Noticias@modify' , 'middleware' => ['auth' , 'userActive']])->name('noticias.modify');
 
-Route::post('noticias/delete/' , ['uses' => 'Noticias@delete' , 'middleware' => ['auth' , 'userActive']])->name('noticias.delete');
+Route::post('noticias/delete' , ['uses' => 'Noticias@delete' , 'middleware' => ['auth' , 'userActive']])->name('noticias.delete');
 
 
 ////////////////////////////////////////////////////
