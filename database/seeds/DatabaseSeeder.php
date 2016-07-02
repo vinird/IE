@@ -28,6 +28,12 @@ class DatabaseSeeder extends Seeder
             'userType' => 1, 
             'active' => 1,
         ]);
+        DB::table('users')->insert([
+            'name' => "Invitado",
+            'email' => "admin@admin.comm",
+            'password' => bcrypt('password'),
+            'active' => 1,
+        ]);
 
         DB::table('sedes')->insert([
             'name' => "Turrialba",

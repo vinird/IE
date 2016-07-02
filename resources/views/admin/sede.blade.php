@@ -43,7 +43,7 @@
 					    	{!! Form::open(['route'=>['sedes.store'], 'class'=>'form-horizontal'] ) !!}
 							  	<div class="form-group">
 							    	<label for="name" class>Nombre:</label>
-							      	<input type="text" class="form-control" name="name">
+							      	<input type="text" class="form-control" name="name" required>
 							  	</div>
 							  	<div class="form-group">
 							    	<label for="address" >Dirección:</label>
@@ -56,12 +56,12 @@
 							  	<div class="form-group">
 							    	<div class="checkbox">
 									    <label>
-									        <input type="checkbox" name="toMap" class="toMap" >Agregar link a mapa de google
+									        <input type="checkbox" name="toMap" class="toMap" >Agregar mapa de google
 									    </label>
 									</div>
 							  	</div>
 							  	<div class="form-group forMap hide">
-							    	<label for="link" >Código de inserción del mapa:</label>
+							    	<label for="link" >Código de inserción del mapa: <a href="" data-toggle="modal" data-target="#modalVerMapa"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
 							    	  	<textarea id="tAreaMap1" class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="linkMap" style="min-height: 70px;"></textarea>
 
 				        				<a class="btn btn-success btn-xs " ng-click="verMapa()">Ver mapa</a>
@@ -93,7 +93,7 @@
 										<input class="hide" type="text" name="id" ng-model="sedeID">
 							    	<label for="name" class="col-sm-2 control-label">Nombre:</label>
 							    	<div class="col-sm-10">
-							      		<input type="text" class="form-control" name="name" placeholder="Nombre..." ng-model="sedeName">
+							      		<input type="text" class="form-control" name="name" placeholder="Nombre..." ng-model="sedeName" required>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
@@ -112,13 +112,13 @@
 							    	<div class="checkbox col-sm-12" >
 									    <label>
 									        <input type="checkbox" name="toMap2" class="toMap2" > 	
-									        	<div ng-if="link == ''">Agregar link a mapa de google</div> 
-									        	<div ng-if="link != ''">Modificar link a mapa de google</div>
+									        	<div ng-if="link == ''">Agregar mapa de google</div> 
+									        	<div ng-if="link != ''">Modificar mapa de google</div>
 									    </label>
 									</div>
 							  	</div>
 							  	<div class="form-group forMap2 hide">
-							    	<label for="link" >Código de inserción del mapa:</label>
+							    	<label for="link" >Código de inserción del mapa: <a href="" data-toggle="modal" data-target="#modalVerMapa"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
 							    	  	<textarea class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="link" style="min-height: 70px;" "></textarea>
 
 				        				<a class="btn btn-success btn-xs " ng-click="verMapa2()">Ver mapa</a>
@@ -130,7 +130,7 @@
 				      		<div class="form-group">
 							    	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							    	<div class="col-sm-10">
-							      		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							      		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							      		<p class="help-block">Debe ingresar su contraseña para poder modificar sedes.</p>
 							    	</div>
 							  	</div>
@@ -160,7 +160,7 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   		<p class="help-block">Debe ingresar su contraseña para poder eliminar sedes.</p>
 							   	</div>
 							</div>
@@ -175,24 +175,26 @@
 				</div>
 
 				<!-- Modal Ver mapa -->
-			<!-- 	<div class="modal fade" id="modalVerMapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal fade" id="modalVerMapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				  	<div class="modal-dialog" role="document">
 				    	<div class="modal-content">
 				      		<div class="modal-header text-center">
 										<input class="hide" type="text" name="id" ng-model="sedeID">
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        		<h4>Mapa</h4>
+				        		<h4>Prosedimiento para incorporar el mapa</h4>
 				      		</div>
-				      	<div class="modal-body text-center">
-				      		<div class="embed-responsive embed-responsive-16by9 frameMap"></div>
+				      	<div class="modal-body">
+				      		<p>El código de inserción debe copiarse de la página oficial de Google Maps, en la opción de compartir se seleciona <strong>incorporar mapa.</strong> como se muestra en la imagen</p>
+				      		<img class="img img-responsive" src="{{asset('img/img_include/map_example.png')}}"><br/>
+				      		<p>Después de selecionar el código se pega en el campo de texto y se verifica con la opción de ver mapa.</p>
+				      		<strong><h4>Si el procedimiento se realizó correctamente se mostrará el mapa.</h4></strong>
 				      	</div>
 				      	<div class="modal-footer">
 				        	<button class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-				        	<button class="btn btn-danger btn-sm">Eliminar</button>
 				      	</div>
 				    </div>
 				  </div>
-				</div> -->
+				</div>
 		</div>
 	</div>
 

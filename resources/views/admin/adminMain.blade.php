@@ -329,12 +329,43 @@
 		  	<div class="modal-dialog" role="document">
 		  	<form class="form-horizontal">
 		    	<div class="modal-content">
-		      		<div class="modal-header">
+		      		<div class="modal-header" >
 		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        		<strong>Nombre de usuario</strong>
-		        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		        		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		        		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+		        		<br>
+		        		<div style="max-height: 30vh; overflow-y: scroll">
+		        			
+			      			<div class="col-xs-10">
+			      				<p ><strong>Nombre de usuario</strong></p>
+				        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				        		tempor incididunt ut labore et dolore magna.</p>
+			      			</div>
+			      			<div class="col-xs-10 col-xs-offset-2">
+				        		<p class="text-right"><strong>Nombre de usuario</strong></p>
+				        		<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				        		tempor incididunt ut labore et dolore magna.</p>
+			      			</div>
+			      			<div class="col-xs-10">
+			      				<p ><strong>Nombre de usuario</strong></p>
+				        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				        		tempor incididunt ut labore et dolore magna.</p>
+			      			</div>
+			      			<div class="col-xs-10 col-xs-offset-2">
+				        		<p class="text-right"><strong>Nombre de usuario</strong></p>
+				        		<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				        		tempor incididunt ut labore et dolore magna.</p>
+			      			</div>
+			      			<div class="col-xs-10">
+			      				<p ><strong>Nombre de usuario</strong></p>
+				        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				        		tempor incididunt ut labore et dolore magna.</p>
+			      			</div>
+			      			<div class="col-xs-10 col-xs-offset-2">
+				        		<p class="text-right"><strong>Nombre de usuario</strong></p>
+				        		<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				        		tempor incididunt ut labore et dolore magna.</p>
+			      			</div>
+
+		        		</div>
 		      		</div>
 		      	<div class="modal-body text-center">
 		      		<br>
