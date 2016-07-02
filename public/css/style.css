@@ -27,7 +27,7 @@ html , body{
 	padding: 2em;
 }
 .nav-dark-background {
-	background-color: #222222; 
+	background-color: #222222;
 	color: #FFF;
 	text-decoration: none;
 	font-size: 1em;
@@ -130,10 +130,10 @@ html , body{
 
 }
 .section-1 {
-	
+
 }
 .section-2{
-	
+
 }
 /*/////////// Map ////////////////////*/
 #col-map{
@@ -198,4 +198,12 @@ footer {
 	-webkit-transition: 0.6s;
 	-o-transition: 0.6s;
 	transition: 0.6s;
+}
+.download_file span {
+	color: #000000 !important;
+}
+
+.download_file:hover {
+	text-decoration: none !important;
+
 }

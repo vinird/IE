@@ -1,4 +1,5 @@
 @include('admin.partials.head')
+<link rel="stylesheet" href="{{ asset('js/js_resources/trumbowyg/ui/trumbowyg.min.css') }}" />
 @include('admin.partials.nav')
 	@include('admin.partials.aside')
 
@@ -15,7 +16,7 @@
 						<!-- Agregar noticia -->
 						<div class="collapse row" id="collapseAgregarArchivo">
 						   	 	<div class="col-xs-12 col-md-8 col-md-offset-2 col-xl-6 col-xl-offset-3">
-						   	 		{!!  Form::open(array('route'=>'noticias.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))  !!}
+						   	 		{!!  Form::open(array('route'=>'noticias.storeNoticia','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))  !!}
 						   	 			<div class="text-center">
 						   	 				<h4>Agregar Noticia</h4>
 						   	 			</div>
@@ -23,25 +24,39 @@
 						   	 		<div class="form-group">
 									   		<label for="title" class="col-sm-2 control-label">Título: </label>
 									    	<div class="col-sm-10">
-									     		<input type="text" class="form-control" name="title" placeholder="Título de la noticia...">
+									     		<input type="text" class="form-control" name="title" placeholder="Título de la noticia..." required>
 									   	</div>
 									  	</div>
-						   	 		<div class="form-group">
+											<div class="form-group">
+									    	<div class="checkbox">
+											    <label class="col-sm-10 col-sm-offset-2">
+											        <input type="checkbox" id="toFile">Agregar un archivo
+											    </label>
+												</div>
+											</div>
+						   	 		<div id="divFile" class="form-group hide">
 									    	<label for="file" class="col-sm-2 control-label">Archivo:</label>
 									    	<div class="col-sm-10">
 									      		<input type="file" class="form-control" name="file">
 									    	</div>
 									  	</div>
-									  	<div class="form-group">
+											<div class="form-group">
+									    	<div class="checkbox">
+											    <label class="col-sm-10 col-sm-offset-2">
+											        <input type="checkbox" id="toImg">Agregar una imagen
+											    </label>
+												</div>
+											</div>
+									  	<div id="divImg" class="form-group hide">
 									    	<label for="img" class="col-sm-2 control-label">Imagen:</label>
 									    	<div class="col-sm-10">
-									      		<input type="file" class="form-control" name="img" >
+									      		<input type="file" class="form-control" name="img" accept="image/x-png, image/gif, image/jpeg">
 									    	</div>
 									  	</div>
 									  	<div class="form-group">
 									   		<label for="contenido" class="col-sm-2 control-label">Contenido: </label>
 									    	<div class="col-sm-10">
-									     		<textArea type="text" class="form-control" name="content" ></textArea>
+									     		<textarea type="text" class="form-control" name="content" required></textarea>
 									   	 	</div>
 									  	</div>
 									  	<div class="form-group">
@@ -75,16 +90,16 @@
 							  		<tr ng-repeat=" x in noticias | filter : searchNoticia | orderBy : myOrderActive">
 							  			<td>@{{ x.title }}</td>
 							  			<td>
-							  				<a data-toggle="modal" data-target="#modalVerNoticia"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
+							  				<a ng-click="setNewsValues( x.id , x.title, x.content )" data-toggle="modal" data-target="#modalVerNoticia"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
 							  			</td>
 							  			<td>@{{ x.auth }}</td>
 							  			<td>@{{ x.user_id }}</td>
 							  			<td class="hidden-xs">@{{ x.created_at }}</td>
 							  			<td class="hidden-xs">@{{ x.updated_at }}</td>
 							  			<td>
-							  				<a data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+							  				<a ng-click="setEdit( x.id , x.title , x.content , x.auth )" data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-							  				<a data-toggle="modal" data-target="#modalEliminarNoticia" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+							  				<a ng-click="setNewsValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarNoticia" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 							  			</td>
 							  		</tr>
 								</tbody>
@@ -102,36 +117,51 @@
 				        		<h4 class="modal-title" id="myModalLabel">Modificar Noticia</h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
-				        <form class="form-horizontal">
+				        {!! Form::open(array('route'=>'noticias.updateNoticia','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
 				      		<div class="modal-body">
+										<input class="hide" type="text" name="id" ng-model="newsID">
 							  	<div class="form-group">
 									   		<label for="title" class="col-sm-2 control-label">Título: </label>
 									    	<div class="col-sm-10">
-									     		<input type="text" class="form-control" name="title" placeholder="Título de la noticia...">
+									     		<input type="text" class="form-control" name="title" placeholder="Título de la noticia..." ng-model="newsTitle" required>
 									   	</div>
 									  	</div>
-						   	 		<div class="form-group">
+											<div class="form-group">
+												<div class="checkbox">
+													<label class="col-sm-10 col-sm-offset-2">
+															<input type="checkbox" id="toFile2">Modificar el archivo
+													</label>
+												</div>
+											</div>
+						   	 		<div id="divFile2" class="form-group hide">
 									    	<label for="file" class="col-sm-2 control-label">Archivo:</label>
 									    	<div class="col-sm-10">
 									      		<input type="file" class="form-control" name="file">
 									    	</div>
 									  	</div>
-									  	<div class="form-group">
+											<div class="form-group">
+												<div class="checkbox">
+													<label class="col-sm-10 col-sm-offset-2">
+															<input type="checkbox" id="toImg2">Modificar la imagen
+													</label>
+												</div>
+											</div>
+						   	 		<div id="divImg2" class="form-group hide">
 									    	<label for="img" class="col-sm-2 control-label">Imagen:</label>
 									    	<div class="col-sm-10">
-									      		<input type="file" class="form-control" name="img" >
+									      		<input type="file" class="form-control" name="img">
 									    	</div>
 									  	</div>
 									  	<div class="form-group">
 									   		<label for="contenido" class="col-sm-2 control-label">Contenido: </label>
 									    	<div class="col-sm-10">
-									     		<textArea type="text" class="form-control" name="contenido" ></textArea>
+									     		<textarea id="newsTextarea" type="text" class="form-control" name="content" ng-model="newsContent" required></textarea>
 									   	 	</div>
 									  	</div>
 									  	<div class="form-group">
 									   		<label for="autor" class="col-sm-2 control-label">Autor: </label>
 									    	<div class="col-sm-10">
-									     		<input type="text" class="form-control" name="autor" placeholder="Autor de la noticia...">
+									     		<input type="text" class="form-control" name="author" placeholder="Autor de la noticia..."  ng-model="newsAuth">
 									   	</div>
 									  	</div>
 							  	<br>
@@ -155,13 +185,16 @@
 				<!-- Modal Eliminar -->
 				<div class="modal fade" id="modalEliminarNoticia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				  	<div class="modal-dialog" role="document">
-				  	 	<form class="form-horizontal">
+				  	 	<form class="form-horizontal" action="{{ route('noticias.delete') }}" method="POST">
 				    		<div class="modal-content">
 				      		<div class="modal-header text-center">
 				        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        			<h4>¿Desea eliminar la noticia ++NombreDelaNoticia++?</h4>
+				        			<h4>¿Desea eliminar la noticia?</h4>
 				      		</div>
 				      		<div class="modal-body">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										<input class="hide" type="text" name="id" ng-model="newsID">
+										<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">
 				      			<br>
 					      		<div class="form-group">
 							    		<label for="password" class="col-sm-2 control-label text-danger">Contraseña: </label>
@@ -173,7 +206,7 @@
 				      		</div>
 				      		<div class="modal-footer">
 				        			<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-				        			<button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+				        			<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 				      		</div>
 				    		</div>
 				   	</form>
@@ -186,9 +219,10 @@
 				  		<div class="modal-content">
 			      		<div class="modal-header text-center">
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4> @{{newsTitle}}</h4>
 			      		</div>
 			      		<div class="modal-body">
-				      		... Aqui va todo el contenido de la noticia ...
+				      		<p ng-bind-html="renderHtml(newsContent)"></p>
 						   </div>
 					      <div class="modal-footer">
 					        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
@@ -200,4 +234,7 @@
 		</div>
 	</div>
 	<script src="{{ asset('js/adminScripts/noticiaController.js') }}"></script>
+	<script src="{{ asset('js/js_resources/trumbowyg/trumbowyg.min.js') }}"></script>
+	<script src="{{ asset('js/js_resources/trumbowyg/langs/es.min.js') }}"></script>
+
 @include('admin.partials.footer')

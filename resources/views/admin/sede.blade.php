@@ -111,15 +111,15 @@
 							  	<div class="form-group">
 							    	<div class="checkbox col-sm-12" >
 									    <label>
-									        <input type="checkbox" name="toMap2" class="toMap2" > 	
-									        	<div ng-if="link == ''">Agregar link a mapa de google</div> 
+									        <input type="checkbox" name="toMap2" class="toMap2" >
+									        	<div ng-if="link == ''">Agregar link a mapa de google</div>
 									        	<div ng-if="link != ''">Modificar link a mapa de google</div>
 									    </label>
 									</div>
 							  	</div>
 							  	<div class="form-group forMap2 hide">
 							    	<label for="link" >Código de inserción del mapa:</label>
-							    	  	<textarea class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="link" style="min-height: 70px;" "></textarea>
+							    	  	<textarea class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="link" style="min-height: 70px;" ></textarea>
 
 				        				<a class="btn btn-success btn-xs " ng-click="verMapa2()">Ver mapa</a>
 				        				<br>

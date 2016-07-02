@@ -198,7 +198,6 @@
 				      		</div>
 				      	<!-- inicia el formulario -->
 						{!! Form::open(array('route'=>'repositorio.updateData','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
-				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input class="hide" type="text" name="id" ng-model="fileID">
 							<input class="hide" type="text" name="url" ng-model="fileUrl">
 					   		<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">

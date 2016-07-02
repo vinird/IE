@@ -15,7 +15,7 @@
 						<!-- Agregar noticia -->
 						<div class="collapse row" id="collapseAgregarArchivo">
 						   	 	<div class="col-xs-12 col-md-8 col-md-offset-2 col-xl-6 col-xl-offset-3">
-						   	 		{!! Form::open(['route'=>['eventos.store'], 'class'=>'form-horizontal'] ) !!}
+						   	 		{!! Form::open(['route'=>['eventos.storeEvento'], 'class'=>'form-horizontal'] ) !!}
 						   	 			<div class="text-center">
 						   	 				<h4>Agregar Evento</h4>
 						   	 			</div>
