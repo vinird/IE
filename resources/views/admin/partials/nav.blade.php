@@ -18,15 +18,6 @@
 
 		      	<ul class="nav navbar-nav navbar-right">
 
-		      <!-- 	<li>
-		      		<a href="#">
-		      			<i class="fa fa-comments" aria-hidden="true"></i>
-		      			<span style="background: red;" class="badge"> 1 </span>
-		      		</a>
-		      	</li> -->
-
-
-
 	        	<li class="dropdown dropNotifications">
 		          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  
 		          		<i class="fa fa-bell" aria-hidden="true"></i>
@@ -56,42 +47,49 @@
 				            	@endif
 							@endforeach
 		            	@endif
-			            <!-- <li class="bg-warning"><a>
-		            		<div>
-		            			<strong>titulo</strong>
-		            			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
-		            		</div>
-		            	</a></li>
-		            	<li role="separator" class="divider"></li>
-		            	<li class="bg-warning"><a>
-		            		<div>
-		            			<strong>titulo</strong>
-		            			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
-		            		</div>
-		            	</a></li> -->
 			        </ul>
 		        </li>
 
-		        <li>
-		      		<a href="#">
+		        <li class="dropdown">
+		      		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		      			<i class="fa fa-comments" aria-hidden="true"></i> 
 		      			<span style="background: red;" class="badge"> 1 </span>
 		      		</a>
-		      	</li>
+		      		<ul class="dropdown-menu">
+			           	<span id="newMessage" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> &nbsp;Nuevo mensaje</span>
+			           	<li role="separator" class="divider"></li>
 
-		        <!-- <li class="dropdown">
-		          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa facomments" aria-hidden="true"></i> &nbsp;<span class="caret"></span></a>
-			          <ul class="dropdown-menu">
-			           	<div style="padding: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			           	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			            	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			            	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			            	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			            	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+			           	<form style="padding: 5%; width: 300px;" class="hide" id="formMessage">
+						  <div class="form-group">
+							<label for="user" class="control-label">Para:</label>
+						   	  	<select class="form-control" name="user">
+									<option value="u" required>Michael Vinicio Rodríguez delgado</option>
+									<option value="u" required>u</option>
+									<option value="u" required>u</option>
+					     		</select>
+						  	</div>
+						  	<div class="form-group">
+						    	<label for="message">Mensaje:</label>
+						    	<textarea class="form-control" name="message"></textarea>
+						  	</div>
+						  	<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-paper-plane" aria-hidden="true"></i> &nbsp;Enviar</button>
+						</form>
+
+			           	<li role="separator" class="divider"></li>
+			           	<div style="max-height: 50vh; overflow-y: scroll;">
+			           		<span class="btn btn-default btn-sm btn-block"><i class="fa fa-check-square-o" aria-hidden="true"></i> &nbsp;Marcar mensajes como leídos</span>
+
+				           	<div style="padding: 5%; width: 300px;">
+				           		<strong>title</strong>
+				           		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				           		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+				           		<em>date 22-2-3</em>
+				           	</div>
+				           	
+			           	</div>
+
 			       	</ul>
-			    </li>
-
- -->
+		      	</li>
 		        <li class="dropdown">
 			       	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp; {{ Auth::user()->name }}<span class="caret"></span></a>
 			       	<ul class="dropdown-menu">
@@ -101,7 +99,7 @@
 			       	</ul>
 			    </li>
 		    </ul>
-		    </div><!-- /.navbar-collapse -->
+		    </div>
 	  	</div>
 	</nav>	
 

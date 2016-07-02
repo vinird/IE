@@ -224,14 +224,22 @@ btnAddUserToogle.click(function(event) {
 		form3Repo.removeClass('fadeOutLeft');
 	}
 
-// Popover
-$(function () {
-  $('[data-toggle="popover"]').popover()
-});
-// Tooltip
-$('.ttip').tooltip({
-	'delay': { "show": 100, "hide": 100 },
-	'template': '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="font-size: 14px;"></div></div>'
-});
-/// end
+	// Popover
+	$(function () {
+	  $('[data-toggle="popover"]').popover()
+	});
+	// Tooltip
+	$('.ttip').tooltip({
+		'delay': { "show": 100, "hide": 100 },
+		'template': '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="font-size: 14px;"></div></div>'
+	});
+	/// end
+	//// Message
+	$('#newMessage').click(function(e) {
+		e.stopPropagation();
+		$(this).hide(400);
+		$('#formMessage').removeClass('hide');
+		$('#formMessage').hide();
+		$('#formMessage').show(400);
+	});
 });
