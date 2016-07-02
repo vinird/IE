@@ -3,18 +3,18 @@
 	@include('admin.partials.aside')
  <!-- contenedor principal -->
 		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="repositorioController" ng-init="archivos= {{ $archivos }}; categorias={{ $categorias}}; users={{ $users }}; userID={{ Auth::user()->id }}; userType= <?php if(null !== Auth::user()->userType){ echo Auth::user()->userType;  }else{ echo "0";} ?>" >
-			
+
 				<!-- panel repositorio -->
 				<div class="col-xs-12">
 					<div class="panel panel-default">
-						<div class="panel-heading p5"> 
+						<div class="panel-heading p5">
 							<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text" aria-hidden="true">
-								</i>&nbsp;&nbsp; Repositorio 
+								</i>&nbsp;&nbsp; Repositorio
 								@if(isset($currentCategory))
 									{!! '/ '.$currentCategory->name !!}
 								@endif
 								<a class="pull-right white "><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-							</h4>  
+							</h4>
 						</div>
 						<!-- Agregar archivo -->
 						<div class="collapse row" id="collapseAgregarArchivo">
@@ -90,7 +90,7 @@
 									     		<input type="text" class="form-control" name="name" placeholder="Nombre..." required>
 									   	 	</div>
 									  	</div>
-									  
+
 									  	<div class="form-group">
 									   		<label for="color" class="col-sm-2 control-label">Color: </label>
 									    	<div class="col-sm-10">
@@ -158,7 +158,7 @@
 							  		<tr ng-repeat="x in archivos | filter : searchFile | orderBy : myOrder" >
 							  			<td class="hidden-xs"> @{{ x.name }}</td>
 									  	<td> @{{ x.title }}</td>
-									  	<td ng-repeat="y in categorias" ng-if=" x.categoria_id == y.id "> 
+									  	<td ng-repeat="y in categorias" ng-if=" x.categoria_id == y.id ">
 									  		<span>
 									  			<i style="color: @{{y.color}}" class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;&nbsp;
 									  			@{{ y.name }}
@@ -167,7 +167,7 @@
 									  	<td class="hidden-xs">
 									  		<a class="ttip" data-toggle="tooltip" data-placement="right" title="@{{x.keyWords}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
 									  	</td>
-									  	<td class="hidden-xs hidden-sm" ng-repeat="u in users" ng-if="u.id == x.user_id"> 
+									  	<td class="hidden-xs hidden-sm" ng-repeat="u in users" ng-if="u.id == x.user_id">
 									  		<span>@{{ u.name }}</span>
 									  	</td>
 									  	<td class="hidden-xs hidden-sm"> @{{ x.created_at }} </td>
@@ -198,7 +198,6 @@
 				      		</div>
 				      	<!-- inicia el formulario -->
 						{!! Form::open(array('route'=>'repositorio.updateData','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
-				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input class="hide" type="text" name="id" ng-model="fileID">
 							<input class="hide" type="text" name="url" ng-model="fileUrl">
 					   		<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">
@@ -227,7 +226,7 @@
 							    	<div class="col-sm-10">
 							    	  	<select class="form-control" name="category" required>
 							    	  		<option value="@{{ fileCategoryID }}"></option>
-											<option ng-repeat="y in categorias" value="@{{ y.id }}" required>@{{ y.name }}</option> 
+											<option ng-repeat="y in categorias" value="@{{ y.id }}" required>@{{ y.name }}</option>
 										</select>
 							    	</div>
 							  	</div>
@@ -268,10 +267,10 @@
 					      		<div class="form-group">
 							    	<label for="password" class="col-sm-2 control-label text-danger">Contraseña: </label>
 							    	<div class="col-sm-10">
-							   	  	<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required> 
+							   	  	<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   	  	<p class="help-block">Debe ingresar su contraseña para poder eliminar archivos.</p>
 							   	</div>
-							
+
 				      		</div>
 				      	<div class="modal-footer">
 				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>

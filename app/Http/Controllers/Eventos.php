@@ -36,7 +36,16 @@ class Eventos extends Controller
      */
     public function create()
     {
-        //
+      $evento= new Evento;
+      $evento->title= $request->name;
+      $evento->content= $request->address;
+      $evento->phone= $request->phone;
+      if($evento->save()) {
+        Flash::success(' Se guardó el evento exitosamente. ');
+      } else {
+        Flash::error(' Se produjó un problema al crear el evento. ');
+      }
+      return redirect('admin/evento');
     }
 
     /**

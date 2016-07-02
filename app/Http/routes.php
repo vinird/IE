@@ -18,9 +18,11 @@ Route::get('/', function () {
 })->name('/');
 
 // noticias
-Route::get('noticias', function(){
+/*Route::get('noticias', function(){
 	return view('informativa.noticias', ['noticiasActive' => true]);
-})->name('noticias');
+})->name('noticias');*/
+
+Route::get('noticias' , [ 'uses' => 'Noticias@indexInformativa' ])->name('noticias');
 
 // eventos
 Route::get('eventos', function(){
@@ -90,6 +92,26 @@ Route::get('users/clearNewUsers',  ['uses' => 'Users@clearNewUsers' , 'middlewar
 Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////
+// Noticias
+
+Route::post('noticias/storeNoticia' , ['uses' => 'Noticias@storeNoticia' ,  'middleware' => ['auth' , 'userActive']])->name('noticias.storeNoticia');
+
+Route::post('noticias/updateNoticia/' , ['uses' => 'Noticias@updateNoticia' , 'middleware' => ['auth' , 'userActive']])->name('noticias.updateNoticia');
+
+Route::post('noticias/delete/' , ['uses' => 'Noticias@delete' , 'middleware' => ['auth' , 'userActive']])->name('noticias.delete');
+
+
+////////////////////////////////////////////////////
+// Eventos
+
+Route::post('eventos/storeEvento' , ['uses' => 'Eventos@storeEvento' ,  'middleware' => ['auth' , 'userActive']])->name('eventos.storeEvento');
+
+Route::post('eventos/updateEvento/' , ['uses' => 'Eventos@updateEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.updateEvento');
+
+Route::post('eventos/deleteEvento/' , ['uses' => 'Eventos@deleteEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.deleteEvento');
+
+
+////////////////////////////////////////////////////
 // Sedes
 
 Route::post('sedes/updateSede/' , ['uses' => 'Sedes@updateSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.updateSede');
@@ -126,10 +148,11 @@ Route::post('acuerdos/open' , ['uses' => 'Acuerdos@open' ,  'middleware' => ['au
 
 
 ////////////////////////////////////////////////
-// Descargar archivos 
+// Descargar archivos
 ///////////////////////////////////////////////
 Route::get('file/getRepositorio/{id}' , ['uses' => 'Archivos@getFileRepositorio' ,  'middleware' => ['auth' , 'userActive']])->name('file.getRepositorio');
 Route::get('file/getAcuerdos/{id}' , ['uses' => 'Acuerdos@getFileAcuerdos' ,  'middleware' => ['auth' , 'userActive']])->name('file.getAcuerdos');
+Route::get('file/getNoticia/{id}' , ['uses' => 'Noticias@getFileNoticia'])->name('file.getNoticia');
 
 
 ////////////////////////////////////////////////
