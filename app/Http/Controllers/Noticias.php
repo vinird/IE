@@ -36,9 +36,11 @@ class Noticias extends Controller
           $noticias = DB::table('noticias')->where('user_id', '=', Auth::user()->id)->get();
           $noticias = collect($noticias);
         }
+        $users = User::all();
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
-        return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'noticias' => $noticias]);
+        return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'noticias' => $noticias , 'users' => $users , 'mensajes' => $mensajes]);
     }
 
     public function indexInformativa()

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('img')->nullable();
             $table->integer('notification')->nullable();
+            $table->integer('message')->nullable();
             $table->integer('sede_id')->unsigned()->nullable();
             $table->foreign('sede_id')->references('id')->on('sedes');
             $table->rememberToken();

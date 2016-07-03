@@ -13,6 +13,10 @@ use App\Sede;
 use App\Notification;
 use App\User;
 use App\LogUser;
+use App\Mensaje;
+use DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class Main extends Controller
 {
@@ -27,9 +31,12 @@ class Main extends Controller
         $acuerdos = Acuerdo::take(25)->get();
         $sedes = Sede::all();
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
-        $users = User::all();
         $logUser = LogUser::find(1);
-        return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser]);
+        $users = User::all();
+        $mensajes = collect(DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get());
+        $mensajes2 = DB::select("SELECT * FROM `mensajes`  WHERE takeBy = '".Auth::user()->id."' ORDER BY sendBy, created_at DESC LIMIT 0 , 55");
+        // $mensajes2 = collect(DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->groupBy('sendBy')->orderBy('created_at' , 'asec')->get());
+        return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'mensajes2' => $mensajes2]);
     }
 
     /**

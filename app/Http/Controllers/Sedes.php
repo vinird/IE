@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Categoria;
 use App\Notification;
 use App\LogUser;
+use DB;
+use App\User;
 
 
 class Sedes extends Controller
@@ -27,7 +29,9 @@ class Sedes extends Controller
         $categorias = Categoria::all();
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
-        return view('admin.sede', ['sedes' => Sede::all() , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser]);
+        $users = User::all();
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
+        return view('admin.sede', ['sedes' => Sede::all() , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser , 'users' => $users , 'mensajes' => $mensajes]);
     }
 
     /**

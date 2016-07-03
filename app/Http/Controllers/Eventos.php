@@ -12,7 +12,7 @@ use App\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\LogUser;
-
+use DB;
 
 class Eventos extends Controller
 {
@@ -26,7 +26,9 @@ class Eventos extends Controller
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $categorias = Categoria::all();
         $logUser = LogUser::find(1);
-        return view('admin/eventos' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser]);
+        $users = User::all();
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
+        return view('admin/eventos' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser , 'users' => $users , 'mensajes' => $mensajes]);
     }
 
     /**

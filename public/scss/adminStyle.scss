@@ -291,7 +291,11 @@ input , select{
 		padding-bottom: 0.5%;
 	}
 	.pBackground{
-		background-color: #EFF2F7; 
+		background-color: #F7F7F9; 
+		padding-left: 20px;
+	}
+	.p-d{
+		background-color: #FCF8E3;
 	}
 	a{
 		cursor: pointer;
@@ -441,9 +445,8 @@ input , select{
 .panelConversacionesAdmin{
 	border-top: 1px #E02424 solid;
 	.conversacionesList{
-		background-color: #EFF2F7;
 		padding: 10px 0 !important;
-		border-radius: 20px;
+		border-radius: 3px;
 		margin: 3% auto;
 		div, h4{
 			display: inline-block;
@@ -454,6 +457,10 @@ input , select{
 			max-width: 50px;
 		}
 	}
+}
+.mjsTakeBy{
+	padding: 6px 15px;
+	margin: 0px;
 }
 // tooltip
 .ttip{

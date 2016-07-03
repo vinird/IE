@@ -20,9 +20,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Sede::class, function (Faker\Generator $faker) {
+// $factory->define(App\Sede::class, function (Faker\Generator $faker) {
+//     return [
+//         'name' => str_random(10),
+//         'link' => str_random(20),
+//     ];
+// });
+
+$factory->define(App\Mensaje::class, function (Faker\Generator $faker) {
     return [
-        'name' => str_random(10),
-        'link' => str_random(20),
+        'message' => str_random(10).' '.str_random(10).' '.str_random(10).' '.str_random(10) ,
+        'sendBy' => 2,
+        'takeBy' =>1
     ];
 });
