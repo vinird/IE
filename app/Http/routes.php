@@ -56,18 +56,12 @@ Route::get('/home', 'HomeController@index');
 
 // admin  //////////////////////////////////////////////////
 Route::get('/admin/main', [ 'uses' => 'Main@index' , 'middleware' => ['auth', 'userActive']])->name('admin.main');
-
 Route::get('/admin/acuerdos' , [ 'uses' =>'Acuerdos@index' , 'middleware' => ['auth' , 'userActive']]);
-
 Route::get('/admin/eventos' , [ 'uses' => 'Eventos@index' , 'middleware' => ['auth' , 'userActive']]);
 Route::get('/admin/noticias' , [ 'uses' => 'Noticias@index' , 'middleware' => ['auth' , 'userActive']]);
-
 Route::get('/admin/repositorio' , ['uses' => 'Archivos@index' , 'middleware' => ['auth' , 'userActive']]);
-
 Route::get('/admin/sede' , [ 'uses' => 'Sedes@index' , 'middleware' => ['auth' , 'userActive' , 'admin'] ]);
-
 Route::get('/admin/users' , ['uses' => 'Users@index' , 'middleware' => ['auth', 'userActive' , 'admin']]);
-
 Route::get('/logOut' , ['middleware' => ['auth' , 'userActive'], function(){
 	Auth::logout();
 	return view('index', ['homeActive' => true]);
@@ -76,48 +70,31 @@ Route::get('/logOut' , ['middleware' => ['auth' , 'userActive'], function(){
 ////////////////////////////////////////////////////
 // Users
 Route::post('users/updatePassword/{id}', 'Users@updatePassword')->name('users.update.password');
-
 Route::post('users/deleteUser/' , ['uses' => 'Users@delete' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.delete');
-
 Route::post('users/deleteAll' , ['uses' => 'Users@deleteAll' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.deleteAll');
-
 Route::post('users/activateUser/',  ['uses' => 'Users@activateUser' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.activateUser');
-
-Route::post('users/modifyIMG',  ['uses' => 'Users@modifyIMG' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.modifyIMG');
-
 Route::get('users/clearNewUsers',  ['uses' => 'Users@clearNewUsers' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('users.clearNewUsers');
 
-
+Route::post('users/modifyIMG',  ['uses' => 'Users@modifyIMG' , 'middleware' => ['auth' , 'userActive']])->name('users.modifyIMG');
 
 Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////
 // Noticias
-
 Route::post('noticias/storeNoticia' , ['uses' => 'Noticias@storeNoticia' ,  'middleware' => ['auth' , 'userActive']])->name('noticias.storeNoticia');
-
 Route::post('noticias/updateNoticia/' , ['uses' => 'Noticias@updateNoticia' , 'middleware' => ['auth' , 'userActive']])->name('noticias.updateNoticia');
-
 Route::post('noticias/delete/' , ['uses' => 'Noticias@delete' , 'middleware' => ['auth' , 'userActive']])->name('noticias.delete');
-
 
 ////////////////////////////////////////////////////
 // Eventos
-
 Route::post('eventos/storeEvento' , ['uses' => 'Eventos@storeEvento' ,  'middleware' => ['auth' , 'userActive']])->name('eventos.storeEvento');
-
 Route::post('eventos/updateEvento/' , ['uses' => 'Eventos@updateEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.updateEvento');
-
 Route::post('eventos/deleteEvento/' , ['uses' => 'Eventos@deleteEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.deleteEvento');
-
 
 ////////////////////////////////////////////////////
 // Sedes
-
 Route::post('sedes/updateSede/' , ['uses' => 'Sedes@updateSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.updateSede');
-
 Route::post('sedes/deleteSede/' , ['uses' => 'Sedes@deleteSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.deleteSede');
-
 Route::resource('sedes', 'Sedes' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////

@@ -18,6 +18,7 @@ use App\Notification;
 use App\LogUser;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use Intervention\Image\Facades\Image;
 
 
 class Users extends Controller
@@ -208,17 +209,22 @@ class Users extends Controller
      */
     public function modifyIMG(Request $request)
     { 
+        // resize image
+        //
         $this->validate($request, [
             'imgUsers' => 'image',
         ]);
+        $newImage = Image::make($request->file('imgUsers'))->resize(300, 300)->save(time().'_'.'user_img.jpg');
+
+        // dd($newImage->basename);
 
         $user = User::find(Auth::user()->id);
 
-        $file = $request->file('imgUsers');
-        $file_route = time().'_'.$file->getClientOriginalName();
-        $user->img = $file_route;
+        // $file = $request->file('imgUsers');
+        // $file_route = time().'_'.$file->getClientOriginalName();
+        $user->img = $newImage->basename;
 
-        if(Storage::disk('userPhotos')->put( $file_route , file_get_contents($file->getRealPath()))){
+        if(Storage::disk('userPhotos')->put( $newImage->basename , $newImage )){
             Storage::disk('userPhotos')->delete(Auth::user()->img);
             Flash::success(' Imagen guardada exitosamente. ');
             $user->save();

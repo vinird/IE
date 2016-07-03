@@ -39,8 +39,8 @@
 								<li class="bg-warning"><a>
 				            		<div>
 				            			<strong>{!! $n->title !!}</strong>
-				            			<p>{!! $n->content !!}</p>
-				            			<em><i class="fa fa-calendar-o" aria-hidden="true"></i> {{$n->created_at}}</em>
+				            			<h6>{!! $n->content !!}</h6>
+				            			<h6 maxlength="1"><em><i class="fa fa-calendar-o" aria-hidden="true"></i> {{$n->created_at}}</em></h6>
 				            		</div>
 				            	</a></li>
 				            	<li role="separator" class="divider"></li>

@@ -76,7 +76,7 @@
 						    	</div>
 						  	</div>
 				      		<div class="form-group">
-				        		<button type="submit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Modificar</button>
+				        		<button type="submit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;Modificar</button>
 				      		</div>
 						{!! Form::close() !!}
 			  		</div> 
@@ -147,18 +147,26 @@
 						  			@endif
 
 										<div class="col-xs-4 col-lg-3 ">
-											<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">							  		
-										</div>
-										<div class="col-xs-8 col-lg-9">
-											<strong>
 												@if(isset($users))
 							           				@foreach($users as $u)
 							           					@if($u->id == $m->sendBy)
-							           						{{$u->name}}
+							           						<?php $uImg =  $u->img ?>
+							           						<?php $uName =  $u->name?>
 							         	  				@endif
 							        	   			@endforeach
 							           			@endif
-											</strong><br>
+							           		@if(isset($uImg))
+							           			@if($uImg != '')
+													<img src="{{ asset('img/users/') }}{{ '/'.$uImg }}" class="img-responsive img-circle">
+													@else	
+														<i class="fa fa-user fa-2x img-responsive" aria-hidden="true"></i>
+							           			@endif
+							           			@else
+													<i class="fa fa-user fa-2x img-responsive" aria-hidden="true"></i>
+							           		@endif
+										</div>
+										<div class="col-xs-8 col-lg-9">
+											<strong>{{ $uName }}</strong><br>
 											<p>{{ $m->message}}</p>
 										</div>
 									</div>
@@ -259,7 +267,7 @@
 					    	<div class="col-sm-10">
 					    		<input type="hidden" name="MAX_FILE_SIZE" value="1999999"> 
 					      		<input type="file" class="form-control" name="imgUsers" required >
-							   	<p class="help-block">El tamaño de la imagen debe ser menor a 2M.</p>
+							   	<p class="help-block">El tamaño de la imagen debe ser menor a 2M. Se recomienda que las imagenes tengan la misma proporción de ancho y alto.</p>
 					    	</div>
 					  	</div>
 		      		</div>
