@@ -75,7 +75,7 @@
 
 							  	</div>
 							  	<br>
-				        		<button type="submit" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar</button>
+				        		<button type="submit" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp;Agregar</button>
 						</form>
 						<!-- termina formulario -->
 					 	</div>
@@ -145,8 +145,8 @@
 							    	</div>
 							  	</div>
 				      		<div class="modal-footer">
-				        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-				        		<button type="submit" class="btn btn-warning btn-sm">Modificar</button>
+				        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
+				        		<button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Modificar</button>
 				      		</div>
 						</form>
 						<!-- termina el formulario -->
@@ -176,7 +176,7 @@
 							</div>
 				      	</div>
 				      	<div class="modal-footer">
-				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				        	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 				      	</div>
 				    </div>

@@ -71,4 +71,14 @@ $(document).ready(function() {
 			toFile2 = true;
 		}
 	});
+
+	$('#tabGenerales').click(function (e) {
+	  	e.preventDefault();
+	  	$(this).tab('show');
+	});
+
+	$('#tabFianlizados').click(function (e) {
+	  	e.preventDefault();
+	  	$(this).tab('show');
+	});
 });

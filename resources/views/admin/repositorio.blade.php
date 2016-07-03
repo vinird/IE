@@ -13,7 +13,7 @@
 								@if(isset($currentCategory))
 									{!! '/ '.$currentCategory->name !!}
 								@endif
-								<a class="pull-right white "><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="pull-right white "><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 							</h4>
 						</div>
 						<!-- Agregar archivo -->
@@ -65,8 +65,8 @@
 									  	</div>
 									  	<br>
 									  	<div class="form-group">
-									    	<div class="col-sm-offset-2 col-sm-10">
-									      		<button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+									    	<div class="col-sm-offset-3 col-sm-10">
+									      		<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-cloud-upload" aria-hidden="true"></i> &nbsp;Agregar</button>
 									    	</div>
 									  	</div>
 									  	@else
@@ -100,7 +100,7 @@
 									  	<br>
 									  	<div class="form-group">
 									    	<div class="col-sm-offset-2 col-sm-10">
-									      		<button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+									      		<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus-square-o" aria-hidden="true"></i> &nbsp;Agregar</button>
 									    	</div>
 									  	</div>
 									  	<br><br><br><br><br>
@@ -125,7 +125,7 @@
 									  	<br><br>
 									  	<div class="form-group">
 									    	<div class="col-sm-offset-2 col-sm-10">
-									      		<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+									      		<button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-minus-square-o" aria-hidden="true"></i> &nbsp;Eliminar</button>
 									    	</div>
 									  	</div>
 									  	<br><br><br><br><br><br>
@@ -142,6 +142,8 @@
 					  	<div class="panel-body" >
 					  		<input type="search" class="form-control" placeholder="Buscar archivo..." ng-model="searchFile"></input>
 					  		<table class="table table-hover">
+								 @if(isset($archivos))
+								 @if(count($archivos) > 0)
 								<thead>
 								  	<th ng-click="myOrder = 'name' " class="hidden-xs">Nombre</th>
 								  	<th ng-click="myOrder = 'title' ">Título</th>
@@ -154,7 +156,6 @@
 								  	<th></th>
 								 </thead>
 								 <tbody>
-								 @if(isset($archivos))
 							  		<tr ng-repeat="x in archivos | filter : searchFile | orderBy : myOrder" >
 							  			<td class="hidden-xs"> @{{ x.name }}</td>
 									  	<td> @{{ x.title }}</td>
@@ -181,8 +182,11 @@
 							  				<a ng-click="setFileValues( x.id , x.name , x.user_id , x.file_route)" data-toggle="modal" data-target="#modalEliminarArchivo" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 							  			</td>
 							  		</tr>
-							  	@endif
 								</tbody>
+							  	 @else 
+							  		<h3 class="text-center">No hay archivos</h3>
+							  	@endif
+							  	@endif
 							</table>
 					 	</div>
 					</div>
@@ -240,8 +244,8 @@
 							  	</div>
 				      		</div>
 				      		<div class="modal-footer">
-				        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-				        		<button type="submit" class="btn btn-warning btn-sm">Modificar</button>
+				        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
+				        		<button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Modificar</button>
 				      		</div>
 						</form>
 						<!-- termina el formulario -->
@@ -273,7 +277,7 @@
 
 				      		</div>
 				      	<div class="modal-footer">
-				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				        	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 				      	</div>
 				    </div>

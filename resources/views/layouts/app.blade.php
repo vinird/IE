@@ -13,6 +13,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/css_resource/font-awesome.min.css') }}">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/adminStyle.css') }}">
+    
 
     <style>
 

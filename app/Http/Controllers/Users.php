@@ -19,6 +19,7 @@ use App\LogUser;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 use Intervention\Image\Facades\Image;
+use App\Sede;
 
 
 class Users extends Controller
@@ -35,7 +36,7 @@ class Users extends Controller
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
-        return view('admin/users' , ['users' => $users , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes]);
+        return view('admin/users' , ['users' => $users , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'sedes' => Sede::all()]);
     }
 
     /**

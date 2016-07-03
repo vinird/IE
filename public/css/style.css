@@ -5,12 +5,18 @@
 a {
 	cursor: pointer;
 }
-html , body{
+html{
+	background-color: #221e1f;
+}
+body{
 	background-color: #000000;
 	font-family: myriad;
 }
 .enlace-panel , .enlace-panel-xs{
 	cursor: pointer;
+}
+.bloque{
+	height: 450px;
 }
 .container {
 	/*
@@ -152,7 +158,17 @@ html , body{
 }
 /*//////////// Footer ////////////*/
 footer {
+	background-color: #221e1f;
 	color: #BAB5B5;
+	padding: 0 !important;
+	margin: 0 !important; 
+}
+#imgFooter{
+	margin-top: -90px !important;
+	margin-bottom: -50px !important;
+	width: 100%;
+	z-index: 1000;
+	display: inline-block;
 }
 /*///////// Events //////////////////*/
 #icon-data-toggle-events {

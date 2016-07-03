@@ -1,26 +1,19 @@
+<img id="imgFooter" class="img img-responsive" src="{{ asset('img/img_include/footer.png') }}" style="background: transparent;">
 <footer class="container-fluid">
 	<div class="container">
 		<div class="row">
-			<br>
-			<div class="col-xs-12">
+			<div class="col-xs-12 col-sm-6">
+				<p class="text-justify">Universidad de Costa Rica Sede Arnoldo Ferreto Segura / Carrera de Informática Empresarial</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
 				<div class="pull-right">
 					@if(Auth::check())
-						<h5><a href="{{ url('/admin/main') }}">Entrar al perfil administrativo</a></h5>
+						<h5><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Entrar al perfil administrativo</a></h5>
 					@else
-						<h5><a href="{{ url('/admin/main') }}">Perfil Administrativo</a></h5>
+						<h5><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Perfil Administrativo</a></h5>
 					@endif
 				</div>
 			</div>
-			<div class="col-xs-12">
-				<br>
-				<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-			</div>
-			<br>
 		</div>
 	</div>
 </footer>

@@ -10,7 +10,7 @@
 		<br>
 		<div class="col-xs-12 col-md-12 col-lg-6">
 			<div class="panel panel-default">
-				<div class="panel-heading p8"> 
+				<div class="panel-heading p8">
 					<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; {{ Auth::user()->name }} /
 					@if(isset($sedes) && isset(Auth::user()->sede_id))
 						@foreach($sedes as $x)
@@ -19,18 +19,18 @@
 							@endif
 						@endforeach
 					@endif
-					</h4>  
+					</h4>
 				</div>
-				
+
 				<!-- fin modificar usuario -->
 			  	<div class="panel-body panelUserImgMain" >
 			  		<div class="col-xs-4 col-lg-3 col-xl-2 panelUserImg">
 			  			@if(Auth::user()->img == null)
 							<a data-toggle="modal" data-target="#modalModificarImgUser"><i class="fa fa-picture-o fa-5x img-responsive" aria-hidden="true"></i></a>
-						@else 
+						@else
 							<a data-toggle="modal" data-target="#modalModificarImgUser"><img src="{{ asset('img/users/'.Auth::user()->img) }}" class="img-responsive img-circle"></a>
 						@endif
-			  		</div> 
+			  		</div>
 			  		<div class="col-xs-8 col-lg-9 col-xl-10">
 			  			{!! Form::open( ['route' => ['users.update', Auth::user()->id] , 'class' => 'form-horizontal'] ) !!}
 			  				<input type="hidden" name="_method" value="PUT">
@@ -50,15 +50,15 @@
 						  	<div class="form-group">
 						  		{!! Form::label('phone', 'Teléfono: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
-							    	<input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control search" placeholder="0000-00-00" pattern="\d{4}[\-]\d{2}[\-]\d{2}" title="El formato correctos es: 8888-88-88" required>
+							    	<input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control search" placeholder="0000-00-00" pattern="\d{4}[\-]\d{2}[\-]\d{2}" title="El formato correctos es: 8888-88-88">
 						    	</div>
 						  	</div>
-						  	<div class="form-group"> 
+						  	<div class="form-group">
 						  		{!! Form::label('sede', 'Sede: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
 							      	<select name="sede" class="form-control">
 							      		@if(isset($sedes))
-											@foreach($sedes as $x) 
+											@foreach($sedes as $x)
 												<option value="{{$x->id}}">{!! $x->name !!}</option>
 											@endforeach
 							      		@endif
@@ -79,7 +79,7 @@
 				        		<button type="submit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;Modificar</button>
 				      		</div>
 						{!! Form::close() !!}
-			  		</div> 
+			  		</div>
 				 	</div>
 			</div>
 		</div>
@@ -94,16 +94,17 @@
 			  			@foreach($notifications as $n)
 			  				@if($contadorN > 0)
 								<div class="panel panel-default animated pulse animated-3 ">
-									<div class="panel-heading p-d"> 
+
+									<div class="panel-heading p-d">
 								<?php $contadorN = $contadorN - 1; ?>
 			  				@else
 			  					<div class="panel panel-default">
-			  						<div class="panel-heading pBackground"> 
+			  						<div class="panel-heading pBackground">
 			  				@endif
-									<strong>{{ $n->title }} </strong>  
+									<strong>{{ $n->title }} </strong>
 									<p>&nbsp;&nbsp; {{ $n->content }}</p>
 									<h6><i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;{{$n->created_at}} <br>
-									<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; 
+									<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;
 									@if(isset($users))
 										@foreach($users as $u)
 											@if($u->id == $n->user_id)
@@ -179,20 +180,20 @@
 						@endforeach
 					@endif
 					<!-- /// -->
-					
+
 			 	</div>
 				<br>
 			</div>
 		</div>
 	</div>
-	
+
 			<!-- panel acuerdos generales -->
 		<div class="col-xs-12 acuerdosGenerales">
 			<div class="panel panel-default">
-				<div class="panel-heading p0"> 
+				<div class="panel-heading p0">
 					<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square" aria-hidden="true">
-						</i>&nbsp;&nbsp; Acuerdos <!-- <a class="pull-right white btnAddAcuerdoToogle"><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; --> 
-					</h4> 
+					</i>&nbsp;&nbsp; Acuerdos <!-- <a class="pull-right white btnAddAcuerdoToogle"><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+					</h4>
 				</div>
 
 				<!-- Mostrar acuerdos -->
@@ -202,35 +203,34 @@
 			  		<div ng-repeat="x in acuerdos |  orderBy : 'agreement_date' | filter : filterAcuerdo" ng-if="x.complete != 1">
 				  		<div class="col-xs-12 col-sm-6" >
 							<div class="panel panel-default boxAcuerdos">
-								<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p"> 
+								<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p">
 									<h4>
-										@{{x.title}} 
-									</h4>   
-									<h5>Próxima revisión <span> @{{x.agreement_date}} </span></h5>
+										@{{x.title}}
+									</h4>
+									<h5>Última revisión <span> @{{x.agreement_date}} </span></h5>
 								</div>
-								<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7"> 
+								<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7">
 									<h4>
-										@{{x.title}} 
-									</h4>   
+										@{{x.title}}
+									</h4>
 									<h5 class="passDate animated flash">Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 								</div>
-								<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4"> 
+								<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4">
 									<h4>
-										@{{x.title}} 
-									</h4>   
+										@{{x.title}}
+									</h4>
 									<h5 >Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 								</div>
 							  	<div class="panel-body text-justify" >
 							  		<p> @{{ x.content }} </p>
 							  		<br>
 								  		<div ng-if="x.primaryUser_id != null">
-								  			<h6>Asignado a:</h6>
-								  			<div ng-repeat="u in users" ng-if="u.id == x.primaryUser_id"><em>@{{ u.name }}</em></div>
+								  			<div ng-repeat="u in users" ng-if="u.id == x.primaryUser_id"><strong>Asignado a: </strong><em> @{{ u.name }}</em></div>
 								  		</div>
 								  		<br>
 								  		<div ng-if="x.file_url != null">
 								  			<h6>Documento del acuerdo</h6>
-								  			<a href="/file/getAcuerdos/@{{ x.file_url }}">@{{ x.file_url }}</a>
+								  			<a href="/file/getAcuerdos/@{{ x.file_url }}"><i class="fa fa-download" aria-hidden="true"></i></a> &nbsp;@{{ x.file_url }}
 								  		</div>
 								  		<br>
 							 	</div>
@@ -241,7 +241,7 @@
 						</div>
 						<!-- <div ng-if="$even" class="clearfix"></div> -->
 					</div>
-					<!-- /// --> 
+					<!-- /// -->
 			 	</div>
 			</div>
 		</div>
@@ -254,7 +254,7 @@
 		        		<h4 class="modal-title" id="myModalLabel">
 		        			@if(Auth::user()->img == null)
 								Agregar imagen de perfil
-		        			@else 
+		        			@else
 		        				Cambiar Imagen de perfil
 		        			@endif
 		        		</h4>
@@ -265,7 +265,7 @@
 					  	<div class="form-group">
 				    	<label for="imgUsers" class="col-sm-2 control-label">Imagen:</label>
 					    	<div class="col-sm-10">
-					    		<input type="hidden" name="MAX_FILE_SIZE" value="1999999"> 
+					    		<input type="hidden" name="MAX_FILE_SIZE" value="1999999">
 					      		<input type="file" class="form-control" name="imgUsers" required >
 							   	<p class="help-block">El tamaño de la imagen debe ser menor a 2M. Se recomienda que las imagenes tengan la misma proporción de ancho y alto.</p>
 					    	</div>
@@ -273,11 +273,11 @@
 		      		</div>
 		      		<br>
 		      		<div class="modal-footer">
-		        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+		        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 		        		@if(Auth::user()->img == null)
-			        		<button type="submit" class="btn btn-success btn-sm">Agregar</button>
-	        			@else 
-		        			<button type="submit" class="btn btn-warning btn-sm">Modificar</button>
+			        		<button type="submit" class="btn btn-success btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp;Agregar</button>
+	        			@else
+		        			<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Actualizar</button>
 		        		@endif
 		      		</div>
 				</form>
@@ -337,7 +337,7 @@
 					   		<textarea class="form-control" name="message" required></textarea>
 					   	</div>
 					</div>
-		        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+		        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 		        	<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-paper-plane" aria-hidden="true"></i> &nbsp;Enviar</button>
 		      	</div>
 		    </div>
@@ -345,7 +345,7 @@
 		  </div>
 		</div>
 		<!-- fin modal -->
-		
+
 		<!-- Modal Eliminar -->
 	</div>
 </div>

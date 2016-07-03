@@ -323,8 +323,8 @@ input:focus, select:focus {
 }
 
 .panel .pAcuerdos, .panel-default .pAcuerdos, .panel-body .pAcuerdos, .p1 .pAcuerdos, .p2 .pAcuerdos, .p3 .pAcuerdos, .p4 .pAcuerdos {
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
 }
 
 .panel .pBackground, .panel-default .pBackground, .panel-body .pBackground, .p1 .pBackground, .p2 .pBackground, .p3 .pBackground, .p4 .pBackground {

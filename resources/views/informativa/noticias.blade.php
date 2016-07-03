@@ -29,7 +29,7 @@ box-shadow: 0px 0px 32px -2px rgba(0,0,0,0.08); background-color: #FFF">
 	<div class="row">
 		<div id="col-container-noticias" class="col-xs-12">
 			<?php $contadorNoticias= 0 ?>
-			@if(isset($noticias))
+			@if(isset($noticias) && count($noticias) > 0)
 				@foreach ($noticias as $noticia)
 					<div class="col-xs-12 col-sm-4">
 						<div class="panel panel-default resizable-col-events">
@@ -56,43 +56,34 @@ box-shadow: 0px 0px 32px -2px rgba(0,0,0,0.08); background-color: #FFF">
 						<a class="show-more-link col-xs-12 hide" data-active="false"><h6 >Mostrar más <i class="fa fa-angle-double-down" aria-hidden="true"></i></h6></a>
 					</div>
 					<?php $contadorNoticias++ ?>
-					@if(($contadorNoticias / 3) == 0)
+					@if(($contadorNoticias / 3) === 0)
 						<div class="clearfix"></div>
 					@endif
 				@endforeach
+			@else
+				<div class="panel-body">
+					<h1 class="text-center">No hay noticias</h1>
+				</div>
+				<div class="bloque"></div>
 			@endif
 		</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<nav>
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
+					{!! $noticias->render() !!}
 				</nav>
 			</div>
 		</div>
+	<br><br>
+	<br><br>
 	</div>
 </div>
+
 
 <!--//////////// footer //////////-->
 
 @include('informativa.layouts.footer')
-
 
 </body>
 <script src="js/js_resources/animate_icon/main_animate_icon.js"></script>

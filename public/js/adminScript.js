@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
 			setTimeout(function(){
 				$('#hiddenButton').html('<i class="fa fa-arrow-circle-right fa-lg" aria-hidden="true"></i>');
 			} , 400);
-			odd = true;	
+			odd = true;
 		}
 	});
 // resize function //////////////
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
 	var dropdownList = $("#repositorio-dropdown-ul");
 	dropdownList.removeClass('hide');
 	dropdownList.hide();
-	
+
 	$("#repositorio-dropdown-btn").hover(function() {
 		/* Stuff to do when the mouse enters the element */
 		dropdownList.show(300);
@@ -63,7 +63,7 @@ jQuery(document).ready(function($) {
 		dropdownList.attr('isActive', 'true');
 	}, function() {
 		setTimeout(function(){
-			dropdownList.attr('isActive', 'false'); 
+			dropdownList.attr('isActive', 'false');
 			dropdownList.hide(300);
 			chevron.addClass('fa-chevron-down');
 		},300);
@@ -82,27 +82,27 @@ jQuery(document).ready(function($) {
 		dropdownList2.hide(300);
 	});
 ///////////////////////////
-// boton agregar usuario
-var btnAddUserToogle = $('#btnAddUsersToogle');
-btnAddUserToogle.click(function(event) {
-	if (btnAddUserToogle.attr('aria-expanded') == 'true') {
-		btnAddUserToogle.fadeOut(200);
+// boton mostrar panel
+var btnAddPanelToogle = $('#btnAddPanelToogle');
+btnAddPanelToogle.click(function(event) {
+	if (btnAddPanelToogle.attr('aria-expanded') == 'true') {
+		btnAddPanelToogle.fadeOut(200);
 		setTimeout(function(){
-			btnAddUserToogle.removeClass('fa-minus-circle');
-			btnAddUserToogle.addClass('fa-plus-circle');
-			btnAddUserToogle.fadeIn(200);
+			btnAddPanelToogle.removeClass('fa-minus-circle');
+			btnAddPanelToogle.addClass('fa-plus-circle');
+			btnAddPanelToogle.fadeIn(200);
 		},200);
 	} else {
-		btnAddUserToogle.fadeOut(200);
+		btnAddPanelToogle.fadeOut(200);
 		setTimeout(function(){
-			btnAddUserToogle.removeClass('fa-plus-circle');
-			btnAddUserToogle.addClass('fa-minus-circle');
-			btnAddUserToogle.fadeIn(200);
+			btnAddPanelToogle.removeClass('fa-plus-circle');
+			btnAddPanelToogle.addClass('fa-minus-circle');
+			btnAddPanelToogle.fadeIn(200);
 		},200);
 	}
  });
 
-// Repositorio 
+// Repositorio
  	var state = $('#hiddenStateRepo');
 	var btnRepo1 = $(".btnRepo1");
 	var btnRepo2 = $(".btnRepo2");
@@ -125,7 +125,7 @@ btnAddUserToogle.click(function(event) {
 			form2Repo.addClass('fadeOutRight');
 
 			setTimeout(function(){
-				
+
 				form2Repo.addClass('hide');
 				form1Repo.removeClass('hide');
 				form1Repo.addClass('fadeInLeft');
@@ -136,7 +136,7 @@ btnAddUserToogle.click(function(event) {
 				form3Repo.addClass('fadeOutRight');
 
 				setTimeout(function(){
-					
+
 					form3Repo.addClass('hide');
 					form1Repo.removeClass('hide');
 					form1Repo.addClass('fadeInLeft');
@@ -155,7 +155,7 @@ btnAddUserToogle.click(function(event) {
 		if (state.attr('stateIndex') == '1') {
 			form1Repo.addClass('animated fadeOutLeft');
 			setTimeout(function(){
-				
+
 				form1Repo.addClass('hide');
 				form2Repo.removeClass('hide');
 				form2Repo.addClass('fadeInRight');
@@ -165,7 +165,7 @@ btnAddUserToogle.click(function(event) {
 			if (state.attr('stateIndex') == '3'){
 				form3Repo.addClass('fadeOutRight');
 				setTimeout(function(){
-					
+
 					form3Repo.addClass('hide');
 					form2Repo.removeClass('hide');
 					form2Repo.addClass('fadeInLeft');
@@ -186,7 +186,7 @@ btnAddUserToogle.click(function(event) {
 			form2Repo.addClass('fadeOutLeft');
 
 			setTimeout(function(){
-				
+
 				form2Repo.addClass('hide');
 				form3Repo.removeClass('hide');
 				form3Repo.addClass('fadeInRight');
@@ -197,7 +197,7 @@ btnAddUserToogle.click(function(event) {
 				form1Repo.addClass('fadeOutLeft');
 
 				setTimeout(function(){
-					
+
 					form1Repo.addClass('hide');
 					form3Repo.removeClass('hide');
 					form3Repo.addClass('fadeInRight');

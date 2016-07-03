@@ -60,7 +60,18 @@ return [
 
         'noticia/img' => [
             'driver' => 'local',
-            'root' => public_path('img/noticias/'),
+            'root' => public_path('img/noticias'),
+            'visibility' => 'public',
+        ],
+
+        'evento/archivo' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/evento/archivo'),
+        ],
+
+        'evento/img' => [
+            'driver' => 'local',
+            'root' => public_path('img/evento'),
             'visibility' => 'public',
         ],
 
@@ -80,9 +91,10 @@ return [
 
         'userPhotos' => [
             'driver' => 'local',
-            'root' => public_path('img/users/'),
+            'root' => public_path('img/users'),
             'visibility' => 'public',
         ],
+
         'acuerdos' => [
             'driver' => 'local',
             'root' => storage_path('app/public/acuerdos'),

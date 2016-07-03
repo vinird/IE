@@ -77,20 +77,22 @@
 			</div>
 			<div class="col-sx-12 col-sm-8">
 				<h3>Ficha profesiográfica</h3>
-				<p class="text-justify">La carrera de Bachillerato en Informática empresarial forma profesionales con capacidad para el desarrollo y la administración de proyectos informáticos tendientes a organizar sistemas, recursos y finanzas en la empresa, al optimizar el  acceso, la sistematización y la organización de la información. Es una carrera que se ofrece sólo en sedes regionales.</p> <a href=""> DESCARGAR FICHA <i class="fa fa-download" aria-hidden="true"></i></a> 
+				<p class="text-justify">La carrera de Bachillerato en Informática empresarial forma profesionales con capacidad para el desarrollo y la administración de proyectos informáticos tendientes a organizar sistemas, recursos y finanzas en la empresa, al optimizar el  acceso, la sistematización y la organización de la información. Es una carrera que se ofrece sólo en sedes regionales.</p> <a href=""><i class="fa fa-download" aria-hidden="true"></i> </a>  DESCARGAR FICHA
 				<div class="divider-lg"></div>
+				<br><br>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div id="panel2" class="container-fluid" style="background-color: #83A1B4" ng-controller="CtrlTable">
+<div id="panel2" class="container-fluid" style="background-color: #B3B6B8" ng-controller="CtrlTable">
 	<div class="container">
 		<div class="row section-2">
 			<div class="col-xs-12 col-sm-4 text-center lg-font hidden-sm hidden-md hidden-lg" >
 				<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 			</div>
 			<div class="col-sx-12 col-sm-8">
+			<br>
 				<h3>Plan de estudio</h3>
 				<table class="table table-condensed" >
 					<thead>
@@ -125,6 +127,8 @@
 				  	</ul>
 				</nav>
 				<div class="divider-lg"></div>
+			<br>
+			<br>
 			</div>
 			<div class="col-xs-12 col-sm-4 text-center lg-font hidden-xs" style="height: 315px;">
 				<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
@@ -144,6 +148,7 @@
 
 			</div>
 			<div class="col-sx-12 col-sm-8">
+			<br>
 				<h3>Habilidades y Características Deseables</h3>
 				<p class="text-justify">
 					<ul class="text-justify">
@@ -203,7 +208,7 @@
 	<br><br>
 </div>
 
-<div id="panel5" class="container-fluid" style=" background-color: #B3B6B8;">
+<div id="panel5" class="container-fluid" style=" background-color: #83A1B4;">
 	<br><br>
 	<div class="container">
 		<div class="row section-5">
@@ -224,7 +229,7 @@
 	</div>
 </div>
 
-<div id="panel6" class="container-fluid" style=" background-color: #B3B6B8;">
+<div id="panel6" class="container-fluid" style=" background-color: #83A1B4;">
 	<div class="container">
 		<div class="row section-6">
 			<div class="col-xs-12 col-sm-4 text-center lg-font hidden-sm hidden-md hidden-lg">
@@ -250,6 +255,8 @@
 			</div>
 		</div>
 	</div>
+	<br><br>
+	<br><br>
 	<br><br>
 </div>
 

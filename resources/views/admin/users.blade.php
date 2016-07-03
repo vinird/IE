@@ -2,7 +2,7 @@
 @include('admin.partials.nav')
 	@include('admin.partials.aside')
  <!-- contenedor principal -->
-		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-App="App" ng-controller="userController" ng-init="users={{ $users }};">
+		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-App="App" ng-controller="userController" ng-init="users={{ $users }}; sedes={{ $sedes }}">
 			
 				<!-- panel usuairos -->
 				<div class="col-xs-12">
@@ -26,7 +26,9 @@
 								  		<td class="hidden-xs">@{{ x.email }}</td>
 								  		<td >@{{ x.name }}</td>
 								  		<td>@{{ x.phone ? x.phone : '---'}}</td>
-								  		<td class="hidden-xs">@{{ x.sede ? x.sede : '---' }}</td>
+								  		<td class="hidden-xs">
+								  			<span  ng-repeat="s in sedes" ng-if="s.id == x.sede_id" class="badge">@{{ s.name }}</span>
+								  		</td>
 								  		<td data-toggle="modal" data-target="#modalDesactivarUsuario" class="hidden-xs"><a ng-click="addUser( x.id, x.name)" class="btn btn-success btn-xs"><i class="fa fa-check" aria-hidden="true"></i> activo</a></td>
 								  		<td>
 								  			<a ng-click="addUser( x.id , x.name )" data-toggle="modal" data-target="#modalEliminarUsuario" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -116,7 +118,7 @@
 				      	<div class="modal-footer">
 				      		<input class="hide" type="text" name="url" value="{{ url()->current() }}">
 				      		<input class="hide" type="text" name="id" ng-model="userId">
-				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				        	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 				      	</div>
 				    </div>
@@ -145,7 +147,7 @@
 							</div>
 				      	</div>
 				      	<div class="modal-footer">
-				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				        	<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 				      	</div>
 				    </div>
@@ -175,7 +177,7 @@
 				      		<input class="hide" type="text" name="url" value="{{ url()->current() }}">
 				      		<input class="hide" type="text" name="id" ng-model="userId">
 				      		<input class="hide" type="text" name="activate" value="1">
-				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				        	<button type="submit" class="btn btn-success btn-sm">Activar</button>
 				      	</div>
 				    </div>
@@ -205,7 +207,7 @@
 				      		<input class="hide" type="text" name="url" value="{{ url()->current() }}">
 				      		<input class="hide" type="text" name="id" ng-model="userId">
 				      		<input class="hide" type="text" name="activate" value="0">
-				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				        	<button type="submit" class="btn btn-default btn-sm">desactivar</button>
 				      	</div>
 				    </div>

@@ -66,6 +66,10 @@ Route::get('/logOut' , ['middleware' => ['auth' , 'userActive'], function(){
 	Auth::logout();
 	return view('index', ['homeActive' => true]);
 }]);
+Route::get('/changeUser' , ['middleware' => ['auth' , 'userActive'], function(){
+	Auth::logout();
+	return view('auth.login', ['homeActive' => true]);
+}]);
 
 ////////////////////////////////////////////////////
 // Users
@@ -81,15 +85,23 @@ Route::resource('users', 'Users' , ['middleware' => ['auth' , 'userActive']]);
 
 ////////////////////////////////////////////////////
 // Noticias
-Route::post('noticias/storeNoticia' , ['uses' => 'Noticias@storeNoticia' ,  'middleware' => ['auth' , 'userActive']])->name('noticias.storeNoticia');
-Route::post('noticias/updateNoticia/' , ['uses' => 'Noticias@updateNoticia' , 'middleware' => ['auth' , 'userActive']])->name('noticias.updateNoticia');
-Route::post('noticias/delete/' , ['uses' => 'Noticias@delete' , 'middleware' => ['auth' , 'userActive']])->name('noticias.delete');
+
+
+Route::post('noticias/store' , ['uses' => 'Noticias@store' ,  'middleware' => ['auth' , 'userActive']])->name('noticias.store');
+
+Route::post('noticias/modify' , ['uses' => 'Noticias@modify' , 'middleware' => ['auth' , 'userActive']])->name('noticias.modify');
+
+Route::post('noticias/delete' , ['uses' => 'Noticias@delete' , 'middleware' => ['auth' , 'userActive']])->name('noticias.delete');
 
 ////////////////////////////////////////////////////
 // Eventos
-Route::post('eventos/storeEvento' , ['uses' => 'Eventos@storeEvento' ,  'middleware' => ['auth' , 'userActive']])->name('eventos.storeEvento');
-Route::post('eventos/updateEvento/' , ['uses' => 'Eventos@updateEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.updateEvento');
-Route::post('eventos/deleteEvento/' , ['uses' => 'Eventos@deleteEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.deleteEvento');
+
+Route::post('eventos/store' , ['uses' => 'Eventos@store' ,  'middleware' => ['auth' , 'userActive']])->name('eventos.store');
+
+Route::post('eventos/modify' , ['uses' => 'Eventos@modify' , 'middleware' => ['auth' , 'userActive']])->name('eventos.modify');
+
+Route::post('eventos/delete' , ['uses' => 'Eventos@delete' , 'middleware' => ['auth' , 'userActive']])->name('eventos.delete');
+
 
 ////////////////////////////////////////////////////
 // Sedes

@@ -113,11 +113,9 @@
 			<div class="embed-responsive embed-responsive-16by9 frameMap">
 				<iframe class="col-sx-12" id="col-map" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2013825.7107557356!2d-84.20209407349701!3d9.659381499553406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scr!4v1461638525429" width="100%" height="70%" frameborder="0" style="border:0" allowfullscreen ></iframe>
 			</div>
-			
+			<br><br>
 		</div>
 	</div>
-	<br>
-	<br>
 </div>
 
 <!--//////////// footer //////////-->

@@ -187,6 +187,9 @@ box-shadow: 0px 0px 32px -2px rgba(0,0,0,0.08); background-color: #FFF">
 			    		
 			    	</tbody>
 			  	</table>
+			  	<br><br><br>
+			  	<br><br><br>
+			  	<br><br><br>
 			</div>
 		</div>
 	</div>
