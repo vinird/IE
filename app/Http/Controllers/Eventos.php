@@ -20,7 +20,6 @@ use File;
 use App\User;
 use App\LogUser;
 
-
 class Eventos extends Controller
 {
     /**
@@ -32,7 +31,8 @@ class Eventos extends Controller
     {
         $categorias = Categoria::all();
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
-        $users = User::select('id' , 'name' )->get();
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
+        $users = User::all();
         $sedes = Sede::select('id' , 'name' )->get();
         $logUser = LogUser::find(1);
         if (Auth::user()->userType == 1) {
@@ -41,7 +41,7 @@ class Eventos extends Controller
           $eventos = DB::table('eventos')->where('user_id', '=', Auth::user()->id)->get();
           $eventos = collect($eventos);
         }
-        return view('admin/eventos' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'eventos' => $eventos, 'users' => $users, 'sedes' => $sedes]);
+        return view('admin/eventos' , ['categorias' => $categorias, 'notifications' => $notifications , 'mensajes' => $mensajes, 'logUser' => $logUser, 'eventos' => $eventos, 'users' => $users, 'sedes' => $sedes]);
     }
 
     /**

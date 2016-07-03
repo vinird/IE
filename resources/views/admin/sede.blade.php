@@ -63,8 +63,13 @@
 							  	<div class="form-group forMap hide">
 							    	<label for="link" >Código de inserción del mapa: <a href="" data-toggle="modal" data-target="#modalVerMapa"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
 							    	  	<textarea id="tAreaMap1" class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="linkMap" style="min-height: 70px;"></textarea>
+							    	  	<div class="col-xs-6">
+				        					<a class="btn btn-success btn-xs btn-block" ng-click="verMapa()"><i class="fa fa-search-plus" aria-hidden="true"></i> &nbsp;Ver mapa</a>
+							    	  	</div>
+							    	  	<div class="col-xs-6">
+				        					<a class="btn btn-primary btn-xs btn-block" ng-click="ocultarMapa()"><i class="fa fa-minus-square-o" aria-hidden="true"></i> &nbsp;Ocultar mapa</a>
+							    	  	</div>
 
-				        				<a class="btn btn-success btn-xs " ng-click="verMapa()">Ver mapa</a>
 				        				<br>
 				      					<div class="embed-responsive embed-responsive-16by9 frameMap hide"></div>
 
@@ -120,8 +125,13 @@
 							  	<div class="form-group forMap2 hide">
 							    	<label for="link" >Código de inserción del mapa: <a href="" data-toggle="modal" data-target="#modalVerMapa"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
 							    	  	<textarea class="form-control" name="link" placeholder="Aquí debe agregar la etiqueta HTML <iframe> con el codigo de inserción de google maps." ng-model="link" style="min-height: 70px;" "></textarea>
+							    	  	<div class="col-xs-6">
+				        					<a class="btn btn-success btn-xs btn-block" ng-click="verMapa2()"><i class="fa fa-search-plus" aria-hidden="true"></i> &nbsp;Ver mapa</a>
+							    	  	</div>
+							    	  	<div class="col-xs-6">
+				        					<a class="btn btn-primary btn-xs btn-block" ng-click="ocultarMapa2()"><i class="fa fa-minus-square-o" aria-hidden="true"></i> &nbsp;Ocultar mapa</a>
+							    	  	</div>
 
-				        				<a class="btn btn-success btn-xs " ng-click="verMapa2()">Ver mapa</a>
 				        				<br>
 				      					<div class="embed-responsive embed-responsive-16by9 frameMap2 hide" style="max-height: 70px !important;"></div>
 
@@ -181,12 +191,12 @@
 				      		<div class="modal-header text-center">
 										<input class="hide" type="text" name="id" ng-model="sedeID">
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        		<h4>Prosedimiento para incorporar el mapa</h4>
+				        		<h4>Procedimiento para incorporar el mapa</h4>
 				      		</div>
 				      	<div class="modal-body">
-				      		<p>El código de inserción debe copiarse de la página oficial de Google Maps, en la opción de compartir se seleciona <strong>incorporar mapa.</strong> como se muestra en la imagen</p>
+				      		<p>El código de inserción debe copiarse de la página oficial de Google Maps, en la opción de compartir se selecciona <strong>incorporar mapa.</strong> como se muestra en la imagen</p>
 				      		<img class="img img-responsive" src="{{asset('img/img_include/map_example.png')}}"><br/>
-				      		<p>Después de selecionar el código se pega en el campo de texto y se verifica con la opción de ver mapa.</p>
+				      		<p>Después de seleccionar el código se pega en el campo de texto y se verifica con la opción de ver mapa.</p>
 				      		<strong><h4>Si el procedimiento se realizó correctamente se mostrará el mapa.</h4></strong>
 				      	</div>
 				      	<div class="modal-footer">

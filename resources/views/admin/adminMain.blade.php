@@ -3,7 +3,7 @@
 	@include('admin.partials.aside')
 <?php $contadorN = Auth::user()->notification; ?>
  <!-- contenedor principal -->
-<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}; users={{ $users }}">
+<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}; users={{ $users }};">
 	<div class="rowContainerAdmin">
 		<!-- panel usuario  -->
 		<div class="clearfix"></div>
@@ -94,7 +94,8 @@
 			  			@foreach($notifications as $n)
 			  				@if($contadorN > 0)
 								<div class="panel panel-default animated pulse animated-3 ">
-									<div class="panel-heading p2">
+
+									<div class="panel-heading p-d">
 								<?php $contadorN = $contadorN - 1; ?>
 			  				@else
 			  					<div class="panel panel-default">
@@ -124,99 +125,52 @@
 		<!-- panel  conversaciones -->
 		<div class="col-xs-12 col-md-6 col-lg-3">
 			<div class="panel panel-default">
-				<div class="panel-heading p8"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp; Conversaciones </h4>  </div>
+				<div class="panel-heading p8"> <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp; Conversaciones</h4>  </div>
 				<br>
 				<div class="panel-body panelConversacionesAdmin" >
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12 animated swing animated-1 newNotification">
-							<div class="col-xs-4 col-lg-3 ">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
-					<!-- /// -->
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12">
-							<div class="col-xs-4 col-lg-3">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
-					<!-- /// -->
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12">
-							<div class="col-xs-4 col-lg-3">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
-					<!-- /// -->
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12">
-							<div class="col-xs-4 col-lg-3">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
-					<!-- /// -->
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12">
-							<div class="col-xs-4 col-lg-3">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
-					<!-- /// -->
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12">
-							<div class="col-xs-4 col-lg-3">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
-					<!-- /// -->
-					<!-- /// -->
-			  		<a data-toggle="modal" data-target="#modalVerMensaje">
-						<div class="conversacionesList col-xs-12">
-							<div class="col-xs-4 col-lg-3">
-								<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
-							</div>
-							<div class="col-xs-8 col-lg-9">
-								<strong>Nombre de usuario</strong><br>
-								<em>Lorem ipsum dolor sit amet...</em>
-							</div>
-						</div>
-					</a>
+					@if(isset($mensajes2))
+						<?php $contadorMensajes = Auth::user()->message; ?>
+						<?php $once = true; ?>
+						@foreach($mensajes2 as $m)
+							@if($once)
+								<?php $once = false ?>
+								<?php $sendBy = -1 ?>
+							@endif
+
+							@if($m->sendBy != $sendBy)
+							@if($m->sendBy != Auth::user()->id)
+						  		<a href="{{route('mensajes.sendBy' , $m->sendBy)}}">
+						  			@if($contadorMensajes > 0)
+										<div class="conversacionesList col-xs-12 animated swing animated-1 newNotification">
+					            		<?php $contadorMensajes = $contadorMensajes - 1; ?>
+					            	@else
+										<div class="conversacionesList col-xs-12 bg-info">
+						  			@endif
+
+										<div class="col-xs-4 col-lg-3 ">
+											<img src="{{ asset('img/users/494461-diving-funny-faces.jpg') }}" class="img-responsive img-circle">
+										</div>
+										<div class="col-xs-8 col-lg-9">
+											<strong>
+												@if(isset($users))
+							           				@foreach($users as $u)
+							           					@if($u->id == $m->sendBy)
+							           						{{$u->name}}
+							         	  				@endif
+							        	   			@endforeach
+							           			@endif
+											</strong><br>
+											<p>{{ $m->message}}</p>
+										</div>
+									</div>
+								</a>
+							@endif
+							@endif
+
+
+							<?php $sendBy = $m->sendBy ?>
+						@endforeach
+					@endif
 					<!-- /// -->
 
 			 	</div>
@@ -230,7 +184,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading p0">
 					<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square" aria-hidden="true">
-					</i>&nbsp;&nbsp; Acuerdos <!-- <a class="pull-right white btnAddAcuerdoToogle"><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; --> 
+					</i>&nbsp;&nbsp; Acuerdos <!-- <a class="pull-right white btnAddAcuerdoToogle"><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; -->
 					</h4>
 				</div>
 
@@ -327,58 +281,57 @@
 		<!-- Modal ver mensaje -->
 		<div class="modal fade" id="modalVerMensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  	<div class="modal-dialog" role="document">
-		  	<form class="form-horizontal">
+		  	<form action="{{route('mensajes.store')}}" method="post" class="form-horizontal">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		    	<div class="modal-content">
 		      		<div class="modal-header" >
 		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        		<br>
-		        		<div style="max-height: 30vh; overflow-y: scroll">
+		      	<div class="modal-body text-center" style="padding-bottom: 0;">
+		        		<div style="max-height: 30vh; overflow-y: scroll; border-top: 1px solid #ABDEF7;"><br>
+		        			@if(isset($mjs))
+		        				@foreach($mjs as $m)
 
-			      			<div class="col-xs-10">
-			      				<p ><strong>Nombre de usuario</strong></p>
-				        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				        		tempor incididunt ut labore et dolore magna.</p>
-			      			</div>
-			      			<div class="col-xs-10 col-xs-offset-2">
-				        		<p class="text-right"><strong>Nombre de usuario</strong></p>
-				        		<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				        		tempor incididunt ut labore et dolore magna.</p>
-			      			</div>
-			      			<div class="col-xs-10">
-			      				<p ><strong>Nombre de usuario</strong></p>
-				        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				        		tempor incididunt ut labore et dolore magna.</p>
-			      			</div>
-			      			<div class="col-xs-10 col-xs-offset-2">
-				        		<p class="text-right"><strong>Nombre de usuario</strong></p>
-				        		<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				        		tempor incididunt ut labore et dolore magna.</p>
-			      			</div>
-			      			<div class="col-xs-10">
-			      				<p ><strong>Nombre de usuario</strong></p>
-				        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				        		tempor incididunt ut labore et dolore magna.</p>
-			      			</div>
-			      			<div class="col-xs-10 col-xs-offset-2">
-				        		<p class="text-right"><strong>Nombre de usuario</strong></p>
-				        		<p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				        		tempor incididunt ut labore et dolore magna.</p>
-			      			</div>
-
-		        		</div>
+		        					@if($m->sendBy == Auth::user()->id)
+		        					<div class="col-xs-10 col-xs-offset-2">
+		        						<p class="text-right text-primary"><strong>
+		        						@if(isset($users))
+								   	  		@foreach($users as $u)
+								   	  			@if($u->id == $m->sendBy)
+													<!-- {{$u->name}} -->
+								   	  			@endif
+								   	  		@endforeach
+								   	  	@endif
+								   	  	</strong></p>
+						        		<p class="text-justify pull-right bg-info mjsTakeBy">{{ $m->message }}</p>
+		        					@else
+									<input type="text" name="takeBy" class="hide" value="{{$m->sendBy}}">
+		        					<div class="col-xs-10">
+					      				<p class="text-success"><strong>
+					      				@if(isset($users))
+								   	  		@foreach($users as $u)
+								   	  			@if($u->id == $m->sendBy)
+													<!-- {{$u->name}} -->
+								   	  			@endif
+								   	  		@endforeach
+								   	  	@endif
+		        						</strong></p>
+						        		<p class="bg-success text-justify pull-left mjsTakeBy">{{ $m->message }}</p>
+		        					@endif
+					      			</div>
+		        				@endforeach
+		        			@endif
 		      		</div>
-		      	<div class="modal-body text-center">
-		      		<br>
-		      		<div class="form-group">
-					   	<label for="message" class="col-sm-2 text-danger control-label">Respuesta:</label>
-					   	<div class="col-sm-10">
-					   		<textarea class="form-control" name="message"></textarea>
-					   	</div>
-					</div>
 		      	</div>
 		      	<div class="modal-footer">
+		      		<div class="form-group">
+					   	<label for="message" class="col-sm-2 text-info control-label">Respuesta: </label>
+					   	<div class="col-sm-10">
+					   		<textarea class="form-control" name="message" required></textarea>
+					   	</div>
+					</div>
 		        	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
-		        	<button type="button" class="btn btn-success btn-sm">Enviar</button>
+		        	<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-paper-plane" aria-hidden="true"></i> &nbsp;Enviar</button>
 		      	</div>
 		    </div>
 		    </form>
@@ -390,6 +343,13 @@
 	</div>
 </div>
 </div>
+@if(isset($mjs))
+	@if(count($mjs) > 0)
+		<script>
+			$('#modalVerMensaje').modal('show')
+		</script>
+	@endif
+@endif
 
 <script src="{{ asset('js/adminScripts/mainController.js') }}"></script>
 

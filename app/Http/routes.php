@@ -55,7 +55,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 // admin  //////////////////////////////////////////////////
-Route::get('/admin/main', [ 'uses' => 'Main@index' , 'middleware' => ['auth', 'userActive']]);
+Route::get('/admin/main', [ 'uses' => 'Main@index' , 'middleware' => ['auth', 'userActive']])->name('admin.main');
 
 Route::get('/admin/acuerdos' , [ 'uses' =>'Acuerdos@index' , 'middleware' => ['auth' , 'userActive']]);
 
@@ -159,3 +159,12 @@ Route::get('file/getNoticia/{id}' , ['uses' => 'Noticias@getFileNoticia'])->name
 // Notificaciones
 ///////////////////////////////////////////////
 Route::get('notification/clearNotification' , ['uses' => 'Notifications@clearNotification' ,  'middleware' => ['auth' , 'userActive']])->name('notification.clearNotification');
+
+
+////////////////////////////////////////////////
+// Mensajes
+///////////////////////////////////////////////
+Route::post('mensajes/store' , ['uses' => 'Mensajes@store' ,  'middleware' => ['auth' , 'userActive']])->name('mensajes.store');
+Route::get('mensajes/clearMessages' , ['uses' => 'Mensajes@clearMessages' ,  'middleware' => ['auth' , 'userActive']])->name('mensajes.clearMessages');
+Route::get('mensajes/get/{sendBy}' , ['uses' => 'Mensajes@getSendBy' , 'middleware' => ['auth' , 'userActive']])->name('mensajes.sendBy');
+

@@ -22,10 +22,18 @@ app.controller('sedesController', function($scope, $sce) {
 		$('.frameMap').append($scope.linkMap);
 	}
 
+	$scope.ocultarMapa = function(){
+		$('.frameMap').addClass('hide');
+	}
+
 	$scope.verMapa2 = function(){
 		// $('iframe').attr('src', $scope.linkMap);
 		$('.frameMap2').removeClass('hide');
 		$('.frameMap2').append($scope.link);
+	}
+
+	$scope.ocultarMapa2 = function(){
+		$('.frameMap2').addClass('hide');
 	}
 
 	$scope.renderHtml = function(html_code)

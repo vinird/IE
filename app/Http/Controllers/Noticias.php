@@ -31,7 +31,8 @@ class Noticias extends Controller
     {
         $categorias = Categoria::all();
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
-        $users = User::select('id' , 'name' )->get();
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
+        $users = User::all();
         $logUser = LogUser::find(1);
         if (Auth::user()->userType == 1) {
           $noticias = Noticia::all();
@@ -39,7 +40,7 @@ class Noticias extends Controller
           $noticias = DB::table('noticias')->where('user_id', '=', Auth::user()->id)->get();
           $noticias = collect($noticias);
         }
-        return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'noticias' => $noticias, 'users' => $users]);
+        return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'mensajes' => $mensajes, 'noticias' => $noticias, 'users' => $users]);
     }
 
     public function indexInformativa()

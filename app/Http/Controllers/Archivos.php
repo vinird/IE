@@ -33,7 +33,8 @@ class Archivos extends Controller
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $users = User::select('id' , 'name' )->get();
         $logUser = LogUser::find(1);
-        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'archivos' => $archivos , 'users' => $users, 'notifications' => $notifications , 'logUser' => $logUser]);
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
+        return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'archivos' => $archivos , 'users' => $users, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes]);
     }
 
     /**

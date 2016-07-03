@@ -27,10 +27,17 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'userType' => 1, 
             'active' => 1,
+            'message' => 125,
         ]);
         DB::table('users')->insert([
             'name' => "Invitado",
             'email' => "admin@admin.comm",
+            'password' => bcrypt('password'),
+            'active' => 1,
+        ]);
+        DB::table('users')->insert([
+            'name' => "Invitado2",
+            'email' => "admin@admin.commm",
             'password' => bcrypt('password'),
             'active' => 1,
         ]);
@@ -76,6 +83,8 @@ class DatabaseSeeder extends Seeder
         DB::table('log_users')->insert([
             'count' => 0,
         ]);
+
+        // factory(App\Mensaje::class, 125)->create();
 
     }
 }

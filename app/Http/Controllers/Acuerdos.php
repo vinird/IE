@@ -16,6 +16,7 @@ use Hash;
 use App\Notification;
 use App\LogUser;
 use Storage;
+use DB;
 
 
 class Acuerdos extends Controller
@@ -32,7 +33,8 @@ class Acuerdos extends Controller
         $users = User::all();
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
-        return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'notifications' => $notifications , 'logUser' => $logUser]);
+        $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
+        return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes]);
     }
 
     /**

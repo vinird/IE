@@ -1,4 +1,5 @@
 <?php $contador = Auth::user()->notification; ?>
+<?php $contadorMensajes = Auth::user()->message; ?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	  	<div class="container-fluid">
 			<div class="navbar-header">
@@ -53,40 +54,67 @@
 		        <li class="dropdown">
 		      		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		      			<i class="fa fa-comments" aria-hidden="true"></i> 
-		      			<span style="background: red;" class="badge"> 1 </span>
+		      			@if(isset(Auth::user()->message))
+		      				@if(Auth::user()->message > 0)
+		      					<span style="background: red;" class="badge"> {{Auth::user()->message}}</span>
+		      				@endif
+		      			@endif
 		      		</a>
 		      		<ul class="dropdown-menu">
 			           	<span id="newMessage" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> &nbsp;Nuevo mensaje</span>
-			           	<li role="separator" class="divider"></li>
 
-			           	<form style="padding: 5%; width: 300px;" class="hide" id="formMessage">
+			           	<form action="{{route('mensajes.store')}}" method="post" style="padding: 5%; width: 300px;" class="hide" id="formMessage">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						  <div class="form-group">
 							<label for="user" class="control-label">Para:</label>
-						   	  	<select class="form-control" name="user">
-									<option value="u" required>Michael Vinicio Rodríguez delgado</option>
-									<option value="u" required>u</option>
-									<option value="u" required>u</option>
+						   	  	<select class="form-control" name="takeBy" required>
+						   	  	@if(isset($users))
+						   	  		@foreach($users as $u)
+						   	  			@if($u->id != Auth::user()->id)
+											<option value="{{$u->id}}">{{$u->name}}</option>
+						   	  			@endif
+						   	  		@endforeach
+						   	  	@endif
 					     		</select>
 						  	</div>
 						  	<div class="form-group">
 						    	<label for="message">Mensaje:</label>
-						    	<textarea class="form-control" name="message"></textarea>
+						    	<textarea class="form-control" name="message" required></textarea>
 						  	</div>
 						  	<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-paper-plane" aria-hidden="true"></i> &nbsp;Enviar</button>
 						</form>
 
 			           	<li role="separator" class="divider"></li>
-			           	<div style="max-height: 50vh; overflow-y: scroll;">
-			           		<span class="btn btn-default btn-sm btn-block"><i class="fa fa-check-square-o" aria-hidden="true"></i> &nbsp;Marcar mensajes como leídos</span>
+							@if(isset($mensajes) && isset(Auth::user()->message))
+								@if($contadorMensajes > 0)
+			           			<div style="max-height: 50vh; overflow-y: scroll;">
+			           			<a href="{{route('mensajes.clearMessages')}}" class="btn btn-default btn-sm btn-block"><i class="fa fa-check-square-o" aria-hidden="true"></i> &nbsp;Marcar mensajes como leídos</a>
 
-				           	<div style="padding: 5%; width: 300px;">
-				           		<strong>title</strong>
-				           		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				           		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-				           		<em>date 22-2-3</em>
-				           	</div>
+								@foreach($mensajes as $m)
+									@if($contadorMensajes > 0)
+						           		<div style="padding: 5%; width: 300px;">
+						           			<strong>
+						           			@if(isset($users))
+						           				@foreach($users as $u)
+						           					@if($u->id == $m->sendBy)
+						           						{{$u->name}}
+						         	  				@endif
+						        	   			@endforeach
+						           			@endif
+						           			</strong>
+						           			<p>{{ $m->message }}</p>
+						           			<h6>{{ $m->created_at }}</h6>
+			           						<li role="separator" class="divider"></li>
+						           		</div>
+						           		<?php $contadorMensajes = $contadorMensajes - 1; ?>
+						           @endif
+								@endforeach
+			           			</div>
+								@else
+									<li><a>No hay mensajes</a></li>
+								@endif
+							@endif
 				           	
-			           	</div>
 
 			       	</ul>
 		      	</li>
