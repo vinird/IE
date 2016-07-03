@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     protected $fillable = [
-        'titulo', 'url_img', 'url_document', 'content', 'titulo', 'auth', 'user_id', 'event_date'
+        'title', 'url_img', 'url_document', 'content', 'event_date', 'org'
     ];
     public function user(){
     	return $this->belognsTo('App\User');
+    }
+    public function sede(){
+    	return $this->belognsTo('App\Sede');
     }
 }

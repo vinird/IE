@@ -1,20 +1,20 @@
 @include('admin.partials.head')
-@include('admin.partials.nav') 
+@include('admin.partials.nav')
 	@include('admin.partials.aside')
  <!-- contenedor principal -->
 		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="acuerdosController" ng-init="users= {{ $users }}; acuerdos= {{ $acuerdos }}; idUser= {{Auth::user()->id}}">
-			
+
 				<!-- panel acuerdos  -->
-				<div class="clearfix"></div> 
+				<div class="clearfix"></div>
 				<div class="col-xs-12 col-md-4">
 					<div class="panel panel-default">
-						<div class="panel-heading p5"> 
+						<div class="panel-heading p5">
 							<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square" aria-hidden="true">
-								</i>&nbsp;&nbsp; Mis acuerdos <a class="pull-right white"><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; 
-							</h4>  
+							</i>&nbsp;&nbsp; Mis acuerdos <a class="pull-right white"><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarAcuerdo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp; 
+							</h4>
 						</div>
 						<!-- Agregar acuerdo -->
-						<div class="collapse row" id="collapseAgregarArchivo">
+						<div class="collapse row" id="collapseAgregarAcuerdo">
 						   	 	<div class="col-xs-12">
 						   	 	{!! Form::open(array('route'=>'acuerdos.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
 						   	 			<div class="text-center">
@@ -31,7 +31,7 @@
 									   		<label for="contenido" class="col-sm-2 control-label">Descripción: </label>
 									    	<div class="col-sm-10">
 									     		<textArea type="text" class="form-control" name="contenido" required></textArea>
-									   	 	</div> 
+									   	 	</div>
 									  	</div>
 									  	<div class="form-group">
 										    <div class="col-sm-offset-2 col-sm-10">
@@ -51,9 +51,9 @@
 									     				<option value="{{$user->id}}">{{$user->name}}</option>
 									     			@endforeach
 									     		</select>
-									   	 	</div> 
+									   	 	</div>
 									  	</div>
-									  
+
 										<div class="form-group">
 									   		<label for="date" class="col-sm-2 control-label">Primera revisión: </label>
 									    	<div class="col-sm-10">
@@ -73,7 +73,7 @@
 									   		<label for="file" class="col-sm-2 control-label">Archivo: </label>
 									    	<div class="col-sm-10">
 									      		<input type="file" class="form-control" name="file" >
-									   	 	</div> 
+									   	 	</div>
 									  	</div>
 									  	<br>
 									  	<div class="form-group">
@@ -89,33 +89,33 @@
 					  	<div class="panel-body" >
 
 							<!-- acuerdos -->
-							<!-- /// -->		
+							<!-- /// -->
 							<div class="clearfix"></div>
 							<br><br>
 							<div class="col-xs-12" ng-repeat="x in acuerdos |  orderBy : 'agreement_date'" ng-if="x.mainUser_id == idUser && x.complete != 1">
 								<div class="panel panel-default boxAcuerdos">
-									<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p"> 
+									<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p">
 										<h4>
-											@{{x.title}} 
-											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalFinalizarAcuerdo" class="pull-right"><i class="fa fa-check" aria-hidden="true"></i></a> &nbsp;&nbsp; 
+											@{{x.title}}
+											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalFinalizarAcuerdo" class="pull-right"><i class="fa fa-check" aria-hidden="true"></i></a> &nbsp;&nbsp;
 											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalEliminarAcuerdo" class="pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a>
-										</h4>   
+										</h4>
 										<h5>Próxima revisión <span> @{{x.agreement_date}} </span></h5>
 									</div>
-									<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7"> 
+									<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7">
 										<h4>
-											@{{x.title}} 
-											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalFinalizarAcuerdo" class="pull-right"><i class="fa fa-check" aria-hidden="true"></i></a> &nbsp;&nbsp; 
+											@{{x.title}}
+											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalFinalizarAcuerdo" class="pull-right"><i class="fa fa-check" aria-hidden="true"></i></a> &nbsp;&nbsp;
 											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalEliminarAcuerdo" class="pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a>
-										</h4>   
+										</h4>
 										<h5 class="passDate animated flash">Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 									</div>
-									<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4"> 
+									<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4">
 										<h4>
-											@{{x.title}} 
-											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalFinalizarAcuerdo" class="pull-right"><i class="fa fa-check" aria-hidden="true"></i></a> &nbsp;&nbsp; 
+											@{{x.title}}
+											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalFinalizarAcuerdo" class="pull-right"><i class="fa fa-check" aria-hidden="true"></i></a> &nbsp;&nbsp;
 											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalEliminarAcuerdo" class="pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a>
-										</h4>   
+										</h4>
 										<h5 >Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 									</div>
 
@@ -139,7 +139,7 @@
 								</div>
 							</div>
 							<!-- /// -->
-					  		
+
 							<!-- fin de acuerdos -->
 					 	</div>
 					</div>
@@ -152,22 +152,22 @@
 					  		<input type="search" class="form-control" placeholder="Buscar acuerdos..." ng-model="filterAcuerdo"></input>
 					  		<div class="col-xs-12" ng-repeat="x in acuerdos |  orderBy : 'agreement_date' | filter : filterAcuerdo" ng-if="x.complete != 1 && idUser != x.mainUser_id">
 								<div class="panel panel-default boxAcuerdos">
-									<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p"> 
+									<div ng-if="dateConverted(x.agreement_date) < today" class="panel-heading  pAcuerdos p">
 										<h4>
-											@{{x.title}} 
-										</h4>   
+											@{{x.title}}
+										</h4>
 										<h5>Próxima revisión <span> @{{x.agreement_date}} </span></h5>
 									</div>
-									<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7"> 
+									<div ng-if="dateConverted(x.agreement_date) >= today && dateConverted(x.agreement_date) < (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p7">
 										<h4>
-											@{{x.title}} 
-										</h4>   
+											@{{x.title}}
+										</h4>
 										<h5 class="passDate animated flash">Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 									</div>
-									<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4"> 
+									<div ng-if="dateConverted(x.agreement_date) >= (today + ((24*60*60)*4000 ))" class="panel-heading  pAcuerdos p4">
 										<h4>
-											@{{x.title}} 
-										</h4>   
+											@{{x.title}}
+										</h4>
 										<h5 >Próxima revisión <span>@{{x.agreement_date}} </span></h5>
 									</div>
 
@@ -205,13 +205,13 @@
 					  		<input type="search" class="form-control" placeholder="Buscar acuerdos..." ng-model="filterAcuerdo2"></input>
 					  		<div class="col-xs-12" ng-repeat="x in acuerdos |  orderBy : 'agreement_date' | filter : filterAcuerdo2" ng-if="x.complete == 1">
 								<div class="panel panel-default boxAcuerdos">
-									<div class="panel-heading  pAcuerdos p"> 
+									<div class="panel-heading  pAcuerdos p">
 										<h4>
-											@{{x.title}} 
+											@{{x.title}}
 											<div ng-if="x.mainUser_id == idUser">
-											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalReabrirAcuerdo" class="pull-right"><i class="fa fa-folder-open" aria-hidden="true"></i></a>	
+											<a data-toggle="modal" ng-click="eliminarAcuerdo(x.title, x.id)" data-target="#modalReabrirAcuerdo" class="pull-right"><i class="fa fa-folder-open" aria-hidden="true"></i></a>
 											</div>
-										</h4>   
+										</h4>
 										<h5>Última revisión <span> @{{x.agreement_date}} </span></h5>
 									</div>
 								  	<div class="panel-body text-justify" >
@@ -281,7 +281,7 @@
 											<option value="{{$user->id}}">{{$user->name}}</option>
 										@endforeach
 									</select>
-								</div> 
+								</div>
 							</div>
 							  	<div class="form-group">
 							    	<label for="contenido" class="col-sm-2 control-label">Descripción:</label>
@@ -303,7 +303,7 @@
 								<div class="col-sm-10">
 									<input type="file" class="form-control" name="file" >
 						      		<p class="help-block">Si actualiza el documento se eliminará el archivo anterior.</p>
-								</div> 
+								</div>
 							</div>
 				      		<br>
 				      		<div class="form-group">

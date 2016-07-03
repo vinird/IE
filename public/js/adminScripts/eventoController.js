@@ -1,14 +1,14 @@
 var app = angular.module('App', []);
-app.controller('noticiaController', function($scope, $sce) {
+app.controller('eventoController', function($scope, $sce) {
 
-  $scope.setNewsValues = function(id, title, content) {
-    $scope.newsID 		= id;
-    $scope.newsTitle 	= title;
-    $scope.newsContent 		= content;
+  $scope.setEventValues = function(id, title, content) {
+    $scope.eventID 		= id;
+    $scope.eventTitle 	= title;
+    $scope.eventContent 		= content;
   };
 
-  $scope.setEdit = function(id, title, content, auth) {
-    $("#modalModificarNoticia input:checkbox").prop('checked', false);
+  $scope.setEdit = function(id, title, event_date, content, sede_id, org) {
+    $("#modalModificarEvento input:checkbox").prop('checked', false);
     $('#divFile2 > div > input').val('');
     $('#divImg2 > div > input').val('');
     if (!$('#divFile2').hasClass('hide')) {
@@ -17,11 +17,13 @@ app.controller('noticiaController', function($scope, $sce) {
     if (!$('#divImg2').hasClass('hide')) {
       $('#divImg2').addClass('hide');
     }
-    $scope.newsID = id;
-    $scope.newsTitle = title;
-    $scope.newsContent = content;
-    $scope.newsAuth = auth;
-    $('#newsTextArea').trumbowyg('html', content);
+    $scope.eventID = id;
+    $scope.eventTitle = title;
+    $scope.eventDate = new Date(event_date);
+    $scope.eventContent = content;
+    $scope.eventSede = sede_id;
+    $scope.eventOrg = org;
+    $('#eventTextArea').trumbowyg('html', content);
   };
 
   $scope.renderHtml = function(html_code) {
@@ -32,7 +34,7 @@ app.controller('noticiaController', function($scope, $sce) {
 
 jQuery(document).ready(function($) {
   $('textarea').trumbowyg({lang: 'es', btns: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['superscript', 'subscript'], 'btnGrp-justify', 'btnGrp-lists', ['horizontalRule'], ['removeformat'], ['fullscreen']]});
-  $("#collapseAgregarNoticia > div > form input:checkbox").prop('checked', false);
+  $("#collapseAgregarEvento > div > form input:checkbox").prop('checked', false);
   $(':input').not(':button, :submit, :reset, :hidden, .hide, .hidden').val('').removeAttr('checked').removeAttr('selected');
   $('#divFile > div > input').val('');
   $('#divImg > div > input').val('');

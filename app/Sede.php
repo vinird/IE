@@ -12,4 +12,7 @@ class Sede extends Model
     public function user(){
     	return $this->hasMany('App\User');
     }
+    public function evento(){
+    	return $this->hasMany('App\Evento');
+    }
 }

@@ -18,10 +18,12 @@ class CreateEventosTable extends Migration
             $table->string('url_img')->nullable();
             $table->string('url_document')->nullable();
             $table->longText('content');
-            $table->string('auth')->nullable();
             $table->dateTime('event_date');
+            $table->string('org')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('sede_id')->unsigned();
+            $table->foreign('sede_id')->references('id')->on('sedes');
             $table->timestamps();
         });
     }

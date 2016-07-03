@@ -13,7 +13,7 @@
 								@if(isset($currentCategory))
 									{!! '/ '.$currentCategory->name !!}
 								@endif
-								<a class="pull-right white "><i class="fa fa-plus-circle fa-lg " id="btnAddUsersToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="pull-right white "><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarArchivo" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 							</h4>
 						</div>
 						<!-- Agregar archivo -->

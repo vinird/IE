@@ -104,11 +104,11 @@ Route::post('noticias/delete' , ['uses' => 'Noticias@delete' , 'middleware' => [
 ////////////////////////////////////////////////////
 // Eventos
 
-Route::post('eventos/storeEvento' , ['uses' => 'Eventos@storeEvento' ,  'middleware' => ['auth' , 'userActive']])->name('eventos.storeEvento');
+Route::post('eventos/store' , ['uses' => 'Eventos@store' ,  'middleware' => ['auth' , 'userActive']])->name('eventos.store');
 
-Route::post('eventos/updateEvento/' , ['uses' => 'Eventos@updateEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.updateEvento');
+Route::post('eventos/modify' , ['uses' => 'Eventos@modify' , 'middleware' => ['auth' , 'userActive']])->name('eventos.modify');
 
-Route::post('eventos/deleteEvento/' , ['uses' => 'Eventos@deleteEvento' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('eventos.deleteEvento');
+Route::post('eventos/delete' , ['uses' => 'Eventos@delete' , 'middleware' => ['auth' , 'userActive']])->name('eventos.delete');
 
 
 ////////////////////////////////////////////////////

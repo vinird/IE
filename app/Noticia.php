@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Noticia extends Model
 {
     protected $fillable = [
-        'titulo', 'url_img', 'url_document', 'content', 'titulo', 'auth', 'user_id', 
+        'title', 'url_img', 'url_document', 'content', 'auth' 
     ];
     public function user(){
     	return $this->belognsTo('App\User');
