@@ -13,9 +13,10 @@
 
 // informativa views /////////////
 // index
-Route::get('/', function () {
-    return view('index', ['homeActive' => true]);
-})->name('/');
+// Route::get('/', function () {
+//     return view('index', ['homeActive' => true]);
+// })->name('/');
+Route::get('/', ['uses' => 'SlideImages@index'])->name('/');
 
 // noticias
 /*Route::get('noticias', function(){
@@ -38,9 +39,10 @@ Route::get('ubicacion' , [ 'uses' => 'Sedes@indexInformativa' ])->name('ubicacio
 
 
 // contactos
-Route::get('contactos', function(){
-	return view('informativa.contactos', ['contactosActive' => true]);
-})->name('contactos');
+// Route::get('contactos', function(){
+// 	return view('informativa.contactos', ['contactosActive' => true]);
+// })->name('contactos');
+Route::get('contactos', ['uses' => 'Main@indexInformativa'])->name('contactos');
 
 //////////////////////////
 
@@ -64,7 +66,7 @@ Route::get('/admin/sede' , [ 'uses' => 'Sedes@index' , 'middleware' => ['auth' ,
 Route::get('/admin/users' , ['uses' => 'Users@index' , 'middleware' => ['auth', 'userActive' , 'admin']]);
 Route::get('/logOut' , ['middleware' => ['auth' , 'userActive'], function(){
 	Auth::logout();
-	return view('index', ['homeActive' => true]);
+	return redirect('/');
 }]);
 Route::get('/changeUser' , ['middleware' => ['auth' , 'userActive'], function(){
 	Auth::logout();
@@ -157,3 +159,8 @@ Route::post('mensajes/store' , ['uses' => 'Mensajes@store' ,  'middleware' => ['
 Route::get('mensajes/clearMessages' , ['uses' => 'Mensajes@clearMessages' ,  'middleware' => ['auth' , 'userActive']])->name('mensajes.clearMessages');
 Route::get('mensajes/get/{sendBy}' , ['uses' => 'Mensajes@getSendBy' , 'middleware' => ['auth' , 'userActive']])->name('mensajes.sendBy');
 
+////////////////////////////////////////////////
+// slideImages
+///////////////////////////////////////////////
+Route::post('slideImages/store' , ['uses' => 'SlideImages@store' ,  'middleware' => ['auth' , 'userActive']])->name('slideImages.store');
+Route::get('slideImages/delete/{id}' , ['uses' => 'SlideImages@delete' ,  'middleware' => ['auth' , 'userActive']])->name('slideImages.delete');

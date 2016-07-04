@@ -209,8 +209,26 @@ $('.resizable-col-events').mouseenter(function() {
 	}
 });
 ////////////// end Noticias ////////////////
-///////////// navbar //////////////////////
-
+///////////// slideImages //////////////////////
+var slide = true;
+$('#btnSlideImages').click(function(event) {
+	if(slide){
+		$('#btnSlideImages i').removeClass('fa-plus-circle');
+		$('#btnSlideImages i').addClass('fa-minus-circle');
+		$('#submitSlideImages').removeClass('hide');
+		$('#submitSlideImages').hide();
+		$('#submitSlideImages').show(300);
+		slide = false;
+	} else {
+		$('#btnSlideImages i').removeClass('fa-minus-circle');
+		$('#btnSlideImages i').addClass('fa-plus-circle');
+		$('#submitSlideImages').hide(300);
+		setTimeout(300, function(){
+			$('#submitSlideImages').addClass('hide');
+		})
+		slide = true;
+	}
+});
 
 
 //// end script

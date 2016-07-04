@@ -41,7 +41,7 @@ class Sedes extends Controller
      */
     public function indexInformativa()
     {
-        return view('informativa.ubicacion', ['sedes' => Sede::all()]);
+        return view('informativa.ubicacion', ['sedes' => Sede::all() , 'ubicacionActive' => true]);
     }
 
     /**

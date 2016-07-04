@@ -39,6 +39,12 @@ class Main extends Controller
         return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'mensajes2' => $mensajes2]);
     }
 
+    public function indexInformativa(){
+        $users = DB::select("SELECT name , email , phone , sede_id FROM `users`");
+        $sedes = DB::select("SELECT id , name FROM `sedes`");
+        return view('informativa.contactos' , ['contactosActive' => true , 'users' => $users , 'sedes' => $sedes]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

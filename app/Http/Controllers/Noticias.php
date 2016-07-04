@@ -46,7 +46,7 @@ class Noticias extends Controller
     public function indexInformativa()
     {
         $noticias = DB::table('noticias')->orderBy('updated_at', 'desc')->paginate(6);
-        return view('informativa.noticias' , ['noticias' => $noticias]);
+        return view('informativa.noticias' , ['noticias' => $noticias, 'noticiasActive' => true]);
     }
 
     /**

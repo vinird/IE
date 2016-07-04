@@ -41,6 +41,18 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'active' => 1,
         ]);
+        DB::table('slide_images')->insert([
+            'url' => '1.jpeg',
+            'icon' => '1.jpeg',
+        ]);
+        DB::table('slide_images')->insert([
+            'url' => '2.jpg',
+            'icon' => '2.jpg',
+        ]);
+        DB::table('slide_images')->insert([
+            'url' => '3.jpg',
+            'icon' => '3.jpg',
+        ]);
 
         DB::table('sedes')->insert([
             'name' => "Turrialba",

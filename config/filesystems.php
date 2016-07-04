@@ -101,6 +101,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'slideImages' => [
+            'driver' => 'local',
+            'root' => public_path('img/img_include/slideImages'),
+            'visibility' => 'public',
+        ],
+
+
     ],
 
 ];
