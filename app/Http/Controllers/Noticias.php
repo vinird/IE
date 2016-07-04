@@ -226,7 +226,7 @@ class Noticias extends Controller
     {
         $exists = Storage::disk('noticia/archivo')->exists($id);
         if($exists){
-          return response()->file(storage_path().'/app/public/noticia/archivo/'.$id);
+          return response()->file(storage_path().'/app/public/noticias/'.$id);
         } else {
           Flash::error(' El archivo no se encuentra en el repositorio. ');
           return $this->indexInformativa();

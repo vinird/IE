@@ -18,6 +18,18 @@ body{
 .bloque{
 	height: 450px;
 }
+.bloque2{
+	height: 370px;
+}
+.bloque3{
+	height: 320px;
+}
+.bloque4{
+	height: 120px;
+}
+.bloque5{
+	height: 112px;
+}
 .container {
 	/*
 	-webkit-box-shadow: 0px 0px 21px 0px rgba(184,184,184,0.24);
@@ -132,15 +144,6 @@ body{
 	width: 50%;
 	margin: auto;
 }
-.section-0{
-
-}
-.section-1 {
-
-}
-.section-2{
-
-}
 /*/////////// Map ////////////////////*/
 #col-map{
 	height: 70vh;
@@ -161,7 +164,7 @@ footer {
 	background-color: #221e1f;
 	color: #BAB5B5;
 	padding: 0 !important;
-	margin: 0 !important; 
+	margin: 0 !important;
 }
 #imgFooter{
 	margin-top: -90px !important;
@@ -191,9 +194,6 @@ footer {
 	-o-transition: 0.6s;
 	transition: 0.6s;
 }
-..resizable-panel{
-
-}
 .show-more-link:hover{
 	text-decoration: none;
 	background-color: #68CEEA;
@@ -215,11 +215,21 @@ footer {
 	-o-transition: 0.6s;
 	transition: 0.6s;
 }
+/*/////////// Events ////////////*/
+table th {
+	text-align: center;
+}
+#event_Exit {
+	font-size: 1.5em;
+	cursor: pointer;
+}
+#eventDetails {
+	margin-top: 25px;
+}
+/*/////////// General ////////////*/
 .download_file span {
 	color: #000000 !important;
 }
-
 .download_file:hover {
 	text-decoration: none !important;
-
 }

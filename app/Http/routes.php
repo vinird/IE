@@ -25,9 +25,11 @@ Route::get('/', function () {
 Route::get('noticias' , [ 'uses' => 'Noticias@indexInformativa' ])->name('noticias');
 
 // eventos
-Route::get('eventos', function(){
+/*Route::get('eventos', function(){
 	return view('informativa.eventos', ['eventosActive' => true]);
-})->name('eventos');
+})->name('eventos');*/
+
+Route::get('eventos' , [ 'uses' => 'Eventos@indexInformativa' ])->name('eventos');
 
 // ubicacion
 // Route::get('ubicacion', function(){
@@ -142,6 +144,7 @@ Route::post('acuerdos/open' , ['uses' => 'Acuerdos@open' ,  'middleware' => ['au
 Route::get('file/getRepositorio/{id}' , ['uses' => 'Archivos@getFileRepositorio' ,  'middleware' => ['auth' , 'userActive']])->name('file.getRepositorio');
 Route::get('file/getAcuerdos/{id}' , ['uses' => 'Acuerdos@getFileAcuerdos' ,  'middleware' => ['auth' , 'userActive']])->name('file.getAcuerdos');
 Route::get('file/getNoticia/{id}' , ['uses' => 'Noticias@getFileNoticia'])->name('file.getNoticia');
+Route::get('file/getEvento/{id}' , ['uses' => 'Eventos@getFileEvento'])->name('file.getEvento');
 
 
 ////////////////////////////////////////////////
@@ -156,4 +159,3 @@ Route::get('notification/clearNotification' , ['uses' => 'Notifications@clearNot
 Route::post('mensajes/store' , ['uses' => 'Mensajes@store' ,  'middleware' => ['auth' , 'userActive']])->name('mensajes.store');
 Route::get('mensajes/clearMessages' , ['uses' => 'Mensajes@clearMessages' ,  'middleware' => ['auth' , 'userActive']])->name('mensajes.clearMessages');
 Route::get('mensajes/get/{sendBy}' , ['uses' => 'Mensajes@getSendBy' , 'middleware' => ['auth' , 'userActive']])->name('mensajes.sendBy');
-

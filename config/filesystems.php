@@ -55,7 +55,7 @@ return [
 
         'noticia/archivo' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/noticia/archivo'),
+            'root' => storage_path('app/public/noticias'),
         ],
 
         'noticia/img' => [
@@ -66,12 +66,12 @@ return [
 
         'evento/archivo' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/evento/archivo'),
+            'root' => storage_path('app/public/eventos'),
         ],
 
         'evento/img' => [
             'driver' => 'local',
-            'root' => public_path('img/evento'),
+            'root' => public_path('img/eventos'),
             'visibility' => 'public',
         ],
 

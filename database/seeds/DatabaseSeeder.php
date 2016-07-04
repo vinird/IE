@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => "Administrador",
             'email' => "admin@admin.com",
             'password' => bcrypt('password'),
-            'userType' => 1, 
+            'userType' => 1,
             'active' => 1,
             'message' => 125,
         ]);
@@ -51,15 +51,15 @@ class DatabaseSeeder extends Seeder
             'link' => '<iframe class="col-sx-12" id="col-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7858.903892690256!2d-84.81089384045744!3d9.979475521599378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x617ab3a3e72c0d8f!2sUniversidad+de+Costa+Rica%2C+Sede+Pac%C3%ADfico!5e0!3m2!1ses-419!2scr!4v1461556238601" width="100%" height="70%" frameborder="0" style="border:0" allowfullscreen ></iframe>',
         ]);
         DB::table('sedes')->insert([
-            'name' => "Guapiles",
+            'name' => "Guápiles",
             'link' => '<iframe class="col-sx-12" id="col-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31413.306858782344!2d-83.78705440086618!3d10.20796927497937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0b81ac8999b1d%3A0x1f1fd155efac4a9d!2sUniversidad+de+Costa+Rica+Recinto+de+Gu%C3%A1piles!5e0!3m2!1ses-419!2scr!4v1461638779514" width="100%" height="70%" frameborder="0" style="border:0" allowfullscreen ></iframe>',
         ]);
         DB::table('sedes')->insert([
-            'name' => "Limon",
+            'name' => "Limón",
             'link' => '<iframe class="col-sx-12" id="col-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31435.64270873805!2d-83.07160899094528!3d9.979194411762354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa7053ee9e58915%3A0x8258c3f42eb0a521!2sUniversidad+de+Costa+Rica!5e0!3m2!1ses-419!2scr!4v1461639863631" width="100%" height="70%" frameborder="0" style="border:0" allowfullscreen ></iframe>',
         ]);
         DB::table('sedes')->insert([
-            'name' => "San Ramon",
+            'name' => "San Ramón",
             'link' => '<iframe class="col-sx-12" id="col-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15712.716292763325!2d-84.48836224739787!3d10.084408883147402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xb205ea7de0c2bb41!2sUniversidad+de+Costa+Rica!5e0!3m2!1ses-419!2scr!4v1461639205655" width="100%" height="70%" frameborder="0" style="border:0" allowfullscreen ></iframe>',
         ]);
         DB::table('sedes')->insert([

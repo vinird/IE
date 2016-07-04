@@ -33,7 +33,7 @@ class Eventos extends Controller
         $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         $users = User::all();
-        $sedes = Sede::select('id' , 'name' )->get();
+        $sedes = Sede::select('id' , 'name')->get();
         $logUser = LogUser::find(1);
         if (Auth::user()->userType == 1) {
           $eventos = Evento::all();
@@ -42,6 +42,14 @@ class Eventos extends Controller
           $eventos = collect($eventos);
         }
         return view('admin/eventos' , ['categorias' => $categorias, 'notifications' => $notifications , 'mensajes' => $mensajes, 'logUser' => $logUser, 'eventos' => $eventos, 'users' => $users, 'sedes' => $sedes]);
+    }
+
+    public function indexInformativa()
+    {
+        $eventos = DB::table('eventos')->orderBy('event_date', 'desc')->paginate(4);
+        $eventosAll = Evento::all();
+        $sedes = Sede::select('id' , 'name')->get();
+        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'sedes' => $sedes]);
     }
 
     /**
@@ -219,6 +227,17 @@ class Eventos extends Controller
           Flash::error(' Contraseña invalida. ');
         }
         return $this->index();
+    }
+
+    public function getFileEvento($id)
+    {
+        $exists = Storage::disk('evento/archivo')->exists($id);
+        if($exists){
+          return response()->file(storage_path().'/app/public/eventos/'.$id);
+        } else {
+          Flash::error(' El archivo no se encuentra en el repositorio. ');
+          return $this->indexInformativa();
+        }
     }
 
     /**
