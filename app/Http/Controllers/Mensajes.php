@@ -50,24 +50,17 @@ class Mensajes extends Controller
     }
 
     public function getSendBy($sendBy){
-        // $mensajes2 = DB::select("SELECT * FROM `mensajes` ORDER BY sendBy, created_at DESC LIMIT 0 , 55");
-        // $mjs = collect(DB::table('mensajes')->take(125)->where([['sendBy', '=', $sendBy] , ['takeBy', '=', Auth::user()->id]])->orderBy('created_at' , 'desc')->get());
         $mjs = DB::select("SELECT * FROM `mensajes` WHERE sendBy = '".$sendBy."' and takeBy = '".Auth::user()->id."' or sendBy = '".Auth::user()->id."' and takeBy = '".$sendBy."' ORDER BY created_at desc LIMIT 0, 300;");
         $mjs = collect($mjs);
 
         $categorias = Categoria::all();
         $acuerdos = Acuerdo::take(25)->get();
         $sedes = Sede::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         $users = User::all();
         $mensajes = collect(DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get());
         $mensajes2 = DB::select("SELECT * FROM `mensajes` WHERE takeBy = '".Auth::user()->id."' ORDER BY sendBy, created_at DESC LIMIT 0 , 55");
-        // $mensajes2 = collect(DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->groupBy('sendBy')->orderBy('created_at' , 'asec')->get());
         return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'mensajes2' => $mensajes2 , 'mjs' => $mjs]);
-
-        // return Redirect::route('admin.main', ['mjs' => $mjs]);
-
-
     }
 }

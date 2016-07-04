@@ -33,54 +33,12 @@ class Users extends Controller
     {
         $users = User::all();
         $categorias = Categoria::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         return view('admin/users' , ['users' => $users , 'categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'sedes' => Sede::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -94,7 +52,7 @@ class Users extends Controller
         if (Hash::check($request->password, Auth::user()->password)) { 
             if($request->name == "" || $request->phone == "" || $request->sede == "" || $request->email == ""){
                 Flash::error(' Debe ingresar todos los datos. ');
-                return redirect('/admin/main');
+                return back();
             }
             $user = User::find($id);
             $user->name = $request->name;
@@ -110,9 +68,9 @@ class Users extends Controller
             }
         } else {
             Flash::error(' Contraseña incorreta. ');
-            return redirect('/admin/main');
+            return back();
         }
-       return redirect('/admin/main');
+       return back();
     }
 
     /**
@@ -134,7 +92,7 @@ class Users extends Controller
                 Flash::success(' Se modificó la contraseña exitosamente. ');
             }
         }
-        return redirect($request->url);
+        return back();
     }
 
 
@@ -147,7 +105,7 @@ class Users extends Controller
     {   
         if($request->id == Auth::user()->id){
             Flash::error(' No puede eliminar su propio usuario. ');
-            return redirect($request->url);
+            return back();
         }
         if (Hash::check($request->password, Auth::user()->password)) { 
             $user = User::find($request->id);
@@ -164,7 +122,7 @@ class Users extends Controller
         } else {
             Flash::error(' Contraseña invalida. ');
         }
-        return redirect($request->url);
+        return back();
     }
 
 
@@ -177,7 +135,7 @@ class Users extends Controller
     {   
         if($request->id == Auth::user()->id){
             Flash::error(' No puede desactivar su propio usuario. ');
-            return redirect($request->url);
+            return back();
         }
         if (Hash::check($request->password, Auth::user()->password)) { 
             $user = User::find($request->id);
@@ -200,7 +158,7 @@ class Users extends Controller
         } else {
             Flash::error(' Contraseña invalida. ');
         }
-        return redirect($request->url);
+        return back();
     }
 
     /**
@@ -213,9 +171,9 @@ class Users extends Controller
         // resize image
         //
         $this->validate($request, [
-            'imgUsers' => 'image',
+            'file' => 'image',
         ]);
-        $newImage = Image::make($request->file('imgUsers'))->resize(300, 300)->save(time().'_'.'user_img.jpg');
+        $newImage = Image::make($request->file('file'))->resize(300, 300)->save('img/users/'.time().'_'.'user_img.jpg');
 
         // dd($newImage->basename);
 
@@ -225,14 +183,13 @@ class Users extends Controller
         // $file_route = time().'_'.$file->getClientOriginalName();
         $user->img = $newImage->basename;
 
-        if(Storage::disk('userPhotos')->put( $newImage->basename , $newImage )){
+        if($user->save()){
             Storage::disk('userPhotos')->delete(Auth::user()->img);
             Flash::success(' Imagen guardada exitosamente. ');
-            $user->save();
         } else {
             Flash::error(' Error al guardar la imagen. ');
         }
-        return redirect('/admin/main');
+        return back();
     }
 
     /**
@@ -286,7 +243,6 @@ class Users extends Controller
             }
         }
     }
-
 
     /**
      * Remove the specified resource from storage.

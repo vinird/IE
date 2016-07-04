@@ -13,16 +13,9 @@
 
 // informativa views /////////////
 // index
-// Route::get('/', function () {
-//     return view('index', ['homeActive' => true]);
-// })->name('/');
 Route::get('/', ['uses' => 'SlideImages@index'])->name('/');
 
 // noticias
-/*Route::get('noticias', function(){
-	return view('informativa.noticias', ['noticiasActive' => true]);
-})->name('noticias');*/
-
 Route::get('noticias' , [ 'uses' => 'Noticias@indexInformativa' ])->name('noticias');
 
 // eventos
@@ -31,17 +24,9 @@ Route::get('eventos', function(){
 })->name('eventos');
 
 // ubicacion
-// Route::get('ubicacion', function(){
-// 	return view('informativa.ubicacion', ['ubicacionActive' => true]);
-// })->name('ubicacion');
-
 Route::get('ubicacion' , [ 'uses' => 'Sedes@indexInformativa' ])->name('ubicacion');
 
-
 // contactos
-// Route::get('contactos', function(){
-// 	return view('informativa.contactos', ['contactosActive' => true]);
-// })->name('contactos');
 Route::get('contactos', ['uses' => 'Main@indexInformativa'])->name('contactos');
 
 //////////////////////////
@@ -109,7 +94,7 @@ Route::post('eventos/delete' , ['uses' => 'Eventos@delete' , 'middleware' => ['a
 // Sedes
 Route::post('sedes/updateSede/' , ['uses' => 'Sedes@updateSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.updateSede');
 Route::post('sedes/deleteSede/' , ['uses' => 'Sedes@deleteSede' , 'middleware' => ['auth' , 'userActive' , 'admin']])->name('sedes.deleteSede');
-Route::resource('sedes', 'Sedes' , ['middleware' => ['auth' , 'userActive']]);
+Route::resource('sedes', 'Sedes' , ['middleware' => ['auth' , 'userActive' , 'admin']]);
 
 ////////////////////////////////////////////////////
 // Categorias
@@ -150,7 +135,6 @@ Route::get('file/getNoticia/{id}' , ['uses' => 'Noticias@getFileNoticia'])->name
 // Notificaciones
 ///////////////////////////////////////////////
 Route::get('notification/clearNotification' , ['uses' => 'Notifications@clearNotification' ,  'middleware' => ['auth' , 'userActive']])->name('notification.clearNotification');
-
 
 ////////////////////////////////////////////////
 // Mensajes

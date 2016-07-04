@@ -242,4 +242,14 @@ btnAddPanelToogle.click(function(event) {
 		$('#formMessage').hide();
 		$('#formMessage').show(400);
 	});
+
+	/// Alerts //////////////
+	setTimeout(function(){
+		$('footer').removeClass('bounceInLeft');
+		$('footer').addClass('fadeOutUp');
+		setTimeout(function(){
+			$('footer').remove();
+		},3000);
+	},6000);
+
 });

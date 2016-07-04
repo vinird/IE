@@ -16,7 +16,7 @@
 						<!-- Agregar acuerdo -->
 						<div class="collapse row" id="collapseAgregarAcuerdo">
 						   	 	<div class="col-xs-12">
-						   	 	{!! Form::open(array('route'=>'acuerdos.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+						   	 	{!! Form::open(array('route'=>'acuerdos.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal' , 'autocomplete' => 'off')) !!}
 						   	 			<div class="text-center">
 						   	 				<h4>Agregar Acuerdo</h4>
 						   	 			</div>
@@ -273,19 +273,19 @@
 				        		<h4 class="modal-title" id="myModalLabel">Modificar Acuerdo</h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
-						{!! Form::open(array('route'=>'acuerdos.modify','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+						{!! Form::open(array('route'=>'acuerdos.modify','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal' , 'autocomplete' => 'off')) !!}
 						<input class="hidden" name="id" ng-model="id">
 				      		<div class="modal-body">
 							  	<div class="form-group">
 							    	<label for="title" class="col-sm-3 control-label">Título:</label>
 							    	<div class="col-sm-9">
-							      		<input type="text" class="form-control" name="title" disabled ng-model="title">
+							      		<input type="text" class="form-control" name="title" disabled ng-model="title" required>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label for="date" class="col-sm-3 control-label">Nueva revisión:</label>
 							    	<div class="col-sm-9">
-							    	  	<input type="date" class="form-control" name="date" placeholder="2012-12-12" ng-model="date">
+							    	  	<input type="date" class="form-control" name="date" placeholder="2012-12-12" ng-model="date" required>
 							    	</div>
 							  	</div>
 				      		<div class="form-group">
@@ -334,7 +334,7 @@
 				      		<div class="form-group">
 							    	<label for="password" class="col-sm-3 text-danger control-label">Contraseña:</label>
 							    	<div class="col-sm-9">
-							      		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							      		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							      		<p class="help-block">Debe ingresar su contraseña para poder modificar acuerdos.</p>
 							    	</div>
 							  	</div>
@@ -364,7 +364,7 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   		<p class="help-block">Debe ingresar su contraseña para poder eliminar acuerdos.</p>
 							   	</div>
 							</div>
@@ -394,8 +394,8 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
-							   		<p class="help-block">Debe ingresar su contraseña para poder finalizar acuerdos.</p>
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
+							   		<p class="help-block">Debe ingresar su contraseña para poder finalizar acuerdos.</p> 
 							   	</div>
 							</div>
 				      	</div>
@@ -424,7 +424,7 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   		<p class="help-block">Debe ingresar su contraseña para poder reabrir acuerdos.</p>
 							   	</div>
 							</div>

@@ -3,14 +3,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
-				<p class="text-justify">Universidad de Costa Rica Sede Arnoldo Ferreto Segura / Carrera de Informática Empresarial</p>
+				<p class="">Universidad de Costa Rica Sede Arnoldo Ferreto Segura / Carrera de Informática Empresarial</p>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<div class="pull-right">
+				<div class="">
 					@if(Auth::check())
-						<h5><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Entrar al perfil administrativo</a></h5>
+						<p class="text-right"><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Entrar al perfil administrativo</a></p>
 					@else
-						<h5><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Perfil Administrativo</a></h5>
+						<p class="text-right"><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Perfil Administrativo</a></p>
 					@endif
 				</div>
 			</div>

@@ -19,6 +19,7 @@ use Storage;
 use File;
 use App\User;
 use App\LogUser;
+use Illuminate\Support\Facades\Redirect;
 
 class Eventos extends Controller
 {
@@ -30,7 +31,7 @@ class Eventos extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         $users = User::all();
         $sedes = Sede::select('id' , 'name' )->get();
@@ -45,16 +46,6 @@ class Eventos extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -64,7 +55,7 @@ class Eventos extends Controller
     {
         if($request->title === '' || $request->date === '' || $request->content === '' || $request->sede === '') {
           Flash::error(' Algunos datos son requeridos, por favor insértelos. ');
-          return $this->index();
+          return Redirect::action('Eventos@index');
         }
         $evento= new Evento;
         $evento->title= $request->title;
@@ -103,49 +94,16 @@ class Eventos extends Controller
         } else {
           Flash::error(' Se produjó un problema al crear el evento. ');
         }
-        return $this->index();
+        return Redirect::action('Eventos@index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     public function modify(Request $request)
     {
         if(Hash::check($request->password, Auth::user()->password)) {
           if($request->title === '' || $request->date === '' || $request->content === '' || $request->sede === '') {
             Flash::error(' Algunos datos son requeridos, por favor insértelos. ');
-            return $this->index();
+            return Redirect::action('Eventos@index');
           }
           $evento= Evento::find($request->id);
           $evento->title= $request->title;
@@ -189,19 +147,9 @@ class Eventos extends Controller
         } else {
           Flash::error(' Contraseña incorrecta. ');
         }
-        return  $this->index();
+        return  Redirect::action('Eventos@index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function delete(Request $request)
     {
@@ -218,7 +166,7 @@ class Eventos extends Controller
         } else {
           Flash::error(' Contraseña invalida. ');
         }
-        return $this->index();
+        return Redirect::action('Eventos@index');
     }
 
     /**

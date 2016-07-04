@@ -14,14 +14,12 @@
 								<thead>
 								  	<th ng-click="myOrderActive = 'name'">Nombre</th>
 								  	<th ng-click="myOrderActive = 'address'">Dirección</th>
-								  	<th ng-click="myOrderActive = 'phone'">Teléfono</th>
 								  	<th></th>
 								 </thead>
 								 <tbody>
 							  		<tr ng-repeat=" x in sedes | filter : searchSede | orderBy : myOrderActive ">
 							  			<td>@{{ x.name }}</td>
 							  			<td>@{{ x.address }}</td>
-							  			<td>@{{ x.phone }}</td>
 							  			<td>
 							  				<a ng-click="modSede(x.id, x.name, x.address, x.phone, x.link)" data-toggle="modal" data-target="#modalModificarUsuario" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
@@ -40,7 +38,7 @@
 						<div class="panel-heading p4"> <h4>&nbsp;&nbsp;&nbsp;&nbsp; Agregar Sede  </h4></div>
 					  	<div class="panel-body">
 					  		<!-- inicia el formulario -->
-					    	{!! Form::open(['route'=>['sedes.store'], 'class'=>'form-horizontal'] ) !!}
+					    	{!! Form::open(['route'=>['sedes.store'], 'class'=>'form-horizontal' , 'autocomplete' => 'off'] ) !!}
 							  	<div class="form-group">
 							    	<label for="name" class>Nombre:</label>
 							      	<input type="text" class="form-control" name="name" required>
@@ -48,10 +46,6 @@
 							  	<div class="form-group">
 							    	<label for="address" >Dirección:</label>
 							    	  	<input type="text" class="form-control" name="address">
-							  	</div>
-							  	<div class="form-group">
-							    	<label for="phone" >Teléfono:</label>
-							    	  	<input type="text" class="form-control" name="phone">
 							  	</div>
 							  	<div class="form-group">
 							    	<div class="checkbox">
@@ -91,7 +85,7 @@
 				        		<h4 class="modal-title" id="myModalLabel">Modificar Sede <em>@{{ sedeName }}</em></h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
-				        {!! Form::open(['route'=>['sedes.updateSede'], 'class'=>'form-horizontal'] ) !!}
+				        {!! Form::open(['route'=>['sedes.updateSede'], 'class'=>'form-horizontal' , 'autocomplete' => 'off'] ) !!}
 							<input class="hide" type="text" name="id" ng-model="sedeID">
 				      		<div class="modal-body">
 							  	<div class="form-group">
@@ -105,12 +99,6 @@
 							    	<label for="address" class="col-sm-2 control-label">Dirección:</label>
 							    	<div class="col-sm-10">
 							    	  	<input type="text" class="form-control" name="address" placeholder="Dirección..." ng-model="address">
-							    	</div>
-							  	</div>
-							  	<div class="form-group">
-							    	<label for="phone" class="col-sm-2 control-label">Teléfono:</label>
-							    	<div class="col-sm-10">
-							    	  	<input type="text" class="form-control" name="phone" placeholder="Teléfono..." ng-model="phone">
 							    	</div>
 							  	</div>
 							  	<div class="form-group">

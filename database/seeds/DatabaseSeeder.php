@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UsersTableSeeder::class);
         // user(App\User::class, 50)->create();
-        // factory(App\Sede::class, 50)->create();
 
         DB::table('users')->insert([
             'name' => "Administrador",
@@ -27,7 +26,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'userType' => 1, 
             'active' => 1,
-            'message' => 125,
         ]);
         DB::table('users')->insert([
             'name' => "Invitado",
@@ -44,14 +42,17 @@ class DatabaseSeeder extends Seeder
         DB::table('slide_images')->insert([
             'url' => '1.jpeg',
             'icon' => '1.jpeg',
+            'user' => 1,
         ]);
         DB::table('slide_images')->insert([
             'url' => '2.jpg',
             'icon' => '2.jpg',
+            'user' => 1,
         ]);
         DB::table('slide_images')->insert([
             'url' => '3.jpg',
             'icon' => '3.jpg',
+            'user' => 1,
         ]);
 
         DB::table('sedes')->insert([

@@ -16,7 +16,7 @@ app.controller('sedesController', function($scope, $sce) {
 		$('.frameMap2').addClass('hide');
 	};
 
-	$scope.verMapa = function(){
+	$scope.verMapa = function(){ 
 		// $('iframe').attr('src', $scope.linkMap);
 		$('.frameMap').removeClass('hide')
 		$('.frameMap').append($scope.linkMap);
@@ -47,8 +47,9 @@ jQuery(document).ready(function($) {
 	var toMap = true;
 	$('.toMap').change(function(){
 		if(toMap) {
-			$('.frameMap').addClass('hide')
+			$('.frameMap').addClass('hide');
 			$('.forMap').removeClass('hide');
+			$('#tAreaMap1').val('');
 			toMap = false;
 		} else {
 			$('.forMap').addClass('hide');

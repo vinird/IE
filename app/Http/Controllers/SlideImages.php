@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\SlideImage;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image; 
 use Storage;
+use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Auth;
+
 
 class SlideImages extends Controller
 {
@@ -24,15 +27,15 @@ class SlideImages extends Controller
 
     	$file = $request->file('file');
         $file_route = time().'_'.$file->getClientOriginalName();
-        $image = Image::make($request->file('file'))->resize(1900, 530)->save($file_route);
-        $icon = Image::make($request->file('file'))->resize(410, 115)->save('icon_'.$file_route);
+        $image = Image::make($request->file('file'))->resize(1900, 530)->save('img/img_include/slideImages/'.$file_route);
+        $icon = Image::make($request->file('file'))->resize(410, 115)->save('img/img_include/slideImages/'.'icon_'.$file_route);
 
         $slideImage->url = $image->basename;
         $slideImage->icon = $icon->basename;
+        $slideImage->user = Auth::user()->id;
 
         if($slideImage->save()){
-        	Storage::disk('slideImages')->put( $image->basename , $image );
-        	Storage::disk('slideImages')->put( $icon->basename , $icon );
+            Flash::success(' Imagen agregada al carrusel. ');
         }
         return back();
     }
@@ -42,9 +45,10 @@ class SlideImages extends Controller
 			Storage::disk('slideImages')->delete($slideImage->url);
 			Storage::disk('slideImages')->delete($slideImage->icon);
 
-			SlideImage::destroy($id);
+			if(SlideImage::destroy($id)){
+                Flash::success(' Imagen eliminada. ');
+            }
     	}
-
 		return back();
     }
 }

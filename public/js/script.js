@@ -230,6 +230,14 @@ $('#btnSlideImages').click(function(event) {
 	}
 });
 
+/// Alerts //////////////
+setTimeout(function(){
+	$('.alert').fadeOut(5000, function(){
+		$('.alert').remove();
+	});
+},5000);
+
+
 
 //// end script
 });

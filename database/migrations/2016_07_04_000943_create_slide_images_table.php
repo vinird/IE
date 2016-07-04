@@ -16,6 +16,8 @@ class CreateSlideImagesTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->string('icon');
+            $table->integer('user')->unsigned();
+            $table->foreign('user')->references('id')->on('users');
             $table->timestamps();
         });
     }

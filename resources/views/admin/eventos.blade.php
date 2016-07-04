@@ -16,7 +16,7 @@
 						<!-- Agregar evento -->
 						<div class="collapse row" id="collapseAgregarEvento">
 							<div class="col-xs-12 col-md-8 col-md-offset-2 col-xl-6 col-xl-offset-3">
-						  	{!!  Form::open(array('route'=>'eventos.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))  !!}
+						  	{!!  Form::open(array('route'=>'eventos.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal' , 'autocomplete' => 'off'))  !!}
 										@if(isset($sedes) && count($sedes) > 0)
 							   	 		<div class="text-center">
 							   	 			<h4>Agregar Evento</h4>
@@ -148,7 +148,7 @@
 				        	<h4 class="modal-title" id="myModalLabel">Modificar evento</h4>
 				      </div>
 				      <!-- Inicia el formulario -->
-				      {!! Form::open(array('route'=>'eventos.modify','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+				      {!! Form::open(array('route'=>'eventos.modify','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal' , 'autocomplete' => 'off')) !!}
 					      	<div class="modal-body">
 										<input class="hide" type="text" name="id" ng-model="eventID">
 										<div class="form-group">
@@ -246,7 +246,7 @@
 					      	<div class="form-group">
 							    	<label for="password" class="col-sm-2 control-label text-danger">Contraseña: </label>
 							    	<div class="col-sm-10">
-							   	  	<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   	  	<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   	  	<p class="help-block">Debe ingresar su contraseña para poder eliminar eventos.</p>
 							   		</div>
 				      		</div>

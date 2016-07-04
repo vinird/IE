@@ -18,6 +18,7 @@ use Hash;
 use DB;
 use App\Notification;
 use App\LogUser;
+use Illuminate\Support\Facades\Redirect;
 
 class Archivos extends Controller
 {
@@ -30,21 +31,11 @@ class Archivos extends Controller
     {   
         $archivos   = Archivo::all();
         $categorias = Categoria::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $users = User::select('id' , 'name' )->get();
         $logUser = LogUser::find(1);
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'archivos' => $archivos , 'users' => $users, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // return $this->index();
     }
 
     /**
@@ -57,7 +48,7 @@ class Archivos extends Controller
     {
         if($request->title == '' || $request->category == '' || $request->resumen == ''){
             Flash::error(' Debe ingresar todos los datos. ');
-            return $this->index();
+            return Redirect::action('Archivos@index');
         }
 
         $file = $request->file('file');
@@ -90,53 +81,8 @@ class Archivos extends Controller
         } else {
             Flash::error(' Debe seleccionar un archivo. ');
         }
-        return redirect($request->url);
+        return back();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    } 
 
     /**
      * Remove the specified resource from storage.
@@ -148,7 +94,7 @@ class Archivos extends Controller
     {   
         if(Auth::user()->userType != 1 && $request->userFileID != Auth::user()->id){
             Flash::error(' No tiene permisos para realizar esta acción. ');
-            return $this->index();
+            return Redirect::action('Archivos@index');
         }
 
         if(Hash::check($request->password, Auth::user()->password)) {
@@ -163,7 +109,7 @@ class Archivos extends Controller
         } else {
             Flash::error(' Contraseña invalida. '); 
         }
-        return redirect($request->url);
+        return back();
     }
 
 
@@ -182,7 +128,7 @@ class Archivos extends Controller
         $categorias = Categoria::all();
         $currentCategory = Categoria::find($id);
         $users      = User::select('id' , 'name' )->get();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         return view('admin.repositorio' , [ 'categorias' =>  $categorias , 'currentCategory' => $currentCategory , 'archivos' => $collection , 'users' => $users, 'notifications' => $notifications , 'logUser' => $logUser]);
     }
@@ -202,7 +148,7 @@ class Archivos extends Controller
             return response()->file(storage_path().'/app/public/repositorio/'.$id);
         } else {
             Flash::error(' El archivo no se encuentra en el repositorio. ');
-            return $this->index();
+            return Redirect::action('Archivos@index');
         }
     }
 
@@ -216,7 +162,7 @@ class Archivos extends Controller
     {
         if($request->title == '' || $request->category == '' || $request->resumen == ''){
             Flash::error(' Debe ingresar todos los datos. ');
-            return $this->index();
+            return Redirect::action('Archivos@index');
         }
         
         if(Hash::check($request->password, Auth::user()->password)) {
@@ -253,7 +199,7 @@ class Archivos extends Controller
         } else {
             Flash::error(' Contraseña incorrecta. ');
         }
-        return redirect($request->url);
+        return back();
     }
     
     /**
