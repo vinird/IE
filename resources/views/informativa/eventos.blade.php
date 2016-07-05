@@ -61,6 +61,10 @@
 												<td>{{ $evento->org }}</td>
 											</tr>
 										@endforeach
+									@else
+										<tr>
+											<td colspan="4">No se encontraron próximos eventos</td>
+										</tr>
 									@endif
 								</tbody>
 							</table>
