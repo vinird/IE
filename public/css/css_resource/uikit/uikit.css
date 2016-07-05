@@ -7,21 +7,6 @@
  * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
  * 3. Style
  */
-html {
-  /* 1 */
-  font: normal 14px / 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  /* 2 */
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  /* 3 */
-  background: #ffffff;
-}
-/*
- * Removes default margin.
- */
-body {
-  margin: 0;
-}
 /* Links
  ========================================================================== */
 /*
@@ -3542,12 +3527,7 @@ select.uk-form-width-mini {
 /* ========================================================================
    Component: Icon
  ========================================================================== */
-@font-face {
-  font-family: 'FontAwesome';
-  src: url("../fonts/fontawesome-webfont.woff2") format('woff2'), url("../fonts/fontawesome-webfont.woff") format("woff"), url("../fonts/fontawesome-webfont.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+
 /*
  * 1. Allow margin
  * 2. Prevent inherit font style

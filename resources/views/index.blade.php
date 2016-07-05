@@ -6,7 +6,7 @@
 	@include('informativa.layouts.headContent')
 
 	<!-- slider -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/uikit.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/uk.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/components/slideshow.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/uikit/components/slidenav.min.css') }}">
 	<script src="{{ asset('js/js_resources/uikit/uikit.min.js') }}"></script>
@@ -86,7 +86,7 @@
 			</div>
 			<div class="col-sx-12 col-sm-8">
 				<h3>Ficha profesiográfica</h3>
-				<p class="text-justify">La carrera de Bachillerato en Informática empresarial forma profesionales con capacidad para el desarrollo y la administración de proyectos informáticos tendientes a organizar sistemas, recursos y finanzas en la empresa, al optimizar el  acceso, la sistematización y la organización de la información. Es una carrera que se ofrece sólo en sedes regionales.</p> <a href=""><i class="fa fa-download" aria-hidden="true"></i> </a>  DESCARGAR FICHA
+				<p class="text-justify">La carrera de Bachillerato en Informática empresarial forma profesionales con capacidad para el desarrollo y la administración de proyectos informáticos tendientes a organizar sistemas, recursos y finanzas en la empresa, al optimizar el  acceso, la sistematización y la organización de la información. Es una carrera que se ofrece sólo en sedes regionales.</p> <a href="archivo/Plandeestudios.pdf" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> </a>  DESCARGAR FICHA
 				<div class="divider-lg"></div>
 				<br><br>
 			</div>
