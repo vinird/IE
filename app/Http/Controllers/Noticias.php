@@ -150,6 +150,10 @@ class Noticias extends Controller
     {
         if(Hash::check($request->password, Auth::user()->password)) {
           $noticia = Noticia::find($request->id);
+          if(Auth::user()->userType != 1 && $noticia->user_id != Auth::user()->id){
+            Flash::error(' No tiene permisos para realizar esta acción. ');
+            return Redirect::action('Noticias@index');
+          }
           if(Noticia::destroy($request->id) == 1){
             Storage::disk('noticia/archivo')->delete($noticia->url_document);
             Storage::disk('noticia/img')->delete($noticia->url_img);
