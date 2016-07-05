@@ -36,12 +36,7 @@ class Eventos extends Controller
         $users = User::all();
         $sedes = Sede::select('id' , 'name')->get();
         $logUser = LogUser::find(1);
-        if (Auth::user()->userType == 1) {
-          $eventos = Evento::all();
-        } else {
-          $eventos = DB::table('eventos')->where('user_id', '=', Auth::user()->id)->get();
-          $eventos = collect($eventos);
-        }
+        $eventos = Evento::take(250)->orderBy('updated_at', 'desc')->get();
         return view('admin/eventos' , ['categorias' => $categorias, 'notifications' => $notifications , 'mensajes' => $mensajes, 'logUser' => $logUser, 'eventos' => $eventos, 'users' => $users, 'sedes' => $sedes]);
     }
 
@@ -51,16 +46,16 @@ class Eventos extends Controller
         $eventosAll = Evento::all();
         $eventosNext = DB::table('eventos')->whereBetween('event_date', [date("Y/m/d"), date("Y/m/d", mktime(0, 0, 0, date("m")+3, date("d"), date("Y")))])->orderBy('event_date', 'asc')->take(5)->get();
         $sedes = Sede::select('id' , 'name')->get();
-        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'eventosNext' => $eventosNext, 'sedes' => $sedes]);
+        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'eventosNext' => $eventosNext, 'sedes' => $sedes, 'eventosActive' => true]);
     }
 
     public function indexInformativaFiltrada($sede_id)
     {
         $eventos = DB::table('eventos')->where('sede_id', '=', $sede_id)->orderBy('event_date', 'desc')->paginate(4);
-        $eventosAll = DB::table('eventos')->where('sede_id', '=', $sede_id)->get();
+        $eventosAll = Evento::all();
         $eventosNext = DB::table('eventos')->where('sede_id', '=', $sede_id)->whereBetween('event_date', [date("Y/m/d"), date("Y/m/d", mktime(0, 0, 0, date("m")+3, date("d"), date("Y")))])->orderBy('event_date', 'asc')->take(5)->get();
         $sedes = Sede::select('id' , 'name')->get();
-        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'eventosNext' => $eventosNext, 'sedes' => $sedes]);
+        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'eventosNext' => $eventosNext, 'sedes' => $sedes, 'eventosActive' => true]);
     }
 
     /**

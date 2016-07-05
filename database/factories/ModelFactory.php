@@ -20,6 +20,30 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Noticia::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+        'url_img' => '1467680479_aa.png',
+        'url_document' => '1467680479_logo.rar',
+        'content' => str_random(10).' '.str_random(20).' '.str_random(10),
+        'auth' => $faker->name,
+        'user_id' => 1
+    ];
+});
+
+$factory->define(App\Evento::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+        'url_img' => '1467610657_a.png',
+        'url_document' => '1467610657_b.pdf',
+        'content' => str_random(10).' '.str_random(20).' '.str_random(10),
+        'event_date' => '2016/07/05',
+        'org' => $faker->name,
+        'user_id' => 1,
+        'sede_id' => 2
+    ];
+});
+
 // $factory->define(App\Sede::class, function (Faker\Generator $faker) {
 //     return [
 //         'name' => str_random(10),

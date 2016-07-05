@@ -18,11 +18,6 @@ Route::get('/', ['uses' => 'SlideImages@index'])->name('/');
 // noticias
 Route::get('noticias' , [ 'uses' => 'Noticias@indexInformativa' ])->name('noticias');
 
-// eventos
-/*Route::get('eventos', function(){
-	return view('informativa.eventos', ['eventosActive' => true]);
-})->name('eventos');*/
-
 Route::get('eventos' , [ 'uses' => 'Eventos@indexInformativa' ])->name('eventos');
 Route::get('eventos/{sede_id}' , [ 'uses' => 'Eventos@indexInformativaFiltrada' ])->name('filtroEventos');
 

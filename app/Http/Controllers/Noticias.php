@@ -35,12 +35,7 @@ class Noticias extends Controller
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         $users = User::all();
         $logUser = LogUser::find(1);
-        if (Auth::user()->userType == 1) {
-          $noticias = Noticia::all();
-        } else {
-          $noticias = DB::table('noticias')->where('user_id', '=', Auth::user()->id)->get();
-          $noticias = collect($noticias);
-        }
+        $noticias = Noticia::take(250)->orderBy('updated_at', 'desc')->get();
         return view('admin/noticias' , ['categorias' => $categorias, 'notifications' => $notifications , 'logUser' => $logUser, 'mensajes' => $mensajes, 'noticias' => $noticias, 'users' => $users]);
     }
 

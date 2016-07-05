@@ -99,5 +99,9 @@ class DatabaseSeeder extends Seeder
 
         // factory(App\Mensaje::class, 125)->create();
 
+        factory(App\Noticia::class, 250)->create();
+
+        factory(App\Evento::class, 250)->create();
+
     }
 }

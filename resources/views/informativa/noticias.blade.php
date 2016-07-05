@@ -56,7 +56,7 @@ box-shadow: 0px 0px 32px -2px rgba(0,0,0,0.08); background-color: #FFF">
 						<a class="show-more-link col-xs-12 hide" data-active="false"><h6 >Mostrar más <i class="fa fa-angle-double-down" aria-hidden="true"></i></h6></a>
 					</div>
 					<?php $contadorNoticias++ ?>
-					@if(($contadorNoticias / 3) === 0)
+					@if(($contadorNoticias % 3) === 0)
 						<div class="clearfix"></div>
 					@endif
 				@endforeach

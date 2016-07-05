@@ -4,13 +4,13 @@
 	@include('admin.partials.aside')
 
  	<!-- Contenedor principal -->
-		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="noticiaController" ng-init="noticias = {{ $noticias }}; users={{ $users }};">
+		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="noticiaController" ng-init="noticias={{ $noticias }}; users={{ $users }}; userID={{ Auth::user()->id }}; userType= <?php if(null !== Auth::user()->userType){ echo Auth::user()->userType;  }else{ echo "0";} ?>">
 
 				<!-- Panel noticias -->
 				<div class="col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading p2">
-							<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias <a class="pull-right white"><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarNoticia" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias<a class="pull-right white"><i class="fa fa-plus-circle fa-lg " id="btnAddPanelToogle" aria-hidden="true" data-toggle="collapse" data-target="#collapseAgregarNoticia" aria-expanded="false" aria-controls="collapseExample"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 							</h4>
 						</div>
 						<!-- Agregar noticia -->
@@ -99,9 +99,11 @@
 							  		<td class="hidden-xs">@{{ x.created_at }}</td>
 							  		<td class="hidden-xs">@{{ x.updated_at }}</td>
 							  		<td>
-							  			<a ng-click="setEdit( x.id , x.title , x.content , x.auth )" data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+											<div ng-if="userType == 1 || userID == x.user_id">
+												<a ng-click="setEdit( x.id , x.title , x.content , x.auth )" data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-							  			<a ng-click="setNewsValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarNoticia" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												<a ng-click="setNewsValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarNoticia" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+											</div>
 							  		</td>
 							  	</tr>
 								</tbody>

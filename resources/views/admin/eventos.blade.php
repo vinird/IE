@@ -4,7 +4,7 @@
 	@include('admin.partials.aside')
 
  <!-- Contenedor principal -->
-		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="eventoController" ng-init="eventos = {{ $eventos }}; users = {{ $users }}; sedes = {{ $sedes }}">
+		<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="eventoController" ng-init="eventos = {{ $eventos }}; users = {{ $users }}; userID={{ Auth::user()->id }}; sedes = {{ $sedes }}; userType= <?php if(null !== Auth::user()->userType){ echo Auth::user()->userType;  }else{ echo "0";} ?>">
 
 				<!-- Panel eventos -->
 				<div class="col-xs-12">
@@ -128,9 +128,11 @@
 										<td class="hidden-xs hidden-sm">@{{ x.updated_at }}</td>
 										<td></td>
 								  	<td>
-								  		<a ng-click="setEdit( x.id , x.title , x.event_date , x.content , x.sede_id , x.org )" data-toggle="modal" data-target="#modalModificarEvento" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+											<div ng-if="userType == 1 || userID == x.user_id">
+									  		<a ng-click="setEdit( x.id , x.title , x.event_date , x.content , x.sede_id , x.org )" data-toggle="modal" data-target="#modalModificarEvento" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-								  		<a ng-click="setEventValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarEvento" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+									  		<a ng-click="setEventValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarEvento" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+											</div>
 								  	</td>
 								  </tr>
 								</tbody>
