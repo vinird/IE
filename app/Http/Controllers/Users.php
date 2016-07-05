@@ -49,7 +49,7 @@ class Users extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Hash::check($request->password, Auth::user()->password)) { 
+        if (Hash::check($request->password, Auth::user()->password)) {
             if($request->name == "" || $request->phone == "" || $request->sede == "" || $request->email == ""){
                 Flash::error(' Debe ingresar todos los datos. ');
                 return back();
@@ -67,7 +67,7 @@ class Users extends Controller
                 Flash::error(' Error al modificar el usuario. ');
             }
         } else {
-            Flash::error(' Contraseña incorreta. ');
+            Flash::error(' Contraseña incorrecta. ');
             return back();
         }
        return back();
@@ -84,7 +84,7 @@ class Users extends Controller
     {
         $user = User::find($id);
         Flash::error(' Contraseña invalida. ');
-        if (Hash::check($request->password, $user->password)) { 
+        if (Hash::check($request->password, $user->password)) {
             Flash::error(' Las contraseñas no coinciden. ');
             if($request->newPassword == $request->confirmPassword){
                 $user->password = bcrypt($request->newPassword);
@@ -102,12 +102,12 @@ class Users extends Controller
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request)
-    {   
+    {
         if($request->id == Auth::user()->id){
             Flash::error(' No puede eliminar su propio usuario. ');
             return back();
         }
-        if (Hash::check($request->password, Auth::user()->password)) { 
+        if (Hash::check($request->password, Auth::user()->password)) {
             $user = User::find($request->id);
             if($user->isNew == 1){
                 $log = LogUser::find(1);
@@ -132,12 +132,12 @@ class Users extends Controller
      * @return \Illuminate\Http\Response
      */
     public function activateUser(Request $request)
-    {   
+    {
         if($request->id == Auth::user()->id){
             Flash::error(' No puede desactivar su propio usuario. ');
             return back();
         }
-        if (Hash::check($request->password, Auth::user()->password)) { 
+        if (Hash::check($request->password, Auth::user()->password)) {
             $user = User::find($request->id);
             if ($request->activate == 1){
                 $user->active = 1;
@@ -148,11 +148,11 @@ class Users extends Controller
                     $log->count = $log->count - 1;
                     $log->save();
                 }
-                $this->addnotification('Se activó un usuario', $user->name);
+                $this->addnotification('Se activó un usuario ', $user->name);
             } else {
                 $user->active = 0;
                 Flash::success(' Se desactivó el usuario correctamente. ');
-                $this->addnotification('Se activó un usuario', $user->name);
+                $this->addnotification('Se desactivó un usuario ', $user->name);
             }
             if($user->save() != true) Flash::error(' Error al cambiar el estado del usuario. ');
         } else {
@@ -167,7 +167,7 @@ class Users extends Controller
      * @return \Illuminate\Http\Response
      */
     public function modifyIMG(Request $request)
-    { 
+    {
         // resize image
         //
         $this->validate($request, [
@@ -209,15 +209,15 @@ class Users extends Controller
         foreach ($users as $user) {
             if($user->id != Auth::user()->id){
                 $user->notification = $user->notification + 1;
-                $user->save();  
+                $user->save();
             }
         }
     }
 
     /**
-     * 
      *
-     * 
+     *
+     *
      */
     public function clearNewUsers()
     {
@@ -226,9 +226,9 @@ class Users extends Controller
     }
 
     /**
-     * 
      *
-     * 
+     *
+     *
      */
     private function clearNewU(){
         $loguser = LogUser::find(1);
@@ -250,16 +250,16 @@ class Users extends Controller
      * @return \Illuminate\Http\Response
      */
     public function deleteAll(Request $request)
-    { 
-        if (Hash::check($request->password, Auth::user()->password)) { 
+    {
+        if (Hash::check($request->password, Auth::user()->password)) {
             if (Auth::user()->userType == 1) {
                 $users = User::all();
-                foreach ($users as $u ) {
+                foreach ($users as $u) {
                     if ($u->active != 1) {
                         User::destroy($u->id);
                     }
                 }
-                Flash::success(' Usuarios eliminados. ');  
+                Flash::success(' Usuarios eliminados exitosamente. ');
                 $this->clearNewU();
             } else {
                 Flash::error(' No tiene permisos para realizar esta acción. ');

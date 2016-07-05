@@ -136,7 +136,7 @@ class Noticias extends Controller
           }
           if($noticia->save()) {
             Flash::success(' Se modificó la noticia exitosamente. ');
-            $this->addnotification("Noticia modificada ", $request->title);
+            $this->addnotification('Se modificó una noticia ', $request->title);
           } else {
             Flash::error(' Se produjó un problema al modificar la noticia. ');
           }
@@ -158,7 +158,7 @@ class Noticias extends Controller
             Storage::disk('noticia/archivo')->delete($noticia->url_document);
             Storage::disk('noticia/img')->delete($noticia->url_img);
             Flash::success(' Noticia eliminada exitosamente. ');
-            $this->addnotification("Noticia eliminada ", $noticia->title);
+            $this->addnotification('Se eliminó una noticia ', $noticia->title);
           } else {
             Flash::error(' Error al eliminar la noticia. ');
           }

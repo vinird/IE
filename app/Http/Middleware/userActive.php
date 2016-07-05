@@ -9,7 +9,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 
-class userActive 
+class userActive
 {
     /**
      * Handle an incoming request.
@@ -26,8 +26,8 @@ class userActive
             }
         }
         Auth::logout();
-        Flash::error(' Su usuario no esta activado, comuniquese con el administrador del sistema para activarlo ');
-        return redirect('/login'); 
+        Flash::error(' Su usuario no esta activado, comuníquese con el administrador del sistema para activarlo. ');
+        return redirect('/login');
 
     }
 }
