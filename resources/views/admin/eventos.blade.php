@@ -101,41 +101,45 @@
 					  <div class="panel-body">
 					  	<input ng-model="searchEvento" type="search" class="form-control" placeholder="Buscar evento...">
 					  	<table class="table table-hover">
-								<thead>
-									<th ng-click="myOrderActive = 'title'">Título</th>
-									<th>Evento</th>
-									<th ng-click="myOrderActive = 'event_date'">Fecha del evento</th>
-									<th class="hidden-xs" ng-click="myOrderActive = 'sede_id'">Sede del evento</th>
-									<th ng-click="myOrderActive = 'organizer'">Organizado por</th>
-									<th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'publisher'">Publicado por</thclass>
-									<th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'created_at'">Fecha de publicación</th>
-								  <th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'updated_at'">Fecha de modificación</th>
-									<th></th>
-								</thead>
-								<tbody>
-									<tr ng-repeat=" x in eventos | filter : searchEvento | orderBy : myOrderActive">
-								  	<td>@{{ x.title }}</td>
-								  	<td>
-								  		<a ng-click="setEventValues( x.id , x.title, x.content )" data-toggle="modal" data-target="#modalVerEvento"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-								  	</td>
-										<td>@{{ x.event_date.split(" ")[0] }}</td>
-										<td class="hidden-xs" ng-repeat="sede in sedes" ng-if="sede.id == x.sede_id"><span class="badge">@{{ sede.name }}</span></td>
-								  	<td>@{{ x.org }}</td>
-										<td class="hidden-xs hidden-sm" ng-repeat="user in users" ng-if="user.id == x.user_id">
-											<span>@{{ user.name }}</span>
-										</td>
-								  	<td class="hidden-xs hidden-sm">@{{ x.created_at }}</td>
-										<td class="hidden-xs hidden-sm">@{{ x.updated_at }}</td>
-										<td></td>
-								  	<td>
-											<div ng-if="userType == 1 || userID == x.user_id">
-									  		<a ng-click="setEdit( x.id , x.title , x.event_date , x.content , x.sede_id , x.org )" data-toggle="modal" data-target="#modalModificarEvento" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+								@if(isset($eventos) && count($eventos) > 0)
+									<thead>
+										<th ng-click="myOrderActive = 'title'">Título</th>
+										<th>Evento</th>
+										<th ng-click="myOrderActive = 'event_date'">Fecha del evento</th>
+										<th class="hidden-xs" ng-click="myOrderActive = 'sede_id'">Sede del evento</th>
+										<th ng-click="myOrderActive = 'organizer'">Organizado por</th>
+										<th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'publisher'">Publicado por</thclass>
+										<th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'created_at'">Fecha de publicación</th>
+									  <th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'updated_at'">Fecha de modificación</th>
+										<th></th>
+									</thead>
+									<tbody>
+										<tr ng-repeat=" x in eventos | filter : searchEvento | orderBy : myOrderActive">
+									  	<td>@{{ x.title }}</td>
+									  	<td>
+									  		<a ng-click="setEventValues( x.id , x.title, x.content )" data-toggle="modal" data-target="#modalVerEvento"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
+									  	</td>
+											<td>@{{ x.event_date.split(" ")[0] }}</td>
+											<td class="hidden-xs" ng-repeat="sede in sedes" ng-if="sede.id == x.sede_id"><span class="badge">@{{ sede.name }}</span></td>
+									  	<td>@{{ x.org }}</td>
+											<td class="hidden-xs hidden-sm" ng-repeat="user in users" ng-if="user.id == x.user_id">
+												<span>@{{ user.name }}</span>
+											</td>
+									  	<td class="hidden-xs hidden-sm">@{{ x.created_at }}</td>
+											<td class="hidden-xs hidden-sm">@{{ x.updated_at }}</td>
+											<td></td>
+									  	<td>
+												<div ng-if="userType == 1 || userID == x.user_id">
+										  		<a ng-click="setEdit( x.id , x.title , x.event_date , x.content , x.sede_id , x.org )" data-toggle="modal" data-target="#modalModificarEvento" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-									  		<a ng-click="setEventValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarEvento" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-											</div>
-								  	</td>
-								  </tr>
-								</tbody>
+										  		<a ng-click="setEventValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarEvento" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												</div>
+									  	</td>
+									  </tr>
+									</tbody>
+							 	@else
+									<h3 class="text-center">No hay eventos</h3>
+							 	@endif
 							</table>
 					 	</div>
 					</div>

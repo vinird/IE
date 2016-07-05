@@ -77,36 +77,40 @@
 					  <div class="panel-body">
 					  	<input ng-model="searchNoticia" type="search" class="form-control" placeholder="Buscar noticia...">
 					  	<table class="table table-hover">
-								<thead>
-								  <th ng-click="myOrderActive = 'title'">Título</th>
-								  <th>Noticia</th>
-								  <th ng-click="myOrderActive = 'auth'">Autor</th>
-								  <th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'publisher'">Publicado por</thclass>
-								  <th class="hidden-xs" ng-click="myOrderActive = 'created_at'">Fecha de publicación</th>
-								  <th class="hidden-xs" ng-click="myOrderActive = 'updated_at'">Fecha de modificación</th>
-									<th></th>
-								</thead>
-							 	<tbody>
-							  	<tr ng-repeat=" x in noticias | filter : searchNoticia | orderBy : myOrderActive">
-							  		<td>@{{ x.title }}</td>
-							  		<td>
-							  			<a ng-click="setNewsValues( x.id , x.title, x.content )" data-toggle="modal" data-target="#modalVerNoticia"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
-							  		</td>
-							  		<td>@{{ x.auth }}</td>
-										<td class="hidden-xs hidden-sm" ng-repeat="user in users" ng-if="user.id == x.user_id">
-											<span>@{{ user.name }}</span>
-										</td>
-							  		<td class="hidden-xs">@{{ x.created_at }}</td>
-							  		<td class="hidden-xs">@{{ x.updated_at }}</td>
-							  		<td>
-											<div ng-if="userType == 1 || userID == x.user_id">
-												<a ng-click="setEdit( x.id , x.title , x.content , x.auth )" data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+								@if(isset($noticias) && count($noticias) > 0)
+									<thead>
+									  <th ng-click="myOrderActive = 'title'">Título</th>
+									  <th>Noticia</th>
+									  <th ng-click="myOrderActive = 'auth'">Autor</th>
+									  <th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'publisher'">Publicado por</thclass>
+									  <th class="hidden-xs" ng-click="myOrderActive = 'created_at'">Fecha de publicación</th>
+									  <th class="hidden-xs" ng-click="myOrderActive = 'updated_at'">Fecha de modificación</th>
+										<th></th>
+									</thead>
+								 	<tbody>
+								  	<tr ng-repeat=" x in noticias | filter : searchNoticia | orderBy : myOrderActive">
+								  		<td>@{{ x.title }}</td>
+								  		<td>
+								  			<a ng-click="setNewsValues( x.id , x.title, x.content )" data-toggle="modal" data-target="#modalVerNoticia"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
+								  		</td>
+								  		<td>@{{ x.auth }}</td>
+											<td class="hidden-xs hidden-sm" ng-repeat="user in users" ng-if="user.id == x.user_id">
+												<span>@{{ user.name }}</span>
+											</td>
+								  		<td class="hidden-xs">@{{ x.created_at }}</td>
+								  		<td class="hidden-xs">@{{ x.updated_at }}</td>
+								  		<td>
+												<div ng-if="userType == 1 || userID == x.user_id">
+													<a ng-click="setEdit( x.id , x.title , x.content , x.auth )" data-toggle="modal" data-target="#modalModificarNoticia" class="btn btn-xs btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-												<a ng-click="setNewsValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarNoticia" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-											</div>
-							  		</td>
-							  	</tr>
-								</tbody>
+													<a ng-click="setNewsValues( x.id , x.title )" data-toggle="modal" data-target="#modalEliminarNoticia" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												</div>
+								  		</td>
+								  	</tr>
+									</tbody>
+								@else
+									<h3 class="text-center">No hay noticias</h3>
+							 	@endif
 							</table>
 					 	</div>
 					</div>
