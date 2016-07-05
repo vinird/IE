@@ -30,6 +30,7 @@ Route::get('noticias' , [ 'uses' => 'Noticias@indexInformativa' ])->name('notici
 })->name('eventos');*/
 
 Route::get('eventos' , [ 'uses' => 'Eventos@indexInformativa' ])->name('eventos');
+Route::get('eventos/{sede_id}' , [ 'uses' => 'Eventos@indexInformativaFiltrada' ])->name('filtroEventos');
 
 // ubicacion
 // Route::get('ubicacion', function(){

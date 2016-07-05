@@ -21,7 +21,7 @@
 						@if(isset($sedes))
 							@foreach($sedes as $sede)
 								<div class="col-xs-12 col-sm-2 col-nav-modify">
-									<a class="events-link-toggle"><strong>{{$sede->name}}</strong></a>
+									<a href="/eventos/{{ $sede->id }}" class="events-link-toggle"><strong>{{$sede->name}}</strong></a>
 								</div>
 							@endforeach
 						@endif
@@ -33,7 +33,11 @@
 						<div class="col-xs-12 col-sm-5 pull-right">
 							<div id='calendar' style="padding: 1em;"></div>
 						</div>
-						<div class="col-xs-12 col-sm-7" style="height:384px">
+						<div class="col-xs-12 col-sm-7">
+							<h3>Próximos eventos</h3>
+							<div class="divider-md pull-left"></div>
+						</div>
+						<div id="tableNextEvents" class="col-xs-12 col-sm-7">
 							<table class="table table-hover">
 								<thead>
 									<th>Título</th>
@@ -42,6 +46,22 @@
 									<th>Organizado por</th>
 								</thead>
 								<tbody>
+									@if(isset($eventosNext) && count($eventosNext) > 0)
+										@foreach($eventosNext as $evento)
+											<tr>
+												<td>{{ $evento->title }}</td>
+												<td>{{ explode(" ", $evento->event_date)[0] }}</td>
+												<td><span class="badge">@if(isset($sedes))
+													@foreach($sedes as $sede)
+														@if($sede->id == $evento->sede_id)
+															{{ $sede->name }}
+														@endif
+													@endforeach
+												@endif</span></td>
+												<td>{{ $evento->org }}</td>
+											</tr>
+										@endforeach
+									@endif
 								</tbody>
 							</table>
 						</div>
@@ -53,7 +73,7 @@
 							<h3>Todos los eventos</h3>
 							<div class="divider-md pull-left"></div>
 						</div>
-						<div class="bloque4"></div>
+						<div class="bloque5"></div>
 						@if(isset($eventos) && count($eventos) > 0)
 							@foreach($eventos as $evento)
 								<div class="col-xs-12 col-sm-6">
@@ -64,7 +84,7 @@
 											</h2>
 											<br>
 											@if(isset($evento->url_img))
-												<img class="img-responsive" src="img/eventos/{{$evento->url_img}}">
+												<img class="img-responsive" src="{{ asset('img/eventos/'.$evento->url_img) }}">
 											@endif
 											<br>
 											<i>Fecha: {{ explode(" ", $evento->event_date)[0] }}<br>
@@ -142,6 +162,6 @@
 		<script type="text/javascript">
 			loadEvents(<?php echo json_encode($eventosAll); ?>, <?php echo json_encode($sedes); ?>);
 		</script>
-		<script src="js/js_resources/animate_icon/main_animate_icon.js"></script>
+		<script src="{{ asset('js/js_resources/animate_icon/main_animate_icon.js') }}"></script>
 	</body>
 </html>

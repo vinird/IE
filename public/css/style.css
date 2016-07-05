@@ -16,19 +16,25 @@ body{
 	cursor: pointer;
 }
 .bloque{
-	height: 450px;
+	height: 500px;
 }
 .bloque2{
-	height: 370px;
+	height: 450px;
 }
 .bloque3{
-	height: 320px;
+	height: 370px;
 }
 .bloque4{
-	height: 120px;
+	height: 320px;
 }
 .bloque5{
+	height: 120px;
+}
+.bloque6{
 	height: 112px;
+}
+.bloque7{
+	height: 75px;
 }
 .container {
 	/*
@@ -216,8 +222,11 @@ footer {
 	transition: 0.6s;
 }
 /*/////////// Events ////////////*/
-table th {
+table th, tr {
 	text-align: center;
+}
+#tableNextEvents {
+	margin-top: 25px;
 }
 #event_Exit {
 	font-size: 1.5em;

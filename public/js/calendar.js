@@ -15,8 +15,11 @@ function loadEvents(reference, sedes) {
     else
       eventsData+= ']';
   }
-  eventsData= JSON.parse(eventsData);
-  console.log(reference);
+  try {
+    eventsData= JSON.parse(eventsData);
+  } catch(err) {
+    eventsData= JSON.parse('{}');
+  }
 }
 
 jQuery(document).ready(function($) {
@@ -32,7 +35,7 @@ jQuery(document).ready(function($) {
       console.log(calEvent.info);
       $('#eventTitle').text(calEvent.title);
       if(calEvent.info.img !== "null") {
-        $('#eventImg').attr('src', 'img/eventos/'+ calEvent.info.img);
+        $('#eventImg').attr('src', "../img/eventos/"+ calEvent.info.img);
         $('#eventImg').addClass('col-xs-12 col-md-6');
         $('#blockDivider').removeClass('hide');
       } else {

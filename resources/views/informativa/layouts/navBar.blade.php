@@ -2,7 +2,7 @@
   	<div class="container">
 		<div class="col-xs-2 hidden-sm hidden-md hidden-lg">
 			<a class="navbar-brand " href="{{ route('/') }}">IE</a>
-		</div>	
+		</div>
 		<div class="hidden-sm hidden-md hidden-lg col-xs-2 col-xs-offset-8" style="overflow: hidden;">
 			<div id="menu-icon-wrapper2" class="menu-icon-wrapper navbar-header" style="visibility: hidden;">
 				<button id="menu-icon-trigger2" class="menu-icon-trigger collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" >
@@ -35,7 +35,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 ">
-			<img id="img-logo-ucr" class="img-responsive center-block" src="img/img_include/ucr-logo.png">
+			<img id="img-logo-ucr" class="img-responsive center-block" src="{{ asset('img/img_include/ucr-logo.png') }}">
 		</div>
 	</div>
 </div>

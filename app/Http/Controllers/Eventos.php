@@ -48,8 +48,18 @@ class Eventos extends Controller
     {
         $eventos = DB::table('eventos')->orderBy('event_date', 'desc')->paginate(4);
         $eventosAll = Evento::all();
+        $eventosNext = DB::table('eventos')->whereBetween('event_date', [date("Y/m/d"), date("Y/m/d", mktime(0, 0, 0, date("m")+3, date("d"), date("Y")))])->orderBy('event_date', 'asc')->take(5)->get();
         $sedes = Sede::select('id' , 'name')->get();
-        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'sedes' => $sedes]);
+        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'eventosNext' => $eventosNext, 'sedes' => $sedes]);
+    }
+
+    public function indexInformativaFiltrada($sede_id)
+    {
+        $eventos = DB::table('eventos')->where('sede_id', '=', $sede_id)->orderBy('event_date', 'desc')->paginate(4);
+        $eventosAll = DB::table('eventos')->where('sede_id', '=', $sede_id)->get();
+        $eventosNext = DB::table('eventos')->where('sede_id', '=', $sede_id)->whereBetween('event_date', [date("Y/m/d"), date("Y/m/d", mktime(0, 0, 0, date("m")+3, date("d"), date("Y")))])->orderBy('event_date', 'asc')->take(5)->get();
+        $sedes = Sede::select('id' , 'name')->get();
+        return view('informativa.eventos' , ['eventos' => $eventos, 'eventosAll' => $eventosAll, 'eventosNext' => $eventosNext, 'sedes' => $sedes]);
     }
 
     /**
