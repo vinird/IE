@@ -19,11 +19,11 @@ class admin
      * @return mixed
      */
     public function handle($request, Closure $next)
-    { 
+    {
         if (Auth::user()->userType == 1) {
             return $next($request);
         } else {
-            Flash::error(' Solo el administrador puede realizar la acción solicitada ');
+            Flash::error(' Solo el administrador puede realizar la acción solicitada. ');
         }
         Auth::logout();
         return redirect('/login');

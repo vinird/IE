@@ -153,7 +153,7 @@ class Eventos extends Controller
           }
           if($evento->save()) {
             Flash::success(' Se modificó el evento exitosamente. ');
-            $this->addnotification("Evento modificada ", $request->title);
+            $this->addnotification('Se modificó un evento ', $request->title);
           } else {
             Flash::error(' Se produjó un problema al modificar el evento. ');
           }
@@ -176,7 +176,7 @@ class Eventos extends Controller
             Storage::disk('evento/archivo')->delete($evento->url_document);
             Storage::disk('evento/img')->delete($evento->url_img);
             Flash::success(' Evento eliminado exitosamente. ');
-            $this->addnotification("Evento eliminado ", $evento->title);
+            $this->addnotification('Se eliminó un evento ', $evento->title);
           } else {
             Flash::error(' Error al eliminar el evento. ');
           }

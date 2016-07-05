@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\SlideImage;
-use Intervention\Image\Facades\Image; 
+use Intervention\Image\Facades\Image;
 use Storage;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +35,7 @@ class SlideImages extends Controller
         $slideImage->user = Auth::user()->id;
 
         if($slideImage->save()){
-            Flash::success(' Imagen agregada al carrusel. ');
+            Flash::success(' Imagen agregada al carrusel exitosamente. ');
         }
         return back();
     }
@@ -46,7 +46,7 @@ class SlideImages extends Controller
 			Storage::disk('slideImages')->delete($slideImage->icon);
 
 			if(SlideImage::destroy($id)){
-                Flash::success(' Imagen eliminada. ');
+                Flash::success(' Imagen eliminada del carrusel exitosamente. ');
             }
     	}
 		return back();

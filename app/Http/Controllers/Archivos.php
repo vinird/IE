@@ -28,7 +28,7 @@ class Archivos extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $archivos   = Archivo::all();
         $categorias = Categoria::all();
         $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
@@ -53,7 +53,7 @@ class Archivos extends Controller
 
         $file = $request->file('file');
         if($file != null) {
-            // toda la logica aqui 
+            // toda la logica aqui
             $file_route = time().'_'.$file->getClientOriginalName();
 
             $archivo                = new Archivo();
@@ -63,14 +63,14 @@ class Archivos extends Controller
             $archivo->categoria_id  = $request->category;
             $archivo->extension     = File::extension($file->getClientOriginalName());
             $archivo->keyWords      = $request->resumen;
-            $archivo->editable      = $request->editable; 
+            $archivo->editable      = $request->editable;
             $archivo->user_id       = Auth::user()->id;
-            
+
             if(Storage::disk('repositorio')->put( $file_route , file_get_contents($file->getRealPath()))){
                 Flash::success(' Archivo guardado exitosamente. ');
                 if($archivo->save()){
                     Flash::success(' Archivo agregado exitosamente. ');
-                    $this->addnotification("Nuevo archivo en el repositorio", $file->getClientOriginalName());
+                    $this->addnotification('Se agregó un nuevo archivo en el repositorio ', $file->getClientOriginalName());
                 } else{
                     Flash::error(' Error al agregar la información del archivo a la base de datos. ');
                 }
@@ -91,7 +91,7 @@ class Archivos extends Controller
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request)
-    {   
+    {
         if(Auth::user()->userType != 1 && $request->userFileID != Auth::user()->id){
             Flash::error(' No tiene permisos para realizar esta acción. ');
             return Redirect::action('Archivos@index');
@@ -102,12 +102,12 @@ class Archivos extends Controller
             if(Archivo::destroy($request->id) == 1){
                 Storage::disk('repositorio')->delete($request->fileUrl);
                 Flash::success(' Archivo eliminado exitosamente. ');
-                $this->addnotification("Archivo eliminado del repositorio", $arch->name);
+                $this->addnotification('Se eliminó un archivo del repositorio ', $arch->name);
             } else {
                 Flash::error(' Error al eliminar el archivo. ');
             }
         } else {
-            Flash::error(' Contraseña invalida. '); 
+            Flash::error(' Contraseña invalida. ');
         }
         return back();
     }
@@ -164,7 +164,7 @@ class Archivos extends Controller
             Flash::error(' Debe ingresar todos los datos. ');
             return Redirect::action('Archivos@index');
         }
-        
+
         if(Hash::check($request->password, Auth::user()->password)) {
 
             $file = $request->file('file');
@@ -180,11 +180,11 @@ class Archivos extends Controller
                 $archivo->extension     = File::extension($file->getClientOriginalName());
                 $archivo->keyWords      = $request->resumen;
                 $archivo->user_id       = Auth::user()->id;
-                
+
                 if(Storage::disk('repositorio')->put( $file_route , file_get_contents($file->getRealPath()))){
                     Flash::success(' Archivo guardado exitosamente. ');
                     Storage::disk('repositorio')->delete($request->url);
-                    $this->addnotification("Archivo modificado en el repositorio",$file->getClientOriginalName());
+                    $this->addnotification('Se modificó un archivo del repositorio ', $file->getClientOriginalName());
                 } else {
                     Flash::error(' Error al guardar el archivo en el repositorio. ');
                 }
@@ -201,7 +201,7 @@ class Archivos extends Controller
         }
         return back();
     }
-    
+
     /**
      * Add a new notification
      *
@@ -219,7 +219,7 @@ class Archivos extends Controller
         foreach ($users as $user) {
             if($user->id != Auth::user()->id){
                 $user->notification = $user->notification + 1;
-                $user->save();  
+                $user->save();
             }
         }
     }

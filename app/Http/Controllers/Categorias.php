@@ -24,7 +24,7 @@ class Categorias extends Controller
      */
     public function store(Request $request)
     {
-        Flash::error('Debe ingresar el nombre de la categria y debe ser diferente a las existentes.');
+        Flash::error(' Debe ingresar el nombre de la categoría y debe ser diferente a las existentes. ');
         $this->validate($request, [
             'name' => 'required|max:255|unique:categorias,name',
             'color' => 'required',
@@ -33,14 +33,14 @@ class Categorias extends Controller
         $categoria->name = $request->name;
         $categoria->color = $request->color;
         if($categoria->save()){
-            Flash::success(' Categria agregada exitosamente.');
-            $this->addnotification("Nueva categoría agregada", $request->name);
+            Flash::success(' Categoría agregada exitosamente. ');
+            $this->addnotification('Se agregó una nueva categoría ', $request->name);
         } else {
-            Flash::error('Algo salió mal al insertar los datos.');  
+            Flash::error(' Algo salió mal al insertar los datos. ');
         }
         return back();
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -51,18 +51,18 @@ class Categorias extends Controller
     {
         $archivos = Archivo::select('categoria_id')->get();
 
-        for ($i=0; $i < count($archivos) ; $i++) { 
+        for ($i=0; $i < count($archivos) ; $i++) {
             if($archivos[$i]->categoria_id == $request->id){
-                Flash::error('Esta categoria esta asignada a algún archivo, no se puede eliminar.');   
+                Flash::error(' Esta categoría esta asignada a algún archivo, no se puede eliminar. ');
                 return redirect('/admin/repositorio');
             }
         }
         $categ = Categoria::find($request->id);
         if(Categoria::destroy($request->id)){
-            Flash::success(' Categria eliminada exitosamente.');
-            $this->addnotification("Se eliminó una categoría", $categ->name);
+            Flash::success(' Categoría eliminada exitosamente. ');
+            $this->addnotification('Se eliminó una categoría ', $categ->name);
         } else {
-            Flash::error('Error al eliminar la categoria.');   
+            Flash::error(' Error al eliminar la categoría. ');
         }
         return back();
     }
@@ -84,7 +84,7 @@ class Categorias extends Controller
         foreach ($users as $user) {
             if($user->id != Auth::user()->id){
                 $user->notification = $user->notification + 1;
-                $user->save();  
+                $user->save();
             }
         }
     }

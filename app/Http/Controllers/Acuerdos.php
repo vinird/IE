@@ -41,7 +41,7 @@ class Acuerdos extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -51,7 +51,7 @@ class Acuerdos extends Controller
             Flash::error(' Debe ingresar todos los datos. ');
             if ($request->main == "true"){
                 return redirect('/admin/main');
-            } else { 
+            } else {
                 return Redirect::action('Acuerdos@index');
             }
         }
@@ -59,7 +59,7 @@ class Acuerdos extends Controller
 
         $file = $request->file('file');
         if($file != null) {
-            // toda la logica aqui 
+            // toda la logica aqui
             $file_route = time().'_'.$file->getClientOriginalName();
             $acuerdo->file_url = $file_route;
             Storage::disk('acuerdos')->put($file_route , file_get_contents($file->getRealPath()));
@@ -73,12 +73,12 @@ class Acuerdos extends Controller
             $acuerdo->primaryUser_id= $request->primaryUser_id;
         }
         $acuerdo->agreement_date= $request->date;
-        
+
         if($acuerdo->save()){
             Flash::success(' Acuerdo agregado exitosamente. ');
-            $this->addnotification('Se agregó un nuevo acuerdo', $request->title);
+            $this->addnotification('Se agregó un nuevo acuerdo ', $request->title);
         } else {
-            Flash::error(' Ocurrio un problema al agregar el acuerdo. ');
+            Flash::error(' Ocurrió un problema al agregar el acuerdo. ');
         }
         if ($request->main == "true"){
             return redirect('/admin/main');
@@ -100,7 +100,7 @@ class Acuerdos extends Controller
             Storage::disk('acuerdos')->delete($acuer->file_url);
             if(Acuerdo::destroy($request->id)){
                 Flash::success(' Acuerdo eliminado exitosamente. ');
-                $this->addnotification('Se eliminó un acuerdo', $acuer->title);
+                $this->addnotification('Se eliminó un acuerdo ', $acuer->title);
             } else {
                 Flash::error(' Error al eliminar el acuerdo. ');
             }
@@ -123,7 +123,7 @@ class Acuerdos extends Controller
             $acuerdo->complete = 1;
             if($acuerdo->save()){
                 Flash::success(' Acuerdo finalizado exitosamente. ');
-                $this->addnotification('Se completó un acuerdo', $acuerdo->title);
+                $this->addnotification('Se completó un acuerdo ', $acuerdo->title);
             } else {
                 Flash::error(' Error al finalizar el acuerdo. ');
             }
@@ -135,7 +135,7 @@ class Acuerdos extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -149,10 +149,10 @@ class Acuerdos extends Controller
             $acuerdo = Acuerdo::find($request->id);
             $acuerdo->content       = $request->contenido;
             $acuerdo->agreement_date= $request->date;
-            
+
                 $file = $request->file('file');
                 if($file != null) {
-                    // toda la logica aqui 
+                    // toda la logica aqui
                     Storage::disk('acuerdos')->delete($acuerdo->file_url);
                     $file_route = time().'_'.$file->getClientOriginalName();
                     $acuerdo->file_url = $file_route;
@@ -165,9 +165,9 @@ class Acuerdos extends Controller
 
             if($acuerdo->save()){
                 Flash::success(' Acuerdo modificado exitosamente. ');
-                $this->addnotification('Se modificó un acuerdo', $acuerdo->title);
+                $this->addnotification('Se modificó un acuerdo ', $acuerdo->title);
             } else {
-                Flash::error(' Ocurrio un problema al modificar el acuerdo. ');
+                Flash::error(' Ocurrió un problema al modificar el acuerdo. ');
             }
         } else {
             Flash::error(' Contraseña invalida. ');
@@ -192,7 +192,7 @@ class Acuerdos extends Controller
         foreach ($users as $user) {
             if($user->id != Auth::user()->id){
                 $user->notification = $user->notification + 1;
-                $user->save();  
+                $user->save();
             }
         }
     }
@@ -228,7 +228,7 @@ class Acuerdos extends Controller
             $title = $acuerdo->title;
             if($acuerdo->save()){
                 Flash::success(' Acuerdo reabierto exitosamente. ');
-                $this->addnotification('Se reabrió un acuerdo', $title);
+                $this->addnotification('Se reabrió un acuerdo ', $title);
             } else {
                 Flash::error(' Error al reabrir el acuerdo. ');
             }
