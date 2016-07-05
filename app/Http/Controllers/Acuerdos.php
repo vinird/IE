@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 // added
+
 use App\Categoria;
 use App\User;
 use App\Acuerdo;
