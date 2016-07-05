@@ -32,7 +32,6 @@ jQuery(document).ready(function($) {
       // any other event sources...
     ],
     eventClick: function(calEvent) {
-      console.log(calEvent.info);
       $('#eventTitle').text(calEvent.title);
       if(calEvent.info.img !== "null") {
         $('#eventImg').attr('src', "../img/eventos/"+ calEvent.info.img);
@@ -54,6 +53,8 @@ jQuery(document).ready(function($) {
         $('#eventDocument > a > span').text(' ');
       }
       $('#eventContent').html(eventsContent[calEvent.info.content_id]);
+      if($(window).height() > $(window).width())
+        $('#tableNextEvents').fadeOut();
       $('#allEvents').fadeOut();
       $('#eventDetails').fadeIn();
     }
@@ -61,6 +62,8 @@ jQuery(document).ready(function($) {
 
   $('#event_Exit').on('click', function () {
     $('#eventDetails').fadeOut();
+    if($(window).height() > $(window).width())
+      $('#tableNextEvents').fadeIn();
     $('#allEvents').fadeIn();
   });
 });

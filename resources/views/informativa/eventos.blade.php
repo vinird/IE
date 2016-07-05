@@ -33,11 +33,11 @@
 						<div class="col-xs-12 col-sm-5 pull-right">
 							<div id='calendar' style="padding: 1em;"></div>
 						</div>
-						<div class="col-xs-12 col-sm-7">
-							<h3>Próximos eventos</h3>
-							<div class="divider-md pull-left"></div>
-						</div>
 						<div id="tableNextEvents" class="col-xs-12 col-sm-7">
+							<div class="titleTableNextEvents">
+								<h3>Próximos eventos</h3>
+								<div class="divider-md pull-left"></div>
+							</div>
 							<table class="table table-hover">
 								<thead>
 									<th>Título</th>
@@ -73,7 +73,7 @@
 							<h3>Todos los eventos</h3>
 							<div class="divider-md pull-left"></div>
 						</div>
-						<div class="bloque5"></div>
+						<div class="bloque2"></div>
 						@if(isset($eventos) && count($eventos) > 0)
 							@foreach($eventos as $evento)
 								<div class="col-xs-12 col-sm-6">
@@ -114,7 +114,7 @@
 							<div class="panel-body">
 								<h1 class="text-center">No hay eventos</h1>
 							</div>
-							<div class="bloque4"></div>
+							<div class="bloque"></div>
 						@endif
 					</div>
 					<div class="col-xs-12 text-center">
@@ -140,7 +140,7 @@
 									<i id="eventInfo"></i><br>
 									<br>
 									<img id="eventImg">
-									<div id="blockDivider" class="bloque3 hidden-md hidden-lg"></div>
+									<div id="blockDivider" class="bloque hidden-md hidden-lg"></div>
 					        <p id="eventContent" class="text-justify"></p>
 									<br>
 									<p id="eventDocument">

@@ -168,6 +168,10 @@ class Eventos extends Controller
     {
         if(Hash::check($request->password, Auth::user()->password)) {
           $evento = Evento::find($request->id);
+          if(Auth::user()->userType != 1 && $evento->user_id != Auth::user()->id){
+            Flash::error(' No tiene permisos para realizar esta acción. ');
+            return Redirect::action('Eventos@index');
+          }
           if(Evento::destroy($request->id) == 1){
             Storage::disk('evento/archivo')->delete($evento->url_document);
             Storage::disk('evento/img')->delete($evento->url_img);

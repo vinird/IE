@@ -16,25 +16,10 @@ body{
 	cursor: pointer;
 }
 .bloque{
-	height: 500px;
-}
-.bloque2{
-	height: 450px;
-}
-.bloque3{
-	height: 370px;
-}
-.bloque4{
 	height: 320px;
 }
-.bloque5{
+.bloque2{
 	height: 120px;
-}
-.bloque6{
-	height: 112px;
-}
-.bloque7{
-	height: 75px;
 }
 .container {
 	/*
@@ -70,7 +55,6 @@ body{
 	margin: 0;
 	padding: 0;
 }
-
 .nav-modify a {
 	border-radius: 1px;
 	font-size: 12px;
@@ -225,8 +209,8 @@ footer {
 table th, tr {
 	text-align: center;
 }
-#tableNextEvents {
-	margin-top: 25px;
+.titleTableNextEvents {
+	margin-bottom: 50px;
 }
 #event_Exit {
 	font-size: 1.5em;
@@ -282,7 +266,6 @@ table th, tr {
   border-radius: 0px;
   padding: 4%;
 }
-
 .modal-content input, .modal-content select {
   border-radius: 0px;
 }
