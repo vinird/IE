@@ -86,6 +86,23 @@
 
 **``git push origin master``**		// subir el contenido al repositorio remoto
 
+## Levantar el proyecto en una red local 
+1. Situarse en el directorio del servidor **``cd /var/www/html``** (linux, apache).
+2. Crear un nuevo directorio **``sudo mkdir App``**
+3. Darle todos los permisos al directorio **``sudo chmod 777 App/``**
+4. Entrar al directorio **``cd App/``**
+5. Descargar el proyecto con Git **``git clone https://github.com/vinird/IE.git``**
+6. Dar permisos a la carpeta de almacenamiento **``sudo chmod 755 -R storage``**
+7. Instalar dependencias **``composer install``**
+8. Crear el archivo de configuración de entorno **``cp .env.example .env``**
+9. Generar llave para el sistema **``php artisan key:generate``**
+10. Configurar el archivo **``.env``** se debe especificar el host, la base de datos, el usuario y la contraseña.
+11. Crear una base de datos para el sistema (MySQL). Puede usar phpmyadmin o cualquier otro.
+12. Generar la migración **``php artisan migrate``** Esto crea las tablas en la base de datos.
+13. Sembrar la base de datos **``php artisan db:seed``** Esto llena la base de datos con información.
+
+14. Levantar el servidor **``php -S 192.168.43.26:8000 -t public``** la dirección IP debe ser la que tiene la maquina asignada.
+
 
 ## Levantar el proyecto con Homestead y Vagrant
 1. Descargar e instalar ya sea [VirtualBox](https://www.virtualbox.org/wiki/Downloads) o VMware para la virtualización.
