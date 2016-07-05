@@ -29,16 +29,16 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => "Invitado",
-            'email' => "admin@admin.comm",
+            'email' => "invitado@invitado.com",
             'password' => bcrypt('password'),
             'active' => 1,
         ]);
-        DB::table('users')->insert([
-            'name' => "Invitado2",
-            'email' => "admin@admin.commm",
-            'password' => bcrypt('password'),
-            'active' => 1,
-        ]);
+        // DB::table('users')->insert([
+        //     'name' => "Invitado2",
+        //     'email' => "admin@admin.commm",
+        //     'password' => bcrypt('password'),
+        //     'active' => 1,
+        // ]);
         DB::table('slide_images')->insert([
             'url' => '1.jpeg',
             'icon' => '1.jpeg',
