@@ -13,20 +13,20 @@
 		      			<div class="form-group">
 					   		<label for="password" class="col-sm-4 control-label">Contraseña:</label>
 					   		<div class="col-sm-8">
-					   			<input class="form-control" type="password" name="password">
+					   			<input class="form-control" type="password" name="password" required>
 					   		</div>
 						</div>
 						<br>
 						<div class="form-group">
 					   		<label for="newPassword" class="col-sm-4 text-danger control-label">Nueva contraseña:</label>
 					   		<div class="col-sm-8">
-					   			<input class="form-control" type="password" name="newPassword">
+					   			<input class="form-control" type="password" name="newPassword" required>
 					   		</div>
 						</div>
 		      			<div class="form-group">
 					   		<label for="confirmPassword" class="col-sm-4 text-danger control-label">Confirme ontraseña:</label>
 					   		<div class="col-sm-8">
-					   			<input class="form-control" type="password" name="confirmPassword">
+					   			<input class="form-control" type="password" name="confirmPassword" required>
 					   		</div>
 						</div>
 						<div class="form-group hidden">

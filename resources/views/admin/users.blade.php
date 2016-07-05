@@ -168,7 +168,7 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   		<p class="help-block">Debe ingresar su contraseña para poder habilitar usuarios.</p>
 							   	</div>
 							</div>
@@ -198,7 +198,7 @@
 				      		<div class="form-group">
 							   	<label for="password" class="col-sm-2 text-danger control-label">Contraseña:</label>
 							   	<div class="col-sm-10">
-							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña...">
+							   		<input type="password" class="form-control" name="password" placeholder="Digite su contraseña..." required>
 							   		<p class="help-block">Debe ingresar su contraseña para poder deshabilitar usuarios.</p>
 							   	</div>
 							</div>

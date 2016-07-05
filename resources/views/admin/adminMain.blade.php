@@ -263,10 +263,10 @@
 		        {!!Form::open(array('route'=>'users.modifyIMG','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal'))!!}
 		      		<div class="modal-body">
 					  	<div class="form-group">
-				    	<label for="imgUsers" class="col-sm-2 control-label">Imagen:</label>
+				    	<label for="file" class="col-sm-2 control-label">Imagen:</label>
 					    	<div class="col-sm-10">
 					    		<input type="hidden" name="MAX_FILE_SIZE" value="1999999">
-					      		<input type="file" class="form-control" name="imgUsers" required >
+					      		<input type="file" class="form-control" name="file" accept="image/*" required>
 							   	<p class="help-block">El tamaño de la imagen debe ser menor a 2M. Se recomienda que las imagenes tengan la misma proporción de ancho y alto.</p>
 					    	</div>
 					  	</div>

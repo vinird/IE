@@ -17,6 +17,7 @@ use App\Notification;
 use App\LogUser;
 use Storage;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 
 
 class Acuerdos extends Controller
@@ -29,22 +30,12 @@ class Acuerdos extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        $acuerdos = Acuerdo::take(25)->get();
+        $acuerdos = Acuerdo::take(125)->orderBy('created_at', 'desc')->get();
         $users = User::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -55,13 +46,12 @@ class Acuerdos extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->date);
         if($request->title == "" || $request->contenido == "" || $request->date == "") {
             Flash::error(' Debe ingresar todos los datos. ');
             if ($request->main == "true"){
                 return redirect('/admin/main');
             } else { 
-                return $this->index();
+                return Redirect::action('Acuerdos@index');
             }
         }
         $acuerdo = new Acuerdo();
@@ -92,53 +82,8 @@ class Acuerdos extends Controller
         if ($request->main == "true"){
             return redirect('/admin/main');
         } else {
-            return $this->index();
+            return Redirect::action('Acuerdos@index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     /**
@@ -161,7 +106,7 @@ class Acuerdos extends Controller
         } else {
             Flash::error(' Contraseña invalida. ');
         }
-        return $this->index();
+        return Redirect::action('Acuerdos@index');
     }
 
     /**
@@ -184,7 +129,7 @@ class Acuerdos extends Controller
         } else {
             Flash::error(' Contraseña invalida. ');
         }
-        return $this->index();
+        return Redirect::action('Acuerdos@index');
     }
 
     /**
@@ -195,11 +140,10 @@ class Acuerdos extends Controller
      */
     public function modify(Request $request)
     {
-        ///// This function is deprecate
         if(Hash::check($request->password, Auth::user()->password)) {
             if($request->contenido == "" || $request->date == "") {
                 Flash::error(' Debe ingresar todos los datos. ');
-                return $this->index();
+                return Redirect::action('Acuerdos@index');
             }
             $acuerdo = Acuerdo::find($request->id);
             $acuerdo->content       = $request->contenido;
@@ -227,7 +171,7 @@ class Acuerdos extends Controller
         } else {
             Flash::error(' Contraseña invalida. ');
         }
-        return $this->index();
+        return Redirect::action('Acuerdos@index');
     }
 
     /**
@@ -265,7 +209,7 @@ class Acuerdos extends Controller
             return response()->file(storage_path().'/app/public/acuerdos/'.$id);
         } else {
             Flash::error(' El archivo no se encuentra en el repositorio. ');
-            return $this->index();
+            return Redirect::action('Acuerdos@index');
         }
     }
 
@@ -277,15 +221,19 @@ class Acuerdos extends Controller
      */
     public function open(Request $request)
     {
-        $acuerdo = Acuerdo::find($request->id);
-        $acuerdo->complete = null;
-        $title = $acuerdo->title;
-        if($acuerdo->save()){
-            Flash::success(' Acuerdo reabierto exitosamente. ');
-            $this->addnotification('Se reabrió un acuerdo', $title);
+        if(Hash::check($request->password, Auth::user()->password)) {
+            $acuerdo = Acuerdo::find($request->id);
+            $acuerdo->complete = null;
+            $title = $acuerdo->title;
+            if($acuerdo->save()){
+                Flash::success(' Acuerdo reabierto exitosamente. ');
+                $this->addnotification('Se reabrió un acuerdo', $title);
+            } else {
+                Flash::error(' Error al reabrir el acuerdo. ');
+            }
         } else {
-            Flash::error(' Error al reabrir el acuerdo. ');
+            Flash::error(' Contraseña invalida. ');
         }
-        return $this->index();
+        return Redirect::action('Acuerdos@index');
     }
 }

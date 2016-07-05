@@ -242,3 +242,47 @@ table th, tr {
 .download_file:hover {
 	text-decoration: none !important;
 }
+#btnModifyImages{
+	padding-top: 10px;
+	padding-left: 18px;
+	padding-right: 16px;
+	padding-bottom: 7px;
+	color: #E3E3E3;
+	position: absolute;
+	right: 20px;
+	margin-top: 10px;
+	z-index: 20;
+	background-color: rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0px 0px 21px 0px rgba(255,255,255,0.4);
+	-moz-box-shadow: 0px 0px 21px 0px rgba(255,255,255,0.4);
+	box-shadow: 0px 0px 21px 0px rgba(255,255,255,0.4);
+	-webkit-box-transition: 0.3s;
+	-moz-box-transition: 0.3s;
+	box-transition: 0.3s;
+	transition: 0.3s;
+}
+#btnModifyImages:hover{
+	color: #fff;
+	padding-top: 12px;
+	padding-left: 20px;
+	padding-right: 18px;
+	padding-bottom: 9px;
+	right: 19px;
+	margin-top: 9px;
+	background-color: rgba(0,0,0,0.7);
+	-webkit-box-shadow: 0px 0px 15px 2px rgba(255,255,255,0.6);
+	-moz-box-shadow: 0px 0px 15px 2px rgba(255,255,255,0.6);
+	box-shadow: 0px 0px 15px 2px rgba(255,255,255,0.6);
+}
+.btn {
+  border-radius: 2px !important;
+  border: 0px !important;
+}
+.modal-content {
+  border-radius: 0px;
+  padding: 4%;
+}
+
+.modal-content input, .modal-content select {
+  border-radius: 0px;
+}

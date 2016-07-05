@@ -85,7 +85,7 @@ return [
             'driver' => 's3',
             'key' => 'your-key',
             'secret' => 'your-secret',
-            'region' => 'your-region',
+            'region' => 'your-region', 
             'bucket' => 'your-bucket',
         ],
 
@@ -100,6 +100,13 @@ return [
             'root' => storage_path('app/public/acuerdos'),
             'visibility' => 'public',
         ],
+
+        'slideImages' => [
+            'driver' => 'local',
+            'root' => public_path('img/img_include/slideImages'),
+            'visibility' => 'public',
+        ],
+
 
     ],
 

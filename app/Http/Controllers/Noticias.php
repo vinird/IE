@@ -18,6 +18,7 @@ use Storage;
 use File;
 use App\User;
 use App\LogUser;
+use Illuminate\Support\Facades\Redirect;
 
 
 class Noticias extends Controller
@@ -30,7 +31,7 @@ class Noticias extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
         $users = User::all();
         $logUser = LogUser::find(1);
@@ -46,17 +47,7 @@ class Noticias extends Controller
     public function indexInformativa()
     {
         $noticias = DB::table('noticias')->orderBy('updated_at', 'desc')->paginate(6);
-        return view('informativa.noticias' , ['noticias' => $noticias]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('informativa.noticias' , ['noticias' => $noticias, 'noticiasActive' => true]);
     }
 
     /**
@@ -69,7 +60,7 @@ class Noticias extends Controller
     {
         if($request->title === '' || $request->content === '') {
           Flash::error(' Algunos datos son requeridos, por favor insértelos. ');
-          return $this->index();
+          return Redirect::action('Noticias@index');
         }
         $noticia= new Noticia;
         $noticia->title= $request->title;
@@ -106,49 +97,16 @@ class Noticias extends Controller
         } else {
           Flash::error(' Se produjó un problema al crear la noticia. ');
         }
-        return $this->index();
+        return Redirect::action('Noticias@index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     public function modify(Request $request)
     {
         if(Hash::check($request->password, Auth::user()->password)) {
           if($request->title === '' || $request->content === '') {
             Flash::error(' Algunos datos son requeridos, por favor insértelos. ');
-            return $this->index();
+            return Redirect::action('Noticias@index');
           }
           $noticia= Noticia::find($request->id);
           $noticia->title= $request->title;
@@ -190,18 +148,7 @@ class Noticias extends Controller
         } else {
           Flash::error(' Contraseña incorrecta. ');
         }
-        return  $this->index();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return  Redirect::action('Noticias@index');
     }
 
     public function delete(Request $request)
@@ -219,7 +166,7 @@ class Noticias extends Controller
         } else {
           Flash::error(' Contraseña invalida. ');
         }
-        return $this->index();
+        return Redirect::action('Noticias@index');
     }
 
     public function getFileNoticia($id)
@@ -229,7 +176,7 @@ class Noticias extends Controller
           return response()->file(storage_path().'/app/public/noticias/'.$id);
         } else {
           Flash::error(' El archivo no se encuentra en el repositorio. ');
-          return $this->indexInformativa();
+          return back();
         }
     }
 

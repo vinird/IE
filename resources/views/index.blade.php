@@ -19,7 +19,9 @@
 </head>
 <body class="">
 <!--/////////// navbar ////////////////-->
-
+<div style="position: absolute; right: 0; z-index: 100; margin: 10px;">
+	@include('flash::message')
+</div>
 @include('informativa.layouts.navBar')
 <div class="container">
 	<div class="row text-center nav-modify">
@@ -46,10 +48,17 @@
 <!--//////// Body ///////////-->
 <!-- slider -->
 	<div class="uk-slidenav-position" data-uk-slideshow>
+    	@if(Auth::check())
+    		<a data-toggle="modal" data-target="#modalImages" href="" id="btnModifyImages" class="btn" style=""><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+    	@endif
     <ul class="uk-slideshow">
-        <li><img width="1900" height="530" alt="img" src="{{ asset('img/img_include/Amakhala_Game_Reserve_Bukela_Game_Lodge_lion1_Banner.jpeg') }}"></li>
-        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/IMAG4011.jpg') }}"></li>
-        <li><img width="1800" height="500" alt="img" src="{{ asset('img/img_include/langlaufen.jpg') }}"></li>
+    	@if(isset($slideImages))
+    		@foreach($slideImages as $i)
+        		<li><img width="1900" height="530" alt="img" src="img/img_include/slideImages/{{ $i->url }}"></li>
+    		@endforeach
+    	@else
+    		<!-- agregar imagen por default -->
+    	@endif
     </ul>
     <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
     <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
@@ -258,6 +267,68 @@
 	<br><br>
 	<br><br>
 	<br><br>
+	<br><br>
+	<br><br>
+	@if(Auth::check())
+		<div class="modal fade" id="modalImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title text-center" id="myModalLabel">Imagenes del carrusel</h4>
+		      </div>
+		      <div class="modal-body" style="max-height: 400px; overflow-y: scroll;">
+		      	@if(isset($slideImages))
+		      	<div class="table-responsive">
+				    <table class="table table-hover" >
+					  	<thead>
+							<th></th>
+						  	<th class="hidden-xs hidden-sm">Nombre</th>
+						  	<th></th>
+		   				</thead>
+						<tbody >
+		    			@foreach($slideImages as $i)
+							<tr>
+								<td style="margin-right: 0;"> <img src="img/img_include/slideImages/{{ $i->url }}" class="" style="height: 40px; width: 140px; min-width: 140px;"> </td>
+							  	<td class="hidden-xs hidden-sm"><a href="img/img_include/slideImages/{{ $i->url }}" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a> &nbsp;{{ $i->url }}</td>
+							  	<td>
+								  	@if(Auth::user()->userType == 1 || Auth::user()->id == $i->user)
+								  		<a href="slideImages/delete/{{ $i->id }}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+								  	@endif
+							  	</td>
+						  	</tr>
+		    			@endforeach
+						</tbody>
+					</table>
+				</div>
+		    	@else
+		    		<!-- agregar imagen por default -->
+		    	@endif
+		      </div>
+				{!! Form::open(array('route'=>'slideImages.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+
+					<a id="btnSlideImages" class="btn btn-default btn-xs btn-block" type="button" data-toggle="collapse" data-target="#collapseAddImages" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-plus-circle fa-2x text-primary" aria-hidden="true"></i></a>
+
+					<div class="collapse" id="collapseAddImages">
+					  <div class="">
+					    <div class="form-group">
+						    <label for="file" class="col-sm-3 control-label">Imagen:</label>
+						    <div class="col-sm-9">
+						      <input type="file" class="form-control" id="file" name="file" accept="image/*" required/>
+							  	<p class="help-block">La imagen no debe ser de mas de 2M, y debe mantener una proporción 1900px x 530px.</p>
+						    </div>
+						  </div>
+					  </div>
+					</div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
+		        <button id="submitSlideImages" type="submit" class="btn btn-primary btn-sm hide"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp;Agregar</button>
+		      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+	@endif
 </div>
 
 <!--//////////// footer //////////-->

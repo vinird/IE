@@ -25,7 +25,7 @@
 										<li role="presentation"><a class="btnRepo2" href="#">Agregar Categoria</a></li>
 										<li role="presentation"><a class="btnRepo3" href="#">Eliminar Categoria</a></li>
 									</ul>
-									{!! Form::open(array('route'=>'repositorio.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal form1Repo')) !!}
+									{!! Form::open(array('route'=>'repositorio.store','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal form1Repo' , 'autocomplete' => 'off')) !!}
 										@if( count($categorias) > 0 )
 						   	 			<br>
 					   					<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">
@@ -80,7 +80,7 @@
 									<!-- form close -->
 
 									<!-- form open categoria agregar -->
-									<form action="{{ route('categoria.store') }}" method="POST" class="form-horizontal form2Repo hide">
+									<form action="{{ route('categoria.store') }}" method="POST" class="form-horizontal form2Repo hide" autocomplete="off">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					   					<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">
 						   	 			<br><br>
@@ -201,7 +201,7 @@
 				        		<h4 class="modal-title" id="myModalLabel">Modificar @{{fileName}}</h4>
 				      		</div>
 				      	<!-- inicia el formulario -->
-						{!! Form::open(array('route'=>'repositorio.updateData','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal')) !!}
+						{!! Form::open(array('route'=>'repositorio.updateData','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal' , 'autocomplete' => 'off')) !!}
 							<input class="hide" type="text" name="id" ng-model="fileID">
 							<input class="hide" type="text" name="url" ng-model="fileUrl">
 					   		<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">

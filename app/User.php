@@ -45,4 +45,7 @@ class User extends Authenticatable
     public function mensaje(){
         return $this->hasMany('App\Mensaje');
     }
+    public function SlideImage(){
+        return $this->hasMany('App\SlideImage');
+    }
 }

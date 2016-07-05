@@ -27,7 +27,7 @@ class Sedes extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        $notifications = Notification::take(25)->orderBy('created_at', 'desc')->get();
+        $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         $users = User::all();
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
@@ -41,17 +41,7 @@ class Sedes extends Controller
      */
     public function indexInformativa()
     {
-        return view('informativa.ubicacion', ['sedes' => Sede::all()]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('informativa.ubicacion', ['sedes' => Sede::all() , 'ubicacionActive' => true]);
     }
 
     /**
@@ -65,48 +55,13 @@ class Sedes extends Controller
       $sede= new Sede;
       $sede->name= $request->name;
       $sede->address= $request->address;
-      $sede->phone= $request->phone;
       $sede->link= $request->link;
       if($sede->save()) {
         Flash::success(' Se guardó la sede exitosamente. ');
       } else {
         Flash::error(' Se produjó un problema al crear la sede. ');
       }
-      return redirect('admin/sede');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+      return back();
     }
 
     public function updateSede(Request $request)
@@ -115,7 +70,6 @@ class Sedes extends Controller
         $sede= Sede::find($request->id);
         $sede->name= $request->name;
         $sede->address= $request->address;
-        $sede->phone= $request->phone;
         $sede->link= $request->link;
         if($sede->save()) {
           Flash::success(' Se modificó la sede exitosamente. ');
@@ -123,17 +77,7 @@ class Sedes extends Controller
           Flash::error(' Se produjó un problema al modificar la sede. ');
         }
       }
-      return redirect('admin/sede');
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      return back();
     }
 
     public function deleteSede(Request $request)
@@ -145,6 +89,6 @@ class Sedes extends Controller
           Flash::error(' Se produjó un problema al eliminar la sede. ');
         }
       }
-      return redirect('admin/sede');
+      return back();
     }
 }
