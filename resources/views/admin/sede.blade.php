@@ -188,7 +188,7 @@
 				      		<strong><h4>Si el procedimiento se realizó correctamente se mostrará el mapa.</h4></strong>
 				      	</div>
 				      	<div class="modal-footer">
-				        	<button class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+				        	<button class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> &nbsp;Cerrar</button>
 				      	</div>
 				    </div>
 				  </div>

@@ -91,6 +91,7 @@
 			  	<div class="panel-body panelNotificacionesAdmin" >
 			  		<!-- /// -->
 			  		@if(isset($notifications))
+			  		@if(count($notifications) > 0)
 			  			@foreach($notifications as $n)
 			  				@if($contadorN > 0)
 								<div class="panel panel-default animated pulse animated-3 ">
@@ -117,6 +118,9 @@
 							</div>
 						<!-- /// -->
 			  			@endforeach
+			  		@else
+			  			<h3 class="text-center">No hay notificaciones</h3>
+			  		@endif
 			  		@endif
 			 	</div>
 			 	<br>
@@ -129,6 +133,7 @@
 				<br>
 				<div class="panel-body panelConversacionesAdmin" >
 					@if(isset($mensajes2))
+					@if(count($mensajes2) > 0)
 						<?php $contadorMensajes = Auth::user()->message; ?>
 						<?php $once = true; ?>
 						@foreach($mensajes2 as $m)
@@ -178,6 +183,9 @@
 
 							<?php $sendBy = $m->sendBy ?>
 						@endforeach
+					@else
+						<h3 class="text-center">No hay conversaciones</h3>
+					@endif
 					@endif
 					<!-- /// -->
 

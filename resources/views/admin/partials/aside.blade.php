@@ -74,9 +74,6 @@
 					<i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp; Repositorio </i>  
 				</a> 
 			</li>
-			<li> 
-				<a href="{{ url('/admin/noticias') }}"> <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias </a> 
-			</li>
 			@endif
 			<li> 
 				<a href="{{ url('/admin/noticias') }}"> <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp; Noticias </a> 

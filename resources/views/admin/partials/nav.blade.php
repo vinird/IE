@@ -26,9 +26,9 @@
 	      					<span style="background: red;" class="badge">{!!$contador!!} </span>
 		          		@endif
 		          	</a>
-		          	<ul class="dropdown-menu">
+		          	<ul class="dropdown-menu" style=" background-color: #fff;">
 					@if($contador > 0)
-				        <li><a href="{{ route('notification.clearNotification')}}" class="btn btn-success center-block"><i class="fa fa-check-square-o" aria-hidden="true"></i> marcar como leído</a></li>
+				        <li><a href="{{ route('notification.clearNotification')}}" class="btn btn-default btn-sm center-block"><i class="fa fa-check-square-o" aria-hidden="true"></i> marcar notificaciones como leídas</a></li>
 				        <li role="separator" class="divider"></li>
 				        @else
 				        <li><a>No hay notificaciones</a></li>
@@ -60,7 +60,7 @@
 		      				@endif
 		      			@endif
 		      		</a>
-		      		<ul class="dropdown-menu">
+		      		<ul class="dropdown-menu" style=" background-color: #fff;">
 			           	<span id="newMessage" class="btn btn-success btn-block btn-sm"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> &nbsp;Nuevo mensaje</span>
 
 			           	<form action="{{route('mensajes.store')}}" method="post" style="padding: 5%; width: 300px;" class="hide" id="formMessage">
@@ -120,7 +120,7 @@
 		      	</li>
 		        <li class="dropdown">
 			       	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp; {{ Auth::user()->name }}<span class="caret"></span></a>
-			       	<ul class="dropdown-menu">
+			       	<ul class="dropdown-menu" style="background-color: #fff;">
 			           	<li><a data-toggle="modal" data-target="#modalCambiarContrasena" href=""><i class="fa fa-key" aria-hidden="true"></i> &nbsp;Cambiar Contraseña</a></li>
 			           	<li><a href="{{ url('/changeUser') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp; Cambiar de Usuario</a></li>
 			           	<li><a href="{{ url('/') }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Ver sitio informativo</a></li>

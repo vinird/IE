@@ -1,5 +1,7 @@
 <title>Eventos</title>
 	<script src="{{ asset('js/js_resources/jquery-1.12.3.min.js') }}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/css_resource/fullcalendar.min.css') }}">

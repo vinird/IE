@@ -106,7 +106,7 @@
 									<th>Evento</th>
 									<th ng-click="myOrderActive = 'event_date'">Fecha del evento</th>
 									<th class="hidden-xs" ng-click="myOrderActive = 'sede_id'">Sede del evento</th>
-									<th ng-click="myOrderActive = 'organizer'">Organizado por</th>
+									<th class="hidden-xs" ng-click="myOrderActive = 'organizer'">Organizado por</th>
 									<th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'publisher'">Publicado por</thclass>
 									<th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'created_at'">Fecha de publicación</th>
 								  <th class="hidden-xs hidden-sm" ng-click="myOrderActive = 'updated_at'">Fecha de modificación</th>
@@ -120,7 +120,7 @@
 								  	</td>
 										<td>@{{ x.event_date.split(" ")[0] }}</td>
 										<td class="hidden-xs" ng-repeat="sede in sedes" ng-if="sede.id == x.sede_id"><span class="badge">@{{ sede.name }}</span></td>
-								  	<td>@{{ x.org }}</td>
+								  	<td class="hidden-xs">@{{ x.org }}</td>
 										<td class="hidden-xs hidden-sm" ng-repeat="user in users" ng-if="user.id == x.user_id">
 											<span>@{{ user.name }}</span>
 										</td>

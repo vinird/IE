@@ -147,14 +147,16 @@
 
 				<!-- tabs -->
 
-				<div class="col-xs-12 col-sm-8 pull-right">
+				<div class="col-xs-12 col-md-8 pull-right">
 				  <!-- Nav tabs -->
 				  <ul class="nav nav-tabs" role="tablist">
 				    <li role="presentation" class="active"><a id="tabGenerales" href="#home" aria-controls="home" role="tab" data-toggle="tab">
-						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp; Acuerdos Generales  </h4>  
+						 <h4 class="hidden-xs">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp; Acuerdos Generales  </h4>  
+						 <h6 class="hidden-sm hidden-md hidden-lg">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp; Acuerdos Generales  </h6>  
 				    </a></li>
 				    <li role="presentation"><a id="tabFianlizados" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-				    	 <h4><i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp; Acuerdos Finalizados  </h4>  
+				    	 <h4 class="hidden-xs"><i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp; Acuerdos Finalizados  </h4>  
+				    	 <h6 class="hidden-sm hidden-md hidden-lg"><i class="fa fa-archive" aria-hidden="true"></i>&nbsp;&nbsp; Acuerdos Finalizados  </h6>  
 				    </a></li>
 				  </ul>
 
