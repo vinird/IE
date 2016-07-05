@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
 
     	//  factory(App\User::class, 50)->create()->each(function($u) {
-	    //     $u->posts()->save(factory(App\Post::class)->make());
-	    // });
+	    //    $u->posts()->save(factory(App\Post::class)->make());
+	    //  });
 
 
-        // $this->call(UsersTableSeeder::class);
-        // user(App\User::class, 50)->create();
+      // $this->call(UsersTableSeeder::class);
+      // user(App\User::class, 50)->create();
 
         DB::table('users')->insert([
             'name' => "Administrador",
@@ -99,9 +99,9 @@ class DatabaseSeeder extends Seeder
 
         // factory(App\Mensaje::class, 125)->create();
 
-        factory(App\Noticia::class, 250)->create();
+        // factory(App\Noticia::class, 250)->create();
 
-        factory(App\Evento::class, 250)->create();
+        // factory(App\Evento::class, 250)->create();
 
     }
 }
