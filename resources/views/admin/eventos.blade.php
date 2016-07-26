@@ -63,7 +63,7 @@
 										  <div class="form-group">
 										   	<label for="contenido" class="col-sm-2 control-label">Contenido: </label>
 										    <div class="col-sm-10">
-										     	<textArea type="text" class="form-control" name="content"></textArea>
+										     	<textArea type="text" class="form-control textarea" name="content"></textArea>
 										   	 </div>
 										  </div>
 										  <div class="form-group">
@@ -198,7 +198,7 @@
 										<div class="form-group">
 											<label for="contenido" class="col-sm-2 control-label">Contenido: </label>
 										  <div class="col-sm-10">
-										  	<textArea id="eventTextArea" type="text" class="form-control" name="content" ng-model="eventContent"></textArea>
+										  	<textArea id="eventTextArea" type="text" class="form-control textarea" name="content" ng-model="eventContent"></textArea>
 										   </div>
 										</div>
 										<div class="form-group">

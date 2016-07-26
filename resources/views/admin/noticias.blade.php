@@ -56,7 +56,7 @@
 									  <div class="form-group">
 									   	<label for="contenido" class="col-sm-2 control-label">Contenido: </label>
 									    <div class="col-sm-10">
-									    	<textarea type="text" class="form-control" name="content" required></textarea>
+									    	<textarea type="text" class="form-control textarea" name="content" required></textarea>
 									   	</div>
 									  </div>
 									  <div class="form-group">
@@ -163,7 +163,7 @@
 									  <div class="form-group">
 									   	<label for="contenido" class="col-sm-2 control-label">Contenido: </label>
 									    <div class="col-sm-10">
-									     	<textarea id="newsTextArea" type="text" class="form-control" name="content" ng-model="newsContent" required></textarea>
+									     	<textarea id="newsTextArea" type="text" class="form-control textarea" name="content" ng-model="newsContent" required></textarea>
 									   	 </div>
 									  </div>
 									  <div class="form-group">
@@ -246,3 +246,4 @@
 	<script src="{{ asset('js/js_resources/trumbowyg/langs/es.min.js') }}"></script>
 
 @include('admin.partials.footer')
+ 

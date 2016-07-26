@@ -31,7 +31,7 @@ app.controller('noticiaController', function($scope, $sce) {
 
 
 jQuery(document).ready(function($) {
-  $('textarea').trumbowyg({lang: 'es', btns: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['superscript', 'subscript'], 'btnGrp-justify', 'btnGrp-lists', ['horizontalRule'], ['removeformat'], ['fullscreen']]});
+  $('.textarea').trumbowyg({lang: 'es', btns: [['viewHTML'], ['formatting'], 'btnGrp-semantic', ['superscript', 'subscript'], 'btnGrp-justify', 'btnGrp-lists', ['horizontalRule'], ['removeformat'], ['fullscreen']]});
   $("#collapseAgregarNoticia > div > form input:checkbox").prop('checked', false);
   $(':input').not(':button, :submit, :reset, :hidden, .hide, .hidden').val('').removeAttr('checked').removeAttr('selected');
   $('#divFile > div > input').val('');
