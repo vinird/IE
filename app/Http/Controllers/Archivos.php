@@ -183,7 +183,7 @@ class Archivos extends Controller
 
                 if(Storage::disk('repositorio')->put( $file_route , file_get_contents($file->getRealPath()))){
                     Flash::success(' Archivo guardado exitosamente. ');
-                    Storage::disk('repositorio')->delete($request->url);
+                    Storage::disk('repositorio')->delete($request->fileUrl); 
                     $this->addnotification('Se modificó un archivo del repositorio ', $file->getClientOriginalName());
                 } else {
                     Flash::error(' Error al guardar el archivo en el repositorio. ');

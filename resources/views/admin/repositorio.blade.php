@@ -203,7 +203,7 @@
 				      	<!-- inicia el formulario -->
 						{!! Form::open(array('route'=>'repositorio.updateData','method'=>'POST', 'files'=>true , 'class' => 'form-horizontal' , 'autocomplete' => 'off')) !!}
 							<input class="hide" type="text" name="id" ng-model="fileID">
-							<input class="hide" type="text" name="url" ng-model="fileUrl">
+							<input class="hide" type="text" name="fileUrl" ng-model="fileUrl"> 
 					   		<input class="form-control hidden" type="text" name="url" value="{{ url()->current() }}">
 				      		<div class="modal-body">
 							  	<div class="form-group">
