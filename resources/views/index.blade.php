@@ -158,7 +158,7 @@
 			</div>
 			<div class="col-sx-12 col-sm-8">
 			<br>
-				<h3>Habilidades y Características Deseables</h3>
+				<h3>Habilidades y características deseables</h3>
 				<p class="text-justify">
 					<ul class="text-justify">
 						<li>Facilidad para el trabajo con material cuantitativo, en especial para el razonamiento lógico matemático</li>
@@ -197,7 +197,7 @@
 				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 			</div>
 			<div class="col-sx-12 col-sm-8">
-				<h3>Tareas Típicas del Estudiante Durante la Carrera</h3>
+				<h3>Tareas típicas del estudiante durante la carrera</h3>
 				<p class="text-justify">
 					<ul class="text-justify">
 						<li>Adquisición de conocimientos para el análisis cuantitativo en áreas como cálculo, algebra, estructuras discretas, análisis numérico, investigación de operaciones, probabilidad, estadística, economía y finanzas</li>
@@ -228,7 +228,7 @@
 				<i class="fa fa-graduation-cap" aria-hidden="true"></i>
 			</div>
 			<div class="col-sx-12 col-sm-8">
-				<h3>Perfil Profesional</h3>
+				<h3>Perfil profesional</h3>
 				<p class="text-justify">La formación del informático empresarial se construye a partir de tres áreas de conocimiento: la computación, la informática y la administración, con el apoyo de la matemática, la estadística y la lógica, teniendo como ejes conductores la ética y el humanismo.</p>
 				<p class="text-justify">Este profesional está capacitado para analizar, diseñar y programar sistemas utilizando tecnología de punta; así como para la planificación, control y dirección de la gestión informática en la empresa o institución. Está capacitado para tomar parte activa en trabajos complejos y para dirigir investigaciones multidisciplinarias aplicadas.</p>
 				<p class="text-justify">Los concomimientos en el área de administración de los recursos informáticos le permitirán mantener un mejor acercamiento a la organización e identificar la manera óptima de aplicar la informática para apoyar su funcionamiento. Estará así, en capacidad de utilizar las herramientas computacionales que le permitan modelar los procesos empresariales y ayudar en la toma de decisiones.</p>
@@ -245,7 +245,7 @@
 				<i class="fa fa-building-o" aria-hidden="true"></i>
 			</div>
 			<div class="col-sx-12 col-sm-8">
-				<h3>Mercado Laboral</h3>
+				<h3>Mercado laboral</h3>
 				<p>
 					<ul>
 						<li>Instituciones autónomas</li>

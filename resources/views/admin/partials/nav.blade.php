@@ -70,7 +70,7 @@
 						   	  	<select class="form-control" name="takeBy" required>
 						   	  	@if(isset($users))
 						   	  		@foreach($users as $u)
-						   	  			@if($u->id != Auth::user()->id)
+						   	  			@if($u->id != Auth::user()->id && $u->active == 1)
 											<option value="{{$u->id}}">{{$u->name}}</option>
 						   	  			@endif
 						   	  		@endforeach
