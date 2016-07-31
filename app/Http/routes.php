@@ -33,7 +33,7 @@ Route::get('contactos', ['uses' => 'Main@indexInformativa'])->name('contactos');
 Route::group(['middleware' => ['auth']], function () {
 
 });
-
+ 
 
 Route::auth();
 
@@ -118,6 +118,9 @@ Route::post('acuerdos/delete' , ['uses' => 'Acuerdos@delete' ,  'middleware' => 
 Route::post('acuerdos/complete' , ['uses' => 'Acuerdos@complete' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.complete');
 Route::post('acuerdos/modify' , ['uses' => 'Acuerdos@modify' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.modify');
 Route::post('acuerdos/open' , ['uses' => 'Acuerdos@open' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.open');
+Route::post('acuerdos/agregarSeguimiento' , ['uses' => 'Acuerdos@agregarSeguimiento' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.agregarSeguimiento');
+Route::post('acuerdos/modificarSeguimiento' , ['uses' => 'Acuerdos@modificarSeguimiento' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.modificarSeguimiento');
+Route::post('acuerdos/eliminarSeguimiento' , ['uses' => 'Acuerdos@eliminarSeguimiento' ,  'middleware' => ['auth' , 'userActive']])->name('acuerdos.eliminarSeguimiento');
 
 
 

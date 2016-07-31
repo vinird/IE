@@ -19,6 +19,7 @@ use App\LogUser;
 use Storage;
 use DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Seguimiento;
 
 
 class Acuerdos extends Controller
@@ -36,7 +37,8 @@ class Acuerdos extends Controller
         $notifications = Notification::take(35)->orderBy('created_at', 'desc')->get();
         $logUser = LogUser::find(1);
         $mensajes = DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get();
-        return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes]);
+        $seguimientos = Seguimiento::take(999999)->orderBy('created_at', 'acuerdo_id', 'asc')->get();
+        return view('admin/acuerdos' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'seguimientos' => $seguimientos]);
     }
 
     /**
@@ -236,5 +238,64 @@ class Acuerdos extends Controller
             Flash::error(' Contraseña invalida. ');
         }
         return Redirect::action('Acuerdos@index');
+    }
+
+    public function agregarSeguimiento(Request $request) {
+        if($request->title == "" || $request->content ==""){
+            Flash::error(' Debe ingresar el título y la descripción. ');
+            return back();
+        }
+        $seguimiento = new Seguimiento();
+        $seguimiento->acuerdo_id = $request->acuerdo_id;
+        $seguimiento->title = $request->title;
+        $seguimiento->content = $request->content;
+
+        $acuerdo = Acuerdo::find($request->acuerdo_id);
+        
+        if($seguimiento->save()){
+            Flash::success(' Seguimiento agregado exitosamente. ');
+            $this->addnotification('Se agregó un seguimiento al acuerdo '.$acuerdo->title, $request->title);
+        } else {
+            Flash::error(' Error al agregar el seguimiento. ');
+        }
+        return back();
+    }
+
+    public function modificarSeguimiento(Request $request) {
+        if(Hash::check($request->password, Auth::user()->password)) {
+            if($request->content == ""){
+                Flash::error(' Debe agregar la descripción. ');
+                return back();
+            }
+            $seguimiento = Seguimiento::find($request->id);
+            $seguimiento->content = $request->content;
+
+            $acuerdo = Acuerdo::find($seguimiento->acuerdo_id);
+
+            if($seguimiento->save()){
+                Flash::success(' Seguimiento modificado exitosamente. ');
+                $this->addnotification('Se modificó un seguimiento al acuerdo '.$acuerdo->title, $seguimiento->title);
+            }
+        } else {
+            Flash::error(' Contraseña invalida. ');
+        }
+
+        return back();
+    }
+
+    public function eliminarSeguimiento(Request $request) {
+        if(Hash::check($request->password, Auth::user()->password)) {
+            
+            $seguimiento = Seguimiento::find($request->id);
+            $acuerdo = Acuerdo::find($seguimiento->acuerdo_id);
+
+            if(Seguimiento::destroy($request->id)){
+                Flash::success(' Seguimiento eliminado exitosamente. ');
+                $this->addnotification('Se eliminó un seguimiento al acuerdo '.$acuerdo->title, $seguimiento->title);
+            }
+        } else {
+            Flash::error(' Contraseña invalida. ');
+        }
+        return back();
     }
 }

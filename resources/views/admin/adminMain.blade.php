@@ -3,7 +3,7 @@
 	@include('admin.partials.aside')
 <?php $contadorN = Auth::user()->notification; ?>
  <!-- contenedor principal -->
-<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}; users={{ $users }};">
+<div class="col-xs-12 col-sm-9 col-md-10 col-xl-11" id="main-container" ng-app="App" ng-controller="mainController" ng-init="acuerdos= {{$acuerdos}}; users={{ $users }}; seguimientos= {{ $seguimientos }};">
 	<div class="rowContainerAdmin">
 		<!-- panel usuario  -->
 		<div class="clearfix"></div>
@@ -232,6 +232,31 @@
 							  	<div class="panel-body text-justify" >
 							  		<p> @{{ x.content }} </p>
 							  		<br>
+							  		<!-- si hay seguimiento -->
+								  		<div class="seguimiento-box">
+											<br>
+								  			<div class="panel-group" id="accordion@{{x.id}}" role="tablist" aria-multiselectable="true">
+
+								  			<!-- <div  > -->
+											  <div class="panel panel-default" ng-repeat="s in seguimientos" ng-if="s.acuerdo_id == x.id">
+											    <div class="panel-heading" role="tab" id="heading@{{x.id}}@{{ s.id }}">
+											      <h4 class="panel-title">
+											        <button class="btn btn-default btn-xs" role="button" data-toggle="collapse" data-parent="#accordion@{{x.id}}" href="#@{{x.id}}@{{ s.id }}" aria-expanded="true" aria-controls="@{{x.id}}@{{ s.id }}">
+											          <i class="fa fa-arrow-right" aria-hidden="true"></i> &nbsp;@{{ s.title}}
+											        </button>
+											      </h4>
+											    </div>
+											    <div id="@{{x.id}}@{{ s.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading@{{x.id}}@{{ s.id }}">
+											      <div class="panel-body">
+											       	@{{ s.content }}
+											       	<h6>@{{ s.created_at }}</h6>
+											      </div>
+											    </div>
+											  </div>
+
+											</div>
+								  		</div>
+								  		<!-- fin -->
 								  		<div ng-if="x.primaryUser_id != null">
 								  			<div ng-repeat="u in users" ng-if="u.id == x.primaryUser_id"><strong>Asignado a: </strong><em> @{{ u.name }}</em></div>
 								  		</div>

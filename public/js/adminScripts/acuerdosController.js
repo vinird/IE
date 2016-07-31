@@ -6,6 +6,10 @@ app.controller('acuerdosController', function($scope) {
 	$scope.id = ""; 
 	$scope.date;
 	$scope.content = "";
+	// seguimiento
+	$scope.idSeguimiento = "";
+	$scope.titleSeguimiento = "";
+	$scope.contentSeguimiento = "";
 
 	$scope.dateConverted = function(date) {
 		var myDate= date;
@@ -24,6 +28,12 @@ app.controller('acuerdosController', function($scope) {
 		$scope.id = id; 
 		$scope.date = agreement_date;
 		$scope.content = content;
+	}
+
+	$scope.setValuesSeguimiento = function(id, title, content){
+		$scope.idSeguimiento = id;
+		$scope.titleSeguimiento = title;
+		$scope.contentSeguimiento = content;
 	}
 });
 

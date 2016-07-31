@@ -13,4 +13,7 @@ class Acuerdo extends Model
     public function user(){
     	return $this->belongsTo('App\User');
     }
+    public function Seguimiento(){
+    	return $this->hasMany('App\Seguimiento');
+    }
 }
