@@ -238,6 +238,24 @@ setTimeout(function(){
 },5000);
 
 
+//// aside nav /////////
+$('#botonAutores').click(function(){
+	if($('body').width() < 768){
+		$('.site-wrap').css('width', '100%');
+	}
+	$('.site-wrap').css('left', '0px');
+	$('.site-wrap-shadow').css('left', '0px');
+	$('.site-wrap-shadow').hide();
+	$('.site-wrap-shadow').fadeIn(500);
+});
+$('#botonAutoresCerrar').click(function(){
+	$('.site-wrap').css('width', '50%');
+	$('.site-wrap').css('left', '-50%');
+	$('.site-wrap-shadow').fadeOut(500);
+	setTimeout(function(){
+		$('.site-wrap-shadow').css('left', '-100%');
+	},500);
+});
 
 //// end script
 });

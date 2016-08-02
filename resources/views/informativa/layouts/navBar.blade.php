@@ -27,6 +27,7 @@
 	      	</ul>
 	      	<ul class="nav navbar-nav navbar-right">
 	        	<li class="@if(isset($contactosActive))  {{ 'active' }}  @endif"><a href="{{ route('contactos') }}">Contacto</a></li>
+	        	<li class=""><a id="botonAutores" style="font-size: 0.9em;">Acerca de &nbsp;<i class="fa fa-question" aria-hidden="true"></i></a></li>
 	      	</ul>
     	</div><!-- /.navbar-collapse -->
   	</div><!-- /.container-fluid -->
@@ -39,3 +40,5 @@
 		</div>
 	</div>
 </div>
+
+

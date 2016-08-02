@@ -269,3 +269,57 @@ table th, tr {
 .modal-content input, .modal-content select {
   border-radius: 0px;
 }
+
+/* aside nav */
+.site-wrap {
+    width: 50%;
+    min-height: 100%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    bottom: 100%;
+    left: -50%;
+    z-index: 2;
+    padding: 3em;
+    background: #222222;
+    transition: 0.5s;
+    color: #fff;
+}
+.site-wrap-shadow{
+	width: 100%;
+    min-height: 100%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    bottom: 100%;
+    left: -100%;
+    z-index: 1;
+    padding: 4em;
+    background: rgba(0,0,0,0.7);
+}
+#botonAutoresCerrar{
+	display: block;
+	margin-top: -26px;
+	margin-right: -26px;
+	background: #000;
+	padding: 7px 10px;
+	border-radius: 100px;
+	color: #D1D1D1;
+	cursor: pointer;
+	-webkit-transition: 0.2s;
+	-o-transition: 0.2s;
+	transition: 0.2s;
+}
+#botonAutoresCerrar:hover{
+	color: #fff;
+	margin-right: -29px;
+	margin-top: -29px;
+	padding: 10px 13px;
+	border-radius: 100px;
+	-webkit-box-shadow: 0px 0px 15px -4px #fff;
+	box-shadow: 0px 0px 15px -4px #fff;
+}
+body {
+    overflow-x: hidden;
+}
+
