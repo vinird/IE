@@ -214,7 +214,7 @@ s.cicle6 = [{
 		correquisitos: ''
 	},
 	{
-		sigla: 'SR-l',
+		sigla: 'SR-ll',
 		curso: 'Seminario de Realidad Nacional ll',
 		creditos: '2',
 		requisitos: 'SR-l',
