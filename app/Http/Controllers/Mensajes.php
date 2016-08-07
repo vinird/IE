@@ -17,6 +17,7 @@ use App\Acuerdo;
 use App\Sede;
 use App\Notification;
 use App\LogUser;
+use App\Seguimiento; 
 
 class Mensajes extends Controller
 {
@@ -61,6 +62,7 @@ class Mensajes extends Controller
         $users = User::all();
         $mensajes = collect(DB::table('mensajes')->take(125)->where('takeBy', '=', Auth::user()->id)->orderBy('created_at' , 'desc')->get());
         $mensajes2 = DB::select("SELECT * FROM mensajes WHERE takeBy = '".Auth::user()->id."' ORDER BY sendBy, created_at DESC LIMIT 0 , 55");
-        return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'mensajes2' => $mensajes2 , 'mjs' => $mjs]);
+        $seguimientos = Seguimiento::take(999999)->orderBy('created_at', 'acuerdo_id', 'asc')->get();
+        return view('admin/adminMain' , ['categorias' => $categorias , 'users' => $users , 'acuerdos' => $acuerdos, 'sedes' => $sedes, 'notifications' => $notifications , 'logUser' => $logUser , 'mensajes' => $mensajes , 'mensajes2' => $mensajes2 , 'mjs' => $mjs, 'seguimientos' => $seguimientos]);
     }
 }
