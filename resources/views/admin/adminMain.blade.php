@@ -69,7 +69,7 @@
 							<br>
 							<br>
 				      		<div class="form-group">
-						  		{!! Form::label('password', 'Password: ', array('class' => 'col-sm-3 control-label')); !!}
+						  		{!! Form::label('password', 'Contraseña: ', array('class' => 'col-sm-3 control-label')); !!}
 							    <div class="col-sm-9">
 						    		{!! Form::password('password' , ['class' => 'form-control search', 'required']) !!}
 							   		<p class="help-block">Confirme su contraseña para realizar los cambios.</p>
