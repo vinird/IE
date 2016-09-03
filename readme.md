@@ -37,7 +37,8 @@
 
 14. Levantar el servidor **``php -S 192.168.43.26:8000 -t public``** la dirección IP debe ser la que tiene la maquina asignada.
 
-15. Usuario administrador: email **``admin@admin.com``** , contraseña: **``password``** 
+15. El token por defecto para ingresar al login es  **``informatica2016``**
+16. Usuario administrador: email **``admin@admin.com``** , contraseña: **``password``** 
 
 
 
@@ -92,7 +93,8 @@
 18. Se configura el archivo con los hosts **``sudo gedit /etc/hosts``**
 19. Se agrega la siguiente linea **``127.0.0.1  laravel.com``**
 
-20. Usuario administrador: email **``admin@admin.com``** , contraseña: **``password``** 
+20. El token por defecto para ingresar al login es  **``informatica2016``**
+21. Usuario administrador: email **``admin@admin.com``** , contraseña: **``password``** 
 
 
  
@@ -114,7 +116,8 @@
 14. Añadir al archivo hosts, ubicado en /etc la dirección modificado en el paso 12 y el nombre de dominio modificado en el paso 13 (puede requerir acceso como superusuario), por ejemplo "192.168.2.2 infoempresarial.com".
 15. Para finalizar, levante la máquina virtual con el comado **``vagrant up``**.
 
-16. Usuario administrador: email **``admin@admin.com``** , contraseña: **``password``** 
+16. El token por defecto para ingresar al login es  **``informatica2016``**
+17. Usuario administrador: email **``admin@admin.com``** , contraseña: **``password``** 
 
 
 
