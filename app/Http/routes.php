@@ -150,3 +150,10 @@ Route::get('mensajes/get/{sendBy}' , ['uses' => 'Mensajes@getSendBy' , 'middlewa
 ///////////////////////////////////////////////
 Route::post('slideImages/store' , ['uses' => 'SlideImages@store' ,  'middleware' => ['auth' , 'userActive']])->name('slideImages.store');
 Route::get('slideImages/delete/{id}' , ['uses' => 'SlideImages@delete' ,  'middleware' => ['auth' , 'userActive']])->name('slideImages.delete');
+
+////////////////////////////////////////////////
+// Tokens
+///////////////////////////////////////////////
+Route::post('tokens/getValue' , ['uses' => 'Tokens@getValue'])->name('tokens.getValue');
+Route::post('tokens/modify' , ['uses' => 'Tokens@modify' ,  'middleware' => ['auth' , 'userActive', 'admin']])->name('tokens.modify');
+Route::get('tokens/reset' , ['uses' => 'Tokens@reset' ,  'middleware' => ['auth' , 'userActive', 'admin']])->name('tokens.reset');

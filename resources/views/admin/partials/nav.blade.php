@@ -121,6 +121,9 @@
 		        <li class="dropdown">
 			       	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user" aria-hidden="true"></i>&nbsp; {{ Auth::user()->name }}<span class="caret"></span></a>
 			       	<ul class="dropdown-menu" style="background-color: #fff;">
+			       		@if(Auth::user()->userType == 1)
+			           	<li><a data-toggle="modal" data-target="#modalToken" href=""><i class="fa fa-unlock-alt" aria-hidden="true"></i> &nbsp; Cambiar Token</a></li>
+			           	@endif
 			           	<li><a data-toggle="modal" data-target="#modalCambiarContrasena" href=""><i class="fa fa-key" aria-hidden="true"></i> &nbsp;Cambiar Contraseña</a></li>
 			           	<li><a href="{{ url('/changeUser') }}"><i class="fa fa-users" aria-hidden="true"></i> &nbsp; Cambiar de Usuario</a></li>
 			           	<li><a href="{{ url('/') }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Ver sitio informativo</a></li>

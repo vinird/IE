@@ -10,7 +10,7 @@
 					@if(Auth::check())
 						<p class="text-right"><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Entrar al perfil administrativo</a></p>
 					@else
-						<p class="text-right"><a href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Perfil Administrativo</a></p>
+						<p class="text-right"><a data-toggle="modal" data-target="#modalToken" href="{{ url('/admin/main') }}"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;Perfil Administrativo</a></p>
 					@endif
 				</div>
 			</div>
@@ -54,3 +54,28 @@
     </div>
 </div>
 <div class="site-wrap-shadow"></div>
+
+<!-- Small modal -->
+
+<div id="modalToken" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Ingreso al sistema</h4>
+      	</div>
+	      <div class="modal-body">
+			<form action="{{route('tokens.getValue')}}" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			  	<div class="form-group">
+			    	<label for="token">Token:</label>
+			    	<input type="password" class="form-control" name="token" id="token" placeholder="********" required>
+			    	<p class="help-block">El token es una clave de seguridad para el ingreso al sistema.</p>
+			  	</div>
+			  	<button type="submit" class="btn btn-primary "><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;Ingresar</button>
+			</form>
+	      </div>
+    </div>
+  </div>
+</div>

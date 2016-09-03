@@ -97,18 +97,26 @@ class Acuerdos extends Controller
      */
     public function delete(Request $request)
     {
-        if(Hash::check($request->password, Auth::user()->password)) {
-            $acuer = Acuerdo::find($request->id);
-            Storage::disk('acuerdos')->delete($acuer->file_url);
-            if(Acuerdo::destroy($request->id)){
-                Flash::success(' Acuerdo eliminado exitosamente. ');
-                $this->addnotification('Se eliminó un acuerdo ', $acuer->title);
+        if(value($seguimiento = DB::table('seguimientos')->where('acuerdo_id', '=', $request->id)->get()) == []){
+
+            if(Hash::check($request->password, Auth::user()->password)) {
+                // Verificar si tiene seguimiento
+                $acuer = Acuerdo::find($request->id);
+                Storage::disk('acuerdos')->delete($acuer->file_url);
+                if(Acuerdo::destroy($request->id)){
+                    Flash::success(' Acuerdo eliminado exitosamente. ');
+                    $this->addnotification('Se eliminó un acuerdo ', $acuer->title);
+                } else {
+                    Flash::error(' Error al eliminar el acuerdo. ');
+                }
             } else {
-                Flash::error(' Error al eliminar el acuerdo. ');
+                Flash::error(' Contraseña invalida. ');
             }
+
         } else {
-            Flash::error(' Contraseña invalida. ');
+            Flash::error(' Este acuerdo ya posee seguimientos por lo tanto no se puede eliminar. ');
         }
+
         return Redirect::action('Acuerdos@index');
     }
 

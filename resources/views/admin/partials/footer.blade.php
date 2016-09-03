@@ -24,7 +24,7 @@
 					   		</div>
 						</div>
 		      			<div class="form-group">
-					   		<label for="confirmPassword" class="col-sm-4 text-danger control-label">Confirme ontraseña:</label>
+					   		<label for="confirmPassword" class="col-sm-4 text-danger control-label">Confirme contraseña:</label>
 					   		<div class="col-sm-8">
 					   			<input class="form-control" type="password" name="confirmPassword" required>
 					   		</div>
@@ -46,6 +46,47 @@
 		  </div>
 		</div>
 		<!-- fin modal -->
+
+<!-- modal modificar token-->
+
+<div id="modalToken" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+
+    	<div class="modal-header text-center">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Modificar Token</h4>
+      	</div>
+		<form action="{{route('tokens.modify')}}" method="post" class="form-horizontal">
+	      <div class="modal-body">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			  	<div class="form-group">
+			    	<label for="token" class="col-sm-4 control-label">Token actual:</label>
+			    	<div class="col-sm-8">
+			    		<input type="password" class="form-control" name="token" id="token" placeholder="********" required>
+			  		</div>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="token2" class="col-sm-4 control-label">Nuevo token:</label>
+			    	<div class="col-sm-8">
+			    		<input type="password" class="form-control" name="token2" id="token" required>
+			  		</div>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="token3" class="col-sm-4 control-label">Confirme el nuevo token:</label>
+			    	<div class="col-sm-8">
+			    		<input type="password" class="form-control" name="token3" id="token" required>
+			  		</div>
+			  	</div>
+	      </div>
+	      <div class="modal-footer">
+			  	<a class="btn btn-default btn-sm" href="{{route('tokens.reset')}}" onclick="confirm('Esto reiniciará el token al valor por defecto [informatica2016] ¿Desea proceder?')">Reiniciar token</a>
+			  	<button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;Actualizar</button>
+	      </div>
+		</form>
+    </div>
+  </div>
+</div>
 
 <!-- alertas -->
 <footer class="animated bounceInLeft">
