@@ -16,7 +16,8 @@
 6. Generar la migración **``php artisan migrate``** Esto crea las tablas en la base de datos.
 7. Sembrar la base de datos **``php artisan db:seed``** Esto llena la base de datos con información.
 8. Levantar el servidor de desarrollor de Laravel **``php artisan serve``**
-9. Usuario administrador: email **``admin@admin.com``** , contraseña **``password``**
+9. El token por defecto para ingresar al login es  **``informatica2016``**
+10. Usuario administrador: email **``admin@admin.com``** , contraseña **``password``**
 
 
 ## Levantar el proyecto en una red local con Apache
