@@ -1,11 +1,19 @@
-# IE on Laravel PHP Framework
+# IE 
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Url del proyecto: http://ie.nubila.tech
+* Token: informatica2016
+* Usuario: admin@admin.com
+* Contraseña: password
 
+## Requerimientos de Laravel
+* Composer
+* MySQL
+* PHP >= 5.6.4
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Mbstring PHP Extension
+* Tokenizer PHP Extension
+* XML PHP Extension
 
 ## Levantar el proyecto con el servidor de prueba de Laravel
 1. Descargar el proyecto con Git **``git clone https://github.com/vinird/IE.git``**
